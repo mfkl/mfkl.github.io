@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>mfkl</title>
-  <meta name="description" content="">
+  <title>Introducing LibVLCSharp</title>
+  <meta name="description" content="Introducing LibVLCSharp">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://yourdomain.com/">
+  <link rel="canonical" href="http://yourdomain.com/libvlc/intro/2018/10/06/introducing-libvlcsharp.html">
   <link rel="alternate" type="application/rss+xml" title="mfkl" href="http://yourdomain.com/feed.xml">
 </head>
 
@@ -50,33 +50,60 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Introducing LibVLCSharp</h1>
+    <p class="post-meta"><time datetime="2018-10-06T10:10:40+07:00" itemprop="datePublished">Oct 6, 2018</time></p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Oct 6, 2018</span>
+  <div class="post-content" itemprop="articleBody">
+    <h1 id="introducing-libvlcsharp">Introducing LibVLCSharp</h1>
 
-        <h2>
-          <a class="post-link" href="/yolo/2018/10/06/Samples.html">Samples</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Oct 6, 2018</span>
+<p>LibVLCSharp are .NET/Mono bindings for <code class="highlighter-rouge">libvlc</code>, the multimedia framework powering the VLC applications.</p>
 
-        <h2>
-          <a class="post-link" href="/libvlc/intro/2018/10/06/introducing-libvlcsharp.html">Introducing LibVLCSharp</a>
-        </h2>
-      </li>
-    
-  </ul>
+<p>We support all .NET runtimes (Xamarin/Mono, .NET Core and .NET Framework) on most platfoms by targeting .NET Standard 2.0.</p>
 
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+<p><code class="highlighter-rouge">libvlc</code> is <em>modularized</em> into <a href="https://github.com/mfkl/libvlc-nuget/blob/master/tree.md">hundreds of plugins</a>, which may be loaded at runtime. This architecture provides great flexibility to developers (both VLC devs and devs consuming the library). The unified, complete and (somewhat) high level <code class="highlighter-rouge">libvlc</code> C API allows a wide range of operations, such as:</p>
 
+<ul>
+  <li>Network browsing for distant filesystems (SMB, FTP, SFTP, NFS…).</li>
+  <li>HDMI passthrough for Audio HD codecs, like E-AC3, TrueHD or DTS-HD.</li>
+  <li>Stream to distant renderers, like Chromecast.</li>
+  <li>360 video and 3D audio playback with viewpoint change.</li>
+  <li>Support for Ambisonics audio and more than 8 audio channels.</li>
+  <li>Subtitles size modification live.</li>
+  <li>Hardware decoding and display on all platforms.</li>
+  <li>DVD playback and menu navigation.</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    static void Main(string[] args)
+    {
+        // Loading the native libvlc library
+        Core.Initialize();
+
+        using (var libVLC = new LibVLC())
+        using (var mediaPlayer = new MediaPlayer(libVLC))
+        {
+            var media = new Media(libVLC, 
+                                "http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4", 
+                                Media.FromType.FromLocation)
+            mediaPlayer.Play(media);
+            Console.ReadKey();
+        }
+    }
+</code></pre>
 </div>
+
+<p>LibVLCSharp aims to always support the latest <code class="highlighter-rouge">libvlc</code> major version (currently version 3).</p>
+
+<p>We are distributing packages (native and managed) through <a href="https://www.nuget.org/profiles/videolan">nuget</a>.</p>
+
+<p>We use <a href="https://code.videolan.org/videolan/LibVLCSharp">GitLab</a> and <a href="https://github.com/videolan/libvlcsharp">GitHub</a>.</p>
+
+  </div>
+
+</article>
 
       </div>
     </div>

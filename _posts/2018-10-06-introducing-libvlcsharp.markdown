@@ -22,20 +22,23 @@ We support all .NET runtimes (Xamarin/Mono, .NET Core and .NET Framework) on mos
 - Hardware decoding and display on all platforms.
 - DVD playback and menu navigation.
 
-```csharp
-        static void Main(string[] args)
-        {
-            // Loading the native libvlc library
-            Core.Initialize();
+~~~~
+    static void Main(string[] args)
+    {
+        // Loading the native libvlc library
+        Core.Initialize();
 
-            using (var libVLC = new LibVLC())
-            using (var mediaPlayer = new MediaPlayer(libVLC))
-            {
-                mediaPlayer.Play(new Media(libVLC, "http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4", Media.FromType.FromLocation));
-                Console.ReadKey();
-            }
+        using (var libVLC = new LibVLC())
+        using (var mediaPlayer = new MediaPlayer(libVLC))
+        {
+            var media = new Media(libVLC, 
+                                "http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4", 
+                                Media.FromType.FromLocation)
+            mediaPlayer.Play(media);
+            Console.ReadKey();
         }
-```
+    }
+~~~~
 
 LibVLCSharp aims to always support the latest `libvlc` major version (currently version 3).
 
