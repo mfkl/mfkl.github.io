@@ -5,20 +5,100 @@
     <description></description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 06 Oct 2018 14:34:36 +0700</pubDate>
-    <lastBuildDate>Sat, 06 Oct 2018 14:34:36 +0700</lastBuildDate>
+    <pubDate>Wed, 10 Oct 2018 11:34:39 +0700</pubDate>
+    <lastBuildDate>Wed, 10 Oct 2018 11:34:39 +0700</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
-        <title>Samples</title>
-        <description>&lt;p&gt;Coming soon&lt;/p&gt;
+        <title>How to record an HLS stream with LibVLCSharp and .NET Core</title>
+        <description>&lt;h1 id=&quot;how-to-record-an-hls-stream-with-libvlcsharp-and-net-core&quot;&gt;How to record an HLS stream with LibVLCSharp and .NET Core&lt;/h1&gt;
+
+&lt;p&gt;In this post, I will show you how to record an HTTP Live Streaming (HLS) stream using LibVLCSharp in a .NET Core CLI app on Windows.&lt;/p&gt;
+
+&lt;p&gt;HLS is a streaming protocol originally developped by Apple which is supported in most internet browser and streaming media servers. &lt;a href=&quot;https://en.wikipedia.org/wiki/HTTP_Live_Streaming&quot;&gt;Wikipedia&lt;/a&gt; has some info about it:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;HLS resembles MPEG-DASH in that it works by breaking the overall stream into a sequence of small HTTP-based file downloads, each download loading one short chunk of an overall potentially unbounded transport stream. A list of available streams, encoded at different bit rates, is sent to the client using an extended M3U playlist.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So, to get started we need to pull 2 packages from the VideoLAN &lt;a href=&quot;https://www.nuget.org/profiles/videolan&quot;&gt;NuGet&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;Project Sdk=&quot;Microsoft.NET.Sdk&quot;&amp;gt;  
+  &amp;lt;PropertyGroup&amp;gt;
+    &amp;lt;OutputType&amp;gt;Exe&amp;lt;/OutputType&amp;gt;
+    &amp;lt;TargetFramework&amp;gt;netcoreapp2.1&amp;lt;/TargetFramework&amp;gt;
+    &amp;lt;RestoreProjectStyle&amp;gt;PackageReference&amp;lt;/RestoreProjectStyle&amp;gt;
+    &amp;lt;CopyLocalLockFileAssemblies&amp;gt;true&amp;lt;/CopyLocalLockFileAssemblies&amp;gt;
+  &amp;lt;/PropertyGroup&amp;gt;  
+  &amp;lt;ItemGroup&amp;gt;
+    &amp;lt;PackageReference Include=&quot;VideoLAN.LibVLC.Windows&quot; Version=&quot;3.0.4&quot; /&amp;gt;
+    &amp;lt;PackageReference Include=&quot;LibVLCSharp&quot; Version=&quot;0.0.3&quot; /&amp;gt;
+   &amp;lt;/ItemGroup&amp;gt;
+&amp;lt;/Project&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;VideoLAN.LibVLC.Windows&lt;/code&gt; is the &lt;code class=&quot;highlighter-rouge&quot;&gt;libvlc&lt;/code&gt; (C/C++) library compiled for the Windows platform. More info at &lt;a href=&quot;https://github.com/mfkl/libvlc-nuget&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;LibVLCSharp&lt;/code&gt; are the .NET bindings that use the native &lt;code class=&quot;highlighter-rouge&quot;&gt;libvlc&lt;/code&gt; library and expose a .NET friendly API. This &lt;a href=&quot;https://github.com/videolan/libvlcsharp&quot;&gt;readme&lt;/a&gt; has additional details.&lt;/p&gt;
+
+&lt;p&gt;Now onto the actual code&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;static void Main(string[] args)
+{
+    // Record in a file &quot;record.ts&quot; located in the bin folder next to the app
+    var currentDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+    var destination = Path.Combine(currentDirectory, &quot;record.ts&quot;);
+
+    // Load native libvlc library
+    Core.Initialize();
+
+    using (var libvlc = new LibVLC())
+    using (var mediaPlayer = new MediaPlayer(libvlc))
+    {
+        // Redirect log output to the console
+        libvlc.Log += (sender, e) 
+            =&amp;gt; Console.WriteLine($&quot;[{e.Level}] {e.Module}:{e.Message}&quot;);
+
+        // Create new media with HLS link
+        var media = new Media(libvlc, 
+                    &quot;http://hls1.addictradio.net/addictrock_aac_hls/playlist.m3u8&quot;, 
+                    Media.FromType.FromLocation);
+
+        // Define stream output options. 
+        // In this case stream to a file with the given path
+        // and play locally the stream while streaming it.
+        media.AddOption(&quot;:sout=#file{dst=&quot; + destination + &quot;}&quot;);
+        media.AddOption(&quot;:sout-keep&quot;);
+
+        // Start recording
+        mediaPlayer.Play(media);
+
+        Console.WriteLine($&quot;Recording in {destination}&quot;);
+        Console.WriteLine(&quot;Press any key to exit&quot;);
+        Console.ReadKey();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;First we load the &lt;code class=&quot;highlighter-rouge&quot;&gt;libvlc&lt;/code&gt; dlls (included in the &lt;code class=&quot;highlighter-rouge&quot;&gt;VideoLAN.LibVLC.Windows&lt;/code&gt; nuget package).&lt;/li&gt;
+  &lt;li&gt;Then we create 3 LibVLCSharp objects: a &lt;code class=&quot;highlighter-rouge&quot;&gt;LibVLC&lt;/code&gt;, a &lt;code class=&quot;highlighter-rouge&quot;&gt;MediaPlayer&lt;/code&gt; and a &lt;code class=&quot;highlighter-rouge&quot;&gt;Media&lt;/code&gt; (containing the URL of the HLS stream).&lt;/li&gt;
+  &lt;li&gt;To get a better understanding of what is going on, we hook up the &lt;code class=&quot;highlighter-rouge&quot;&gt;libvlc&lt;/code&gt; log output with the console.&lt;/li&gt;
+  &lt;li&gt;We add &lt;code class=&quot;highlighter-rouge&quot;&gt;libvlc&lt;/code&gt; CLI options to the media, such as an output path destination (&lt;a href=&quot;https://wiki.videolan.org/VLC_command-line_help/&quot;&gt;more info&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;At last, we start the process by calling &lt;code class=&quot;highlighter-rouge&quot;&gt;Play&lt;/code&gt; on the &lt;code class=&quot;highlighter-rouge&quot;&gt;MediaPlayer&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;After a while, you will find a &lt;code class=&quot;highlighter-rouge&quot;&gt;record.ts&lt;/code&gt; file located at &lt;code class=&quot;highlighter-rouge&quot;&gt;RecordHLS\bin\Debug\netcoreapp2.1&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/RecordHLS&quot;&gt;VideoLAN GitLab&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sat, 06 Oct 2018 10:10:40 +0700</pubDate>
-        <link>http://yourdomain.com/yolo/2018/10/06/Samples.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/yolo/2018/10/06/Samples.html</guid>
+        <pubDate>Wed, 10 Oct 2018 10:10:40 +0700</pubDate>
+        <link>http://yourdomain.com/hls/2018/10/10/How-to-record-HLS-stream-with-LibVLCSharp-and-.NET-Core.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/hls/2018/10/10/How-to-record-HLS-stream-with-LibVLCSharp-and-.NET-Core.html</guid>
         
         
-        <category>yolo</category>
+        <category>hls</category>
         
       </item>
     

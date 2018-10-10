@@ -1,7 +1,0 @@
----
-layout: post
-title:  "Samples"
-date:   2018-10-06 10:10:40 +0700
-categories: yolo
----
-Coming soon
