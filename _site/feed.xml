@@ -3,10 +3,10 @@
   <channel>
     <title>mfkl</title>
     <description></description>
-    <link>http://yourdomain.com/</link>
-    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 21 Oct 2018 22:47:41 +0700</pubDate>
-    <lastBuildDate>Sun, 21 Oct 2018 22:47:41 +0700</lastBuildDate>
+    <link>https://mfkl.github.io/</link>
+    <atom:link href="https://mfkl.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 21 Oct 2018 22:49:37 +0700</pubDate>
+    <lastBuildDate>Sun, 21 Oct 2018 22:49:37 +0700</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -109,8 +109,8 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
 &lt;p&gt;It currently is implemented for both iOS and Android using Xamarin.Forms. It will however work on any platform supported by libvlc and Mono/.NET.&lt;/p&gt;
 </description>
         <pubDate>Sun, 21 Oct 2018 10:10:40 +0700</pubDate>
-        <link>http://yourdomain.com/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html</guid>
+        <link>https://mfkl.github.io/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html</link>
+        <guid isPermaLink="true">https://mfkl.github.io/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html</guid>
         
         
         <category>chromecast</category>
@@ -202,8 +202,8 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
 &lt;p&gt;This sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/RecordHLS&quot;&gt;VideoLAN GitLab&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 10 Oct 2018 10:10:40 +0700</pubDate>
-        <link>http://yourdomain.com/hls/2018/10/10/How-to-record-HLS-stream-with-LibVLCSharp-and-.NET-Core.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/hls/2018/10/10/How-to-record-HLS-stream-with-LibVLCSharp-and-.NET-Core.html</guid>
+        <link>https://mfkl.github.io/hls/2018/10/10/How-to-record-HLS-stream-with-LibVLCSharp-and-.NET-Core.html</link>
+        <guid isPermaLink="true">https://mfkl.github.io/hls/2018/10/10/How-to-record-HLS-stream-with-LibVLCSharp-and-.NET-Core.html</guid>
         
         
         <category>hls</category>
@@ -256,8 +256,8 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
 &lt;p&gt;We use &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp&quot;&gt;GitLab&lt;/a&gt; and &lt;a href=&quot;https://github.com/videolan/libvlcsharp&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Sat, 06 Oct 2018 10:10:40 +0700</pubDate>
-        <link>http://yourdomain.com/libvlc/intro/2018/10/06/introducing-libvlcsharp.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/libvlc/intro/2018/10/06/introducing-libvlcsharp.html</guid>
+        <link>https://mfkl.github.io/libvlc/intro/2018/10/06/introducing-libvlcsharp.html</link>
+        <guid isPermaLink="true">https://mfkl.github.io/libvlc/intro/2018/10/06/introducing-libvlcsharp.html</guid>
         
         
         <category>libvlc</category>
