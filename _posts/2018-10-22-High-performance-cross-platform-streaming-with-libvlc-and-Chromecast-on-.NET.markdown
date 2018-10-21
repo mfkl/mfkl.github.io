@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "High performance, cross-platform streaming with libvlc and Chromecast"
-date:   2018-10-10 10:10:40 +0700
+date:   2018-10-21 10:10:40 +0700
 categories: chromecast
 ---
 # High performance, cross-platform streaming with libvlc and Chromecast on .NET

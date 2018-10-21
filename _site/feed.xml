@@ -5,8 +5,8 @@
     <description></description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 21 Oct 2018 22:43:14 +0700</pubDate>
-    <lastBuildDate>Sun, 21 Oct 2018 22:43:14 +0700</lastBuildDate>
+    <pubDate>Sun, 21 Oct 2018 22:47:41 +0700</pubDate>
+    <lastBuildDate>Sun, 21 Oct 2018 22:47:41 +0700</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -108,9 +108,9 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
 
 &lt;p&gt;It currently is implemented for both iOS and Android using Xamarin.Forms. It will however work on any platform supported by libvlc and Mono/.NET.&lt;/p&gt;
 </description>
-        <pubDate>Wed, 10 Oct 2018 10:10:40 +0700</pubDate>
-        <link>http://yourdomain.com/chromecast/2018/10/10/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/chromecast/2018/10/10/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html</guid>
+        <pubDate>Sun, 21 Oct 2018 10:10:40 +0700</pubDate>
+        <link>http://yourdomain.com/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html</guid>
         
         
         <category>chromecast</category>
