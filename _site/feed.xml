@@ -5,9 +5,117 @@
     <description></description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 10 Oct 2018 11:34:39 +0700</pubDate>
-    <lastBuildDate>Wed, 10 Oct 2018 11:34:39 +0700</lastBuildDate>
+    <pubDate>Sun, 21 Oct 2018 22:43:14 +0700</pubDate>
+    <lastBuildDate>Sun, 21 Oct 2018 22:43:14 +0700</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>High performance, cross-platform streaming with libvlc and Chromecast</title>
+        <description>&lt;h1 id=&quot;high-performance-cross-platform-streaming-with-libvlc-and-chromecast-on-net&quot;&gt;High performance, cross-platform streaming with libvlc and Chromecast on .NET&lt;/h1&gt;
+
+&lt;p&gt;With the release of &lt;a href=&quot;https://www.videolan.org/vlc/releases/3.0.0.html&quot;&gt;libvlc 3.0&lt;/a&gt;, the long awaited feature of being able to cast your media to your TV has been added to libvlc (and the VLC apps). In this post, I will show you how to cast a media using LibVLCSharp, in a cross-platform way.&lt;/p&gt;
+
+&lt;p&gt;But before I do so, you should know a few things about the Chromecast module of VLC, as it is a bit &lt;em&gt;special&lt;/em&gt;. To quote &lt;a href=&quot;https://geoffreymetais.github.io/features/vlc-30/&quot;&gt;Geoffrey Metais&lt;/a&gt;, the &lt;a href=&quot;https://code.videolan.org/videolan/vlc-android&quot;&gt;Android VLC port&lt;/a&gt; maintainer:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[…] VLC is 100% Open Source and Chromecast SDK isn’t: We had to develop our very own Chromecast stack by ourselves. This is also why there is no voice actions for VLC (except with Android Auto), we cannot use Google Play Services.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Furthermore, Chromecast is not designed to play local video files: When you watch a Youtube video, your phone is just a remote controller, nothing more. Chromecast streams the video from youtube.com.
+That’s where it becomes complicated, Chromecast only supports very few codecs number, let’s say h264. Google ensures that your video is encoded in h264 format on youtube.com, so streaming is simple.
+With VLC, you have media of any format. So VLC has to be a http server like youtube.com, and provide the video in a Chromecast compatible format. And of course in real time, which is challenging on Android because phones are less powerful than computers […].&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;note-if-you-want-to-have-a-look-how-it-works-under-the-hood-herehttpsgithubcomvideolanvlc-30treemastermodulesstreamoutchromecast-is-a-good-place-to-start&quot;&gt;Note: if you want to have a look how it works under the hood, &lt;a href=&quot;https://github.com/videolan/vlc-3.0/tree/master/modules/stream_out/chromecast&quot;&gt;here&lt;/a&gt; is a good place to start.&lt;/h5&gt;
+
+&lt;p&gt;So I can cast my DVDs to my chromecast, that’s cool… but how do I make use of this with .NET on any platform?&lt;/p&gt;
+
+&lt;p&gt;Let’s have a look at the code.&lt;/p&gt;
+
+&lt;p&gt;The first step is to find a chromecast on our local network.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;void DiscoverChromecasts()
+{
+    // load native libvlc libraries
+    Core.Initialize();
+
+    // create core libvlc object
+    _libVLC = new LibVLC();
+
+    string rendererName;
+
+    // choose the correct service discovery protocol depending on the host platform
+    // Apple platforms use the Bonjour protocol
+    if (Device.RuntimePlatform == Device.iOS)
+        rendererName = _libVLC.RendererList.Select(renderer =&amp;gt; renderer.Name).FirstOrDefault(name =&amp;gt; name.Equals(&quot;Bonjour_renderer&quot;));
+    else if (Device.RuntimePlatform == Device.Android)
+        rendererName = _libVLC.RendererList.Select(renderer =&amp;gt; renderer.Name).FirstOrDefault(name =&amp;gt; name.Equals(&quot;microdns_renderer&quot;));
+    else throw new PlatformNotSupportedException(&quot;Only Android and iOS are currently supported in this sample&quot;);
+    
+    // create a renderer discoverer
+    _rendererDiscoverer = new RendererDiscoverer(_libVLC, rendererName);
+
+    // register callback when a new renderer is found
+    _rendererDiscoverer.ItemAdded += RendererDiscoverer_ItemAdded;
+
+    // start discovery on the local network
+    _rendererDiscoverer.Start();
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;So when a new RendererItem (typically a chromecast, or other distant renderers) has been discovered, the &lt;code class=&quot;highlighter-rouge&quot;&gt;ItemAdded&lt;/code&gt; event is raised.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;void RendererDiscoverer_ItemAdded(object sender, RendererDiscovererItemAddedEventArgs e)
+{
+    WriteLine($&quot;New item discovered: {e.RendererItem.Name} of type {e.RendererItem.Type}&quot;);
+
+    if (e.RendererItem.CanRenderVideo)
+        WriteLine(&quot;Can render video&quot;);
+    if (e.RendererItem.CanRenderAudio)
+        WriteLine(&quot;Can render audio&quot;);
+
+    // add newly found renderer item to local collection
+    _rendererItems.Add(e.RendererItem);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We will now start casting a media. In this example, I will use a HTTP URL, but of course local content works as well (using a crossplatform native file picker, for instance).&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;void StartCasting()
+{
+    // create a media
+    var media = new Media(_libVLC,
+        &quot;http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4&quot;,
+        Media.FromType.FromLocation);
+
+    // create the mediaplayer
+    _mediaPlayer = new MediaPlayer(_libVLC);
+
+    // set the first discovered renderer item (chromecast) on the mediaplayer
+    // if you set it to null, it will start to render normally (i.e. locally) again
+    _mediaPlayer.SetRenderer(_rendererItems.First());
+
+    // start the playback
+    _mediaPlayer.Play(media);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The full sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/Chromecast&quot;&gt;VideoLAN GitLab&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It currently is implemented for both iOS and Android using Xamarin.Forms. It will however work on any platform supported by libvlc and Mono/.NET.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 10 Oct 2018 10:10:40 +0700</pubDate>
+        <link>http://yourdomain.com/chromecast/2018/10/10/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/chromecast/2018/10/10/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html</guid>
+        
+        
+        <category>chromecast</category>
+        
+      </item>
     
       <item>
         <title>How to record an HLS stream with LibVLCSharp and .NET Core</title>
