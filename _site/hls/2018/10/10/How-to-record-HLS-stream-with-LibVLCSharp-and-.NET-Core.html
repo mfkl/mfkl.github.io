@@ -70,18 +70,18 @@
 
 <p>So, to get started we need to pull 2 packages from the VideoLAN <a href="https://www.nuget.org/profiles/videolan">NuGet</a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;Project Sdk="Microsoft.NET.Sdk"&gt;  
-  &lt;PropertyGroup&gt;
-    &lt;OutputType&gt;Exe&lt;/OutputType&gt;
-    &lt;TargetFramework&gt;netcoreapp2.1&lt;/TargetFramework&gt;
-    &lt;RestoreProjectStyle&gt;PackageReference&lt;/RestoreProjectStyle&gt;
-    &lt;CopyLocalLockFileAssemblies&gt;true&lt;/CopyLocalLockFileAssemblies&gt;
-  &lt;/PropertyGroup&gt;  
-  &lt;ItemGroup&gt;
-    &lt;PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.4" /&gt;
-    &lt;PackageReference Include="LibVLCSharp" Version="0.0.3" /&gt;
-   &lt;/ItemGroup&gt;
-&lt;/Project&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;Project</span> <span class="na">Sdk=</span><span class="s">"Microsoft.NET.Sdk"</span><span class="nt">&gt;</span>  
+  <span class="nt">&lt;PropertyGroup&gt;</span>
+    <span class="nt">&lt;OutputType&gt;</span>Exe<span class="nt">&lt;/OutputType&gt;</span>
+    <span class="nt">&lt;TargetFramework&gt;</span>netcoreapp2.1<span class="nt">&lt;/TargetFramework&gt;</span>
+    <span class="nt">&lt;RestoreProjectStyle&gt;</span>PackageReference<span class="nt">&lt;/RestoreProjectStyle&gt;</span>
+    <span class="nt">&lt;CopyLocalLockFileAssemblies&gt;</span>true<span class="nt">&lt;/CopyLocalLockFileAssemblies&gt;</span>
+  <span class="nt">&lt;/PropertyGroup&gt;</span>  
+  <span class="nt">&lt;ItemGroup&gt;</span>
+    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">"VideoLAN.LibVLC.Windows"</span> <span class="na">Version=</span><span class="s">"3.0.4"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">"LibVLCSharp"</span> <span class="na">Version=</span><span class="s">"0.0.3"</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;/ItemGroup&gt;</span>
+<span class="nt">&lt;/Project&gt;</span>
 </code></pre>
 </div>
 
@@ -91,41 +91,41 @@
 
 <p>Now onto the actual code</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>static void Main(string[] args)
-{
-    // Record in a file "record.ts" located in the bin folder next to the app
-    var currentDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-    var destination = Path.Combine(currentDirectory, "record.ts");
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Record in a file "record.ts" located in the bin folder next to the app
+</span>    <span class="n">var</span> <span class="n">currentDirectory</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">GetDirectoryName</span><span class="p">(</span><span class="n">Assembly</span><span class="p">.</span><span class="nf">GetEntryAssembly</span><span class="p">().</span><span class="n">Location</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">destination</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">Combine</span><span class="p">(</span><span class="n">currentDirectory</span><span class="p">,</span> <span class="s">"record.ts"</span><span class="p">);</span>
 
-    // Load native libvlc library
-    Core.Initialize();
+    <span class="c1">// Load native libvlc library
+</span>    <span class="n">Core</span><span class="p">.</span><span class="nf">Initialize</span><span class="p">();</span>
 
-    using (var libvlc = new LibVLC())
-    using (var mediaPlayer = new MediaPlayer(libvlc))
-    {
-        // Redirect log output to the console
-        libvlc.Log += (sender, e) 
-            =&gt; Console.WriteLine($"[{e.Level}] {e.Module}:{e.Message}");
+    <span class="k">using</span> <span class="p">(</span><span class="n">var</span> <span class="n">libvlc</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">())</span>
+    <span class="k">using</span> <span class="p">(</span><span class="n">var</span> <span class="n">mediaPlayer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MediaPlayer</span><span class="p">(</span><span class="n">libvlc</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="c1">// Redirect log output to the console
+</span>        <span class="n">libvlc</span><span class="p">.</span><span class="n">Log</span> <span class="p">+=</span> <span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> 
+            <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">"[{e.Level}] {e.Module}:{e.Message}"</span><span class="p">);</span>
 
-        // Create new media with HLS link
-        var media = new Media(libvlc, 
-                    "http://hls1.addictradio.net/addictrock_aac_hls/playlist.m3u8", 
-                    Media.FromType.FromLocation);
+        <span class="c1">// Create new media with HLS link
+</span>        <span class="n">var</span> <span class="n">media</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Media</span><span class="p">(</span><span class="n">libvlc</span><span class="p">,</span> 
+                    <span class="s">"http://hls1.addictradio.net/addictrock_aac_hls/playlist.m3u8"</span><span class="p">,</span> 
+                    <span class="n">Media</span><span class="p">.</span><span class="n">FromType</span><span class="p">.</span><span class="n">FromLocation</span><span class="p">);</span>
 
-        // Define stream output options. 
-        // In this case stream to a file with the given path
-        // and play locally the stream while streaming it.
-        media.AddOption(":sout=#file{dst=" + destination + "}");
-        media.AddOption(":sout-keep");
+        <span class="c1">// Define stream output options. 
+</span>        <span class="c1">// In this case stream to a file with the given path
+</span>        <span class="c1">// and play locally the stream while streaming it.
+</span>        <span class="n">media</span><span class="p">.</span><span class="nf">AddOption</span><span class="p">(</span><span class="s">":sout=#file{dst="</span> <span class="p">+</span> <span class="n">destination</span> <span class="p">+</span> <span class="s">"}"</span><span class="p">);</span>
+        <span class="n">media</span><span class="p">.</span><span class="nf">AddOption</span><span class="p">(</span><span class="s">":sout-keep"</span><span class="p">);</span>
 
-        // Start recording
-        mediaPlayer.Play(media);
+        <span class="c1">// Start recording
+</span>        <span class="n">mediaPlayer</span><span class="p">.</span><span class="nf">Play</span><span class="p">(</span><span class="n">media</span><span class="p">);</span>
 
-        Console.WriteLine($"Recording in {destination}");
-        Console.WriteLine("Press any key to exit");
-        Console.ReadKey();
-    }
-}
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">"Recording in {destination}"</span><span class="p">);</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Press any key to exit"</span><span class="p">);</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">ReadKey</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 </div>
 

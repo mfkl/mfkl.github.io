@@ -24,7 +24,7 @@ Let's have a look at the code.
 
 The first step is to find a chromecast on our local network.
 
-~~~~
+~~~~csharp
 void DiscoverChromecasts()
 {
     // load native libvlc libraries
@@ -56,7 +56,7 @@ void DiscoverChromecasts()
 
 So when a new RendererItem (typically a chromecast, or other distant renderers) has been discovered, the `ItemAdded` event is raised.
 
-~~~~
+~~~~csharp
 void RendererDiscoverer_ItemAdded(object sender, RendererDiscovererItemAddedEventArgs e)
 {
     WriteLine($"New item discovered: {e.RendererItem.Name} of type {e.RendererItem.Type}");
@@ -73,7 +73,7 @@ void RendererDiscoverer_ItemAdded(object sender, RendererDiscovererItemAddedEven
 
 We will now start casting a media. In this example, I will use a HTTP URL, but of course local content works as well (using a crossplatform native file picker, for instance).
 
-~~~~
+~~~~csharp
 void StartCasting()
 {
     // create a media

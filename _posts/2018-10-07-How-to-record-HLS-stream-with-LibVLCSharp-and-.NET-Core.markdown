@@ -14,7 +14,7 @@ HLS is a streaming protocol originally developped by Apple which is supported in
 
 So, to get started we need to pull 2 packages from the VideoLAN [NuGet](https://www.nuget.org/profiles/videolan)
 
-~~~~
+~~~~xml
 <Project Sdk="Microsoft.NET.Sdk">  
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -35,7 +35,7 @@ So, to get started we need to pull 2 packages from the VideoLAN [NuGet](https://
 
 Now onto the actual code
 
-~~~~
+~~~csharp
 static void Main(string[] args)
 {
     // Record in a file "record.ts" located in the bin folder next to the app

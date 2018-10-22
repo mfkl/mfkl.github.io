@@ -77,21 +77,21 @@
   <li>DVD playback and menu navigation.</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    static void Main(string[] args)
-    {
-        // Loading the native libvlc library
-        Core.Initialize();
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Loading the native libvlc library
+</span>        <span class="n">Core</span><span class="p">.</span><span class="nf">Initialize</span><span class="p">();</span>
 
-        using (var libVLC = new LibVLC())
-        using (var mediaPlayer = new MediaPlayer(libVLC))
-        {
-            var media = new Media(libVLC, 
-                                "http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4", 
-                                Media.FromType.FromLocation)
-            mediaPlayer.Play(media);
-            Console.ReadKey();
-        }
-    }
+        <span class="k">using</span> <span class="p">(</span><span class="n">var</span> <span class="n">libVLC</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">())</span>
+        <span class="k">using</span> <span class="p">(</span><span class="n">var</span> <span class="n">mediaPlayer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MediaPlayer</span><span class="p">(</span><span class="n">libVLC</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="n">var</span> <span class="n">media</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Media</span><span class="p">(</span><span class="n">libVLC</span><span class="p">,</span> 
+                                <span class="s">"http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4"</span><span class="p">,</span> 
+                                <span class="n">Media</span><span class="p">.</span><span class="n">FromType</span><span class="p">.</span><span class="n">FromLocation</span><span class="p">)</span>
+            <span class="n">mediaPlayer</span><span class="p">.</span><span class="nf">Play</span><span class="p">(</span><span class="n">media</span><span class="p">);</span>
+            <span class="n">Console</span><span class="p">.</span><span class="nf">ReadKey</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 </code></pre>
 </div>
 

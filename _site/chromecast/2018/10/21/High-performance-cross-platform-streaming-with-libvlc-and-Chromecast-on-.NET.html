@@ -82,72 +82,72 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
 
 <p>The first step is to find a chromecast on our local network.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>void DiscoverChromecasts()
-{
-    // load native libvlc libraries
-    Core.Initialize();
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">void</span> <span class="nf">DiscoverChromecasts</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// load native libvlc libraries
+</span>    <span class="n">Core</span><span class="p">.</span><span class="nf">Initialize</span><span class="p">();</span>
 
-    // create core libvlc object
-    _libVLC = new LibVLC();
+    <span class="c1">// create core libvlc object
+</span>    <span class="n">_libVLC</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">();</span>
 
-    string rendererName;
+    <span class="kt">string</span> <span class="n">rendererName</span><span class="p">;</span>
 
-    // choose the correct service discovery protocol depending on the host platform
-    // Apple platforms use the Bonjour protocol
-    if (Device.RuntimePlatform == Device.iOS)
-        rendererName = _libVLC.RendererList.Select(renderer =&gt; renderer.Name).FirstOrDefault(name =&gt; name.Equals("Bonjour_renderer"));
-    else if (Device.RuntimePlatform == Device.Android)
-        rendererName = _libVLC.RendererList.Select(renderer =&gt; renderer.Name).FirstOrDefault(name =&gt; name.Equals("microdns_renderer"));
-    else throw new PlatformNotSupportedException("Only Android and iOS are currently supported in this sample");
+    <span class="c1">// choose the correct service discovery protocol depending on the host platform
+</span>    <span class="c1">// Apple platforms use the Bonjour protocol
+</span>    <span class="k">if</span> <span class="p">(</span><span class="n">Device</span><span class="p">.</span><span class="n">RuntimePlatform</span> <span class="p">==</span> <span class="n">Device</span><span class="p">.</span><span class="n">iOS</span><span class="p">)</span>
+        <span class="n">rendererName</span> <span class="p">=</span> <span class="n">_libVLC</span><span class="p">.</span><span class="n">RendererList</span><span class="p">.</span><span class="nf">Select</span><span class="p">(</span><span class="n">renderer</span> <span class="p">=&gt;</span> <span class="n">renderer</span><span class="p">.</span><span class="n">Name</span><span class="p">).</span><span class="nf">FirstOrDefault</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="nf">Equals</span><span class="p">(</span><span class="s">"Bonjour_renderer"</span><span class="p">));</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Device</span><span class="p">.</span><span class="n">RuntimePlatform</span> <span class="p">==</span> <span class="n">Device</span><span class="p">.</span><span class="n">Android</span><span class="p">)</span>
+        <span class="n">rendererName</span> <span class="p">=</span> <span class="n">_libVLC</span><span class="p">.</span><span class="n">RendererList</span><span class="p">.</span><span class="nf">Select</span><span class="p">(</span><span class="n">renderer</span> <span class="p">=&gt;</span> <span class="n">renderer</span><span class="p">.</span><span class="n">Name</span><span class="p">).</span><span class="nf">FirstOrDefault</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="nf">Equals</span><span class="p">(</span><span class="s">"microdns_renderer"</span><span class="p">));</span>
+    <span class="k">else</span> <span class="k">throw</span> <span class="k">new</span> <span class="nf">PlatformNotSupportedException</span><span class="p">(</span><span class="s">"Only Android and iOS are currently supported in this sample"</span><span class="p">);</span>
     
-    // create a renderer discoverer
-    _rendererDiscoverer = new RendererDiscoverer(_libVLC, rendererName);
+    <span class="c1">// create a renderer discoverer
+</span>    <span class="n">_rendererDiscoverer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RendererDiscoverer</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">,</span> <span class="n">rendererName</span><span class="p">);</span>
 
-    // register callback when a new renderer is found
-    _rendererDiscoverer.ItemAdded += RendererDiscoverer_ItemAdded;
+    <span class="c1">// register callback when a new renderer is found
+</span>    <span class="n">_rendererDiscoverer</span><span class="p">.</span><span class="n">ItemAdded</span> <span class="p">+=</span> <span class="n">RendererDiscoverer_ItemAdded</span><span class="p">;</span>
 
-    // start discovery on the local network
-    _rendererDiscoverer.Start();
-}
+    <span class="c1">// start discovery on the local network
+</span>    <span class="n">_rendererDiscoverer</span><span class="p">.</span><span class="nf">Start</span><span class="p">();</span>
+<span class="p">}</span>
 </code></pre>
 </div>
 
 <p>So when a new RendererItem (typically a chromecast, or other distant renderers) has been discovered, the <code class="highlighter-rouge">ItemAdded</code> event is raised.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>void RendererDiscoverer_ItemAdded(object sender, RendererDiscovererItemAddedEventArgs e)
-{
-    WriteLine($"New item discovered: {e.RendererItem.Name} of type {e.RendererItem.Type}");
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">void</span> <span class="nf">RendererDiscoverer_ItemAdded</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RendererDiscovererItemAddedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nf">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">"New item discovered: {e.RendererItem.Name} of type {e.RendererItem.Type}"</span><span class="p">);</span>
 
-    if (e.RendererItem.CanRenderVideo)
-        WriteLine("Can render video");
-    if (e.RendererItem.CanRenderAudio)
-        WriteLine("Can render audio");
+    <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">RendererItem</span><span class="p">.</span><span class="n">CanRenderVideo</span><span class="p">)</span>
+        <span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Can render video"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">RendererItem</span><span class="p">.</span><span class="n">CanRenderAudio</span><span class="p">)</span>
+        <span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Can render audio"</span><span class="p">);</span>
 
-    // add newly found renderer item to local collection
-    _rendererItems.Add(e.RendererItem);
-}
+    <span class="c1">// add newly found renderer item to local collection
+</span>    <span class="n">_rendererItems</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">RendererItem</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre>
 </div>
 
 <p>We will now start casting a media. In this example, I will use a HTTP URL, but of course local content works as well (using a crossplatform native file picker, for instance).</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>void StartCasting()
-{
-    // create a media
-    var media = new Media(_libVLC,
-        "http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4",
-        Media.FromType.FromLocation);
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">void</span> <span class="nf">StartCasting</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// create a media
+</span>    <span class="n">var</span> <span class="n">media</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Media</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">,</span>
+        <span class="s">"http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4"</span><span class="p">,</span>
+        <span class="n">Media</span><span class="p">.</span><span class="n">FromType</span><span class="p">.</span><span class="n">FromLocation</span><span class="p">);</span>
 
-    // create the mediaplayer
-    _mediaPlayer = new MediaPlayer(_libVLC);
+    <span class="c1">// create the mediaplayer
+</span>    <span class="n">_mediaPlayer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MediaPlayer</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">);</span>
 
-    // set the first discovered renderer item (chromecast) on the mediaplayer
-    // if you set it to null, it will start to render normally (i.e. locally) again
-    _mediaPlayer.SetRenderer(_rendererItems.First());
+    <span class="c1">// set the first discovered renderer item (chromecast) on the mediaplayer
+</span>    <span class="c1">// if you set it to null, it will start to render normally (i.e. locally) again
+</span>    <span class="n">_mediaPlayer</span><span class="p">.</span><span class="nf">SetRenderer</span><span class="p">(</span><span class="n">_rendererItems</span><span class="p">.</span><span class="nf">First</span><span class="p">());</span>
 
-    // start the playback
-    _mediaPlayer.Play(media);
-}
+    <span class="c1">// start the playback
+</span>    <span class="n">_mediaPlayer</span><span class="p">.</span><span class="nf">Play</span><span class="p">(</span><span class="n">media</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre>
 </div>
 
