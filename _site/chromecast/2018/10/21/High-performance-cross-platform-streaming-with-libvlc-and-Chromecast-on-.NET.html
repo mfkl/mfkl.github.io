@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>High performance, cross-platform streaming with libvlc and Chromecast</title>
-  <meta name="description" content="High performance, cross-platform streaming with libvlc and Chromecast on .NET">
+  <title>High performance, cross-platform media streaming with libvlc and Chromecast</title>
+  <meta name="description" content="High performance, cross-platform media streaming with libvlc and Chromecast on .NET">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="https://mfkl.github.io/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html">
@@ -53,16 +53,16 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">High performance, cross-platform streaming with libvlc and Chromecast</h1>
+    <h1 class="post-title" itemprop="name headline">High performance, cross-platform media streaming with libvlc and Chromecast</h1>
     <p class="post-meta"><time datetime="2018-10-21T10:10:40+07:00" itemprop="datePublished">Oct 21, 2018</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <h1 id="high-performance-cross-platform-streaming-with-libvlc-and-chromecast-on-net">High performance, cross-platform streaming with libvlc and Chromecast on .NET</h1>
+    <h1 id="high-performance-cross-platform-media-streaming-with-libvlc-and-chromecast-on-net">High performance, cross-platform media streaming with libvlc and Chromecast on .NET</h1>
 
-<p>With the release of <a href="https://www.videolan.org/vlc/releases/3.0.0.html">libvlc 3.0</a>, the long awaited feature of being able to cast your media to your TV has been added to libvlc (and the VLC apps). In this post, I will show you how to cast a media using LibVLCSharp, in a cross-platform way.</p>
+<p>With the release of <a href="https://www.videolan.org/vlc/releases/3.0.0.html">libvlc 3.0</a>, casting your media to your TV is finally possible with libvlc (and the VLC apps). In this post, I will show you how to cast a media using LibVLCSharp, in a cross-platform way.</p>
 
-<p>But before I do so, you should know a few things about the Chromecast module of VLC, as it is a bit <em>special</em>. To quote <a href="https://geoffreymetais.github.io/features/vlc-30/">Geoffrey Metais</a>, the <a href="https://code.videolan.org/videolan/vlc-android">Android VLC port</a> maintainer:</p>
+<p>But before I do so, there are a few prerequisites that you should know regarding VLC’s Chromecast module, as it is a bit <em>special</em>. To quote <a href="https://geoffreymetais.github.io/features/vlc-30/">Geoffrey Metais</a>, the <a href="https://code.videolan.org/videolan/vlc-android">Android VLC port</a> maintainer:</p>
 
 <blockquote>
   <p>[…] VLC is 100% Open Source and Chromecast SDK isn’t: We had to develop our very own Chromecast stack by ourselves. This is also why there is no voice actions for VLC (except with Android Auto), we cannot use Google Play Services.</p>
@@ -74,13 +74,13 @@ That’s where it becomes complicated, Chromecast only supports very few codecs 
 With VLC, you have media of any format. So VLC has to be a http server like youtube.com, and provide the video in a Chromecast compatible format. And of course in real time, which is challenging on Android because phones are less powerful than computers […].</p>
 </blockquote>
 
-<h5 id="note-if-you-want-to-have-a-look-how-it-works-under-the-hood-herehttpsgithubcomvideolanvlc-30treemastermodulesstreamoutchromecast-is-a-good-place-to-start">Note: if you want to have a look how it works under the hood, <a href="https://github.com/videolan/vlc-3.0/tree/master/modules/stream_out/chromecast">here</a> is a good place to start.</h5>
+<h5 id="note-if-you-want-to-have-a-look-at-how-it-works-under-the-hood-herehttpsgithubcomvideolanvlc-30treemastermodulesstreamoutchromecast-is-a-good-place-to-start">Note: if you want to have a look at how it works under the hood, <a href="https://github.com/videolan/vlc-3.0/tree/master/modules/stream_out/chromecast">here</a> is a good place to start.</h5>
 
-<p>So I can cast my DVDs to my chromecast, that’s cool… but how do I make use of this with .NET on any platform?</p>
+<p>So I can cast my DVDs to my Chromecast, that’s cool… but how do I make use of this from .NET, on any platform?</p>
 
 <p>Let’s have a look at the code.</p>
 
-<p>The first step is to find a chromecast on our local network.</p>
+<p>The first step is to find a Chromecast on our local network.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="k">void</span> <span class="nf">DiscoverChromecasts</span><span class="p">()</span>
 <span class="p">{</span>
@@ -90,18 +90,8 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
     <span class="c1">// create core libvlc object
 </span>    <span class="n">_libVLC</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">();</span>
 
-    <span class="kt">string</span> <span class="n">rendererName</span><span class="p">;</span>
-
-    <span class="c1">// choose the correct service discovery protocol depending on the host platform
-</span>    <span class="c1">// Apple platforms use the Bonjour protocol
-</span>    <span class="k">if</span> <span class="p">(</span><span class="n">Device</span><span class="p">.</span><span class="n">RuntimePlatform</span> <span class="p">==</span> <span class="n">Device</span><span class="p">.</span><span class="n">iOS</span><span class="p">)</span>
-        <span class="n">rendererName</span> <span class="p">=</span> <span class="n">_libVLC</span><span class="p">.</span><span class="n">RendererList</span><span class="p">.</span><span class="nf">Select</span><span class="p">(</span><span class="n">renderer</span> <span class="p">=&gt;</span> <span class="n">renderer</span><span class="p">.</span><span class="n">Name</span><span class="p">).</span><span class="nf">FirstOrDefault</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="nf">Equals</span><span class="p">(</span><span class="s">"Bonjour_renderer"</span><span class="p">));</span>
-    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Device</span><span class="p">.</span><span class="n">RuntimePlatform</span> <span class="p">==</span> <span class="n">Device</span><span class="p">.</span><span class="n">Android</span><span class="p">)</span>
-        <span class="n">rendererName</span> <span class="p">=</span> <span class="n">_libVLC</span><span class="p">.</span><span class="n">RendererList</span><span class="p">.</span><span class="nf">Select</span><span class="p">(</span><span class="n">renderer</span> <span class="p">=&gt;</span> <span class="n">renderer</span><span class="p">.</span><span class="n">Name</span><span class="p">).</span><span class="nf">FirstOrDefault</span><span class="p">(</span><span class="n">name</span> <span class="p">=&gt;</span> <span class="n">name</span><span class="p">.</span><span class="nf">Equals</span><span class="p">(</span><span class="s">"microdns_renderer"</span><span class="p">));</span>
-    <span class="k">else</span> <span class="k">throw</span> <span class="k">new</span> <span class="nf">PlatformNotSupportedException</span><span class="p">(</span><span class="s">"Only Android and iOS are currently supported in this sample"</span><span class="p">);</span>
-    
     <span class="c1">// create a renderer discoverer
-</span>    <span class="n">_rendererDiscoverer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RendererDiscoverer</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">,</span> <span class="n">rendererName</span><span class="p">);</span>
+</span>    <span class="n">_rendererDiscoverer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RendererDiscoverer</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">);</span>
 
     <span class="c1">// register callback when a new renderer is found
 </span>    <span class="n">_rendererDiscoverer</span><span class="p">.</span><span class="n">ItemAdded</span> <span class="p">+=</span> <span class="n">RendererDiscoverer_ItemAdded</span><span class="p">;</span>
@@ -153,7 +143,7 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
 
 <p>The full sample is available on the <a href="https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/Chromecast">VideoLAN GitLab</a>.</p>
 
-<p>It currently is implemented for both iOS and Android using Xamarin.Forms. It will however work on any platform supported by libvlc and Mono/.NET.</p>
+<p>It is currently implemented for both iOS and Android using Xamarin.Forms. It will however work on any platform supported by libvlc and Mono/.NET.</p>
 
   </div>
 

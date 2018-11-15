@@ -5,17 +5,17 @@
     <description></description>
     <link>https://mfkl.github.io/</link>
     <atom:link href="https://mfkl.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 22 Oct 2018 08:52:12 +0700</pubDate>
-    <lastBuildDate>Mon, 22 Oct 2018 08:52:12 +0700</lastBuildDate>
+    <pubDate>Thu, 15 Nov 2018 16:26:47 +0700</pubDate>
+    <lastBuildDate>Thu, 15 Nov 2018 16:26:47 +0700</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
-        <title>High performance, cross-platform streaming with libvlc and Chromecast</title>
-        <description>&lt;h1 id=&quot;high-performance-cross-platform-streaming-with-libvlc-and-chromecast-on-net&quot;&gt;High performance, cross-platform streaming with libvlc and Chromecast on .NET&lt;/h1&gt;
+        <title>High performance, cross-platform media streaming with libvlc and Chromecast</title>
+        <description>&lt;h1 id=&quot;high-performance-cross-platform-media-streaming-with-libvlc-and-chromecast-on-net&quot;&gt;High performance, cross-platform media streaming with libvlc and Chromecast on .NET&lt;/h1&gt;
 
-&lt;p&gt;With the release of &lt;a href=&quot;https://www.videolan.org/vlc/releases/3.0.0.html&quot;&gt;libvlc 3.0&lt;/a&gt;, the long awaited feature of being able to cast your media to your TV has been added to libvlc (and the VLC apps). In this post, I will show you how to cast a media using LibVLCSharp, in a cross-platform way.&lt;/p&gt;
+&lt;p&gt;With the release of &lt;a href=&quot;https://www.videolan.org/vlc/releases/3.0.0.html&quot;&gt;libvlc 3.0&lt;/a&gt;, casting your media to your TV is finally possible with libvlc (and the VLC apps). In this post, I will show you how to cast a media using LibVLCSharp, in a cross-platform way.&lt;/p&gt;
 
-&lt;p&gt;But before I do so, you should know a few things about the Chromecast module of VLC, as it is a bit &lt;em&gt;special&lt;/em&gt;. To quote &lt;a href=&quot;https://geoffreymetais.github.io/features/vlc-30/&quot;&gt;Geoffrey Metais&lt;/a&gt;, the &lt;a href=&quot;https://code.videolan.org/videolan/vlc-android&quot;&gt;Android VLC port&lt;/a&gt; maintainer:&lt;/p&gt;
+&lt;p&gt;But before I do so, there are a few prerequisites that you should know regarding VLC’s Chromecast module, as it is a bit &lt;em&gt;special&lt;/em&gt;. To quote &lt;a href=&quot;https://geoffreymetais.github.io/features/vlc-30/&quot;&gt;Geoffrey Metais&lt;/a&gt;, the &lt;a href=&quot;https://code.videolan.org/videolan/vlc-android&quot;&gt;Android VLC port&lt;/a&gt; maintainer:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;[…] VLC is 100% Open Source and Chromecast SDK isn’t: We had to develop our very own Chromecast stack by ourselves. This is also why there is no voice actions for VLC (except with Android Auto), we cannot use Google Play Services.&lt;/p&gt;
@@ -27,13 +27,13 @@ That’s where it becomes complicated, Chromecast only supports very few codecs 
 With VLC, you have media of any format. So VLC has to be a http server like youtube.com, and provide the video in a Chromecast compatible format. And of course in real time, which is challenging on Android because phones are less powerful than computers […].&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h5 id=&quot;note-if-you-want-to-have-a-look-how-it-works-under-the-hood-herehttpsgithubcomvideolanvlc-30treemastermodulesstreamoutchromecast-is-a-good-place-to-start&quot;&gt;Note: if you want to have a look how it works under the hood, &lt;a href=&quot;https://github.com/videolan/vlc-3.0/tree/master/modules/stream_out/chromecast&quot;&gt;here&lt;/a&gt; is a good place to start.&lt;/h5&gt;
+&lt;h5 id=&quot;note-if-you-want-to-have-a-look-at-how-it-works-under-the-hood-herehttpsgithubcomvideolanvlc-30treemastermodulesstreamoutchromecast-is-a-good-place-to-start&quot;&gt;Note: if you want to have a look at how it works under the hood, &lt;a href=&quot;https://github.com/videolan/vlc-3.0/tree/master/modules/stream_out/chromecast&quot;&gt;here&lt;/a&gt; is a good place to start.&lt;/h5&gt;
 
-&lt;p&gt;So I can cast my DVDs to my chromecast, that’s cool… but how do I make use of this with .NET on any platform?&lt;/p&gt;
+&lt;p&gt;So I can cast my DVDs to my Chromecast, that’s cool… but how do I make use of this from .NET, on any platform?&lt;/p&gt;
 
 &lt;p&gt;Let’s have a look at the code.&lt;/p&gt;
 
-&lt;p&gt;The first step is to find a chromecast on our local network.&lt;/p&gt;
+&lt;p&gt;The first step is to find a Chromecast on our local network.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DiscoverChromecasts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -43,18 +43,8 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
     &lt;span class=&quot;c1&quot;&gt;// create core libvlc object
 &lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;_libVLC&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;LibVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 
-    &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rendererName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// choose the correct service discovery protocol depending on the host platform
-&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// Apple platforms use the Bonjour protocol
-&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RuntimePlatform&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iOS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;rendererName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_libVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RendererList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;renderer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;renderer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;FirstOrDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Equals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Bonjour_renderer&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RuntimePlatform&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Android&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;rendererName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_libVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RendererList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;renderer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;renderer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;FirstOrDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Equals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;microdns_renderer&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PlatformNotSupportedException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Only Android and iOS are currently supported in this sample&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    
     &lt;span class=&quot;c1&quot;&gt;// create a renderer discoverer
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;_rendererDiscoverer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;RendererDiscoverer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_libVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rendererName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;_rendererDiscoverer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;RendererDiscoverer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_libVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
     &lt;span class=&quot;c1&quot;&gt;// register callback when a new renderer is found
 &lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;_rendererDiscoverer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ItemAdded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RendererDiscoverer_ItemAdded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -106,7 +96,7 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
 
 &lt;p&gt;The full sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/Chromecast&quot;&gt;VideoLAN GitLab&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;It currently is implemented for both iOS and Android using Xamarin.Forms. It will however work on any platform supported by libvlc and Mono/.NET.&lt;/p&gt;
+&lt;p&gt;It is currently implemented for both iOS and Android using Xamarin.Forms. It will however work on any platform supported by libvlc and Mono/.NET.&lt;/p&gt;
 </description>
         <pubDate>Sun, 21 Oct 2018 10:10:40 +0700</pubDate>
         <link>https://mfkl.github.io/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html</link>
