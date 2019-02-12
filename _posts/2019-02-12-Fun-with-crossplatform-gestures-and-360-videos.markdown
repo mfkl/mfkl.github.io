@@ -9,6 +9,8 @@ categories: libvlc 360 xamarin forms ux
 
 Touch management is handled quite differently on Android and iOS. Xamarin.Forms offers a nicely designed abstraction, inspired from the iOS APIs, which works across Android, iOS and UWP.
 
+#### Seek and volume
+
 Gestures can be useful to provide effective UX for seeking on videos and changing volume. Let's see how we can implement exactly that.
 
 We need a view that receives touch and we will display information on which actions it takes depending on the gestures.
@@ -117,7 +119,56 @@ internal void OnGesture(PanUpdatedEventArgs e)
 
 This code works on both Android and iOS.
 
-That very same logic can used to navigate 360 videos and change viewpoints, in a crossplatform way as well.
+#### 360 videos
+
+That very same logic can used to navigate 360 videos and change viewpoints, in a crossplatform way as well, albeit a few more considerations.
+
+You need to check if the video being played is actually a 360 video. If it is, then the seeking/volume gestures should be disabled.
+
+~~~~csharp
+bool Is360Video => _media.Tracks[0].Data.Video.Projection == VideoProjection.Equirectangular;
+~~~~
+
+You need to be aware of the screen dimensions for 360 navigation calculations.
+
+~~~~csharp
+protected override void OnSizeAllocated(double width, double height)
+{
+    base.OnSizeAllocated(width, height);
+
+    ScreenWidth = width;
+    ScreenHeight = height;
+}
+~~~~
+
+Now, you are ready to handle the touch events. Here is a basic example code.
+
+~~~~csharp
+void PanUpdated(object sender, PanUpdatedEventArgs e)
+{
+    switch (e.StatusType)
+    {
+        case GestureStatus.Running:
+            if (ScreenWidth > 0 && ScreenHeight > 0)
+            {
+                double range = Math.Max(ScreenWidth, ScreenHeight);
+                float yaw = (float)(Fov * -e.TotalX / range);// up/down
+                float pitch = (float)(Fov * -e.TotalY / range);// left/right
+                MediaPlayer.UpdateViewpoint(Yaw + yaw, Pitch + pitch, Roll, Fov);
+            }
+            break;
+        case GestureStatus.Started:
+        case GestureStatus.Canceled:
+            break;
+        case GestureStatus.Completed:
+            Fov = MediaPlayer.Viewpoint.Fov;
+            Pitch = MediaPlayer.Viewpoint.Pitch;
+            Roll = MediaPlayer.Viewpoint.Roll;
+            Yaw = MediaPlayer.Viewpoint.Yaw;
+            break;
+    }
+}
+~~~~
 
 Below is a demonstration of the 360 capability in the VLC Android application. Note that the sample code linked below also includes a screen with 360 gestures support with LibVLCSharp.
 
