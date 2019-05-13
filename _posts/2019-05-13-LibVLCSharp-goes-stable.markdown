@@ -62,3 +62,5 @@ We are always looking for new contributors, so feel free to reach out on our [Gi
 If you would like to contribute, we accept pull requests on both GitHub and GitLab. Please read and follow our [contributing guide](https://code.videolan.org/videolan/LibVLCSharp/blob/master/CONTRIBUTING.md).
 
 As always, you may download the packages from our [NuGet](https://www.nuget.org/profiles/videolan) account.
+
+Thanks to [@JeremyVignelles](https://twitter.com/JeremyVignelles), [@jsuarezruiz](https://twitter.com/jsuarezruiz), [@mitermite](https://twitter.com/mitermite), [@wjax](https://github.com/wjax) and [@Ch4rg3r](https://github.com/Ch4rg3r).
