@@ -7,7 +7,7 @@ categories: libvlc crossplatform xamarin forms release
 
 # LibVLCSharp 3.0: The first stable release of VideoLAN's crossplatform binding for LibVLC
 
-[LibVLCSharp](https://code.videolan.org/videolan/LibVLCSharp) is the first official **VideoLAN** binding for the multimedia LibVLC library that is _fully cross-platform_.
+[LibVLCSharp](https://code.videolan.org/videolan/LibVLCSharp) is the first official **VideoLAN** binding for the multimedia LibVLC library that is _fully cross-platform_. It has been downloaded over 10K times.
 
 It provides a simple cross-platform audio and video API for .NET on all platforms. Its comprehensive multimedia API can be used across mobile, server and desktop to render video and output audio as well as encode and stream.
 
@@ -38,7 +38,7 @@ This is the first crossplatform libvlc binding by _VideoLAN_ that is available a
 
 LibVLCSharp can now be used on Mac, Linux or Windows to develop applications in C#, F# and VB.NET.
 
-It is integrated with most GUI toolkits such as **Windows Forms**, **WPF**, **UWP**, **Cocoa** and **GTK** so it can be used seamlessly to display video and output audio on **Android**, **iOS**, **macOS**, **tvOS**, **Windows** (including Xbox and Mobile) and **Linux**!
+It is integrated with most GUI toolkits such as **Windows Forms**, **WPF**, **UWP**, **Cocoa** and **GTK** so it can be used seamlessly to display video and output audio on **Android**, **iOS**, **macOS**, **tvOS**, **Windows** (including Xbox and Mobile) as well as **Linux** (including Raspberry Pi).
 
 With LibVLCSharp.Forms, we also support Xamarin.Forms application for **native crossplatform UI development**.
 
@@ -49,6 +49,8 @@ You could also follow our [Getting Started guide](https://code.videolan.org/vide
 # Versioning
 
 Our versioning story is tied to the libvlc major versions as explained in our [versioning](https://code.videolan.org/videolan/LibVLCSharp/blob/master/VERSIONING.md) document. Other LibVLC bindings also follow that versioning scheme. This explains why the first stable release is not a 1.0 version.
+
+LibVLCSharp 3.x works with LibVLC 3.x. LibVLCSharp 4.x will work with LibVLC 4.x.
 
 # What's next?
 
