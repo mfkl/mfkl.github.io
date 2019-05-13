@@ -5,15 +5,98 @@
     <description></description>
     <link>https://mfkl.github.io/</link>
     <atom:link href="https://mfkl.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 12 Feb 2019 14:51:22 +0700</pubDate>
-    <lastBuildDate>Tue, 12 Feb 2019 14:51:22 +0700</lastBuildDate>
+    <pubDate>Mon, 13 May 2019 17:03:28 +0700</pubDate>
+    <lastBuildDate>Mon, 13 May 2019 17:03:28 +0700</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>LibVLCSharp 3.0: The first stable release of VideoLAN&#39;s crossplatform binding for LibVLC</title>
+        <description>&lt;h1 id=&quot;libvlcsharp-30-the-first-stable-release-of-videolans-crossplatform-binding-for-libvlc&quot;&gt;LibVLCSharp 3.0: The first stable release of VideoLAN’s crossplatform binding for LibVLC&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp&quot;&gt;LibVLCSharp&lt;/a&gt; is the first official &lt;strong&gt;VideoLAN&lt;/strong&gt; binding for the multimedia LibVLC library that is &lt;em&gt;fully cross-platform&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;It provides a simple cross-platform audio and video API for .NET on all platforms. Its comprehensive multimedia API can be used across mobile, server and desktop to render video and output audio as well as encode and stream.&lt;/p&gt;
+
+&lt;h1 id=&quot;what-can-libvlcsharp-do&quot;&gt;What can LibVLCSharp do?&lt;/h1&gt;
+
+&lt;p&gt;The full libvlc 3.0 set of public C APIs are surfaced as .NET APIs with LibVLCSharp.&lt;/p&gt;
+
+&lt;p&gt;You can explore LibVLC features by playing with the official &lt;a href=&quot;https://www.videolan.org/vlc&quot;&gt;VLC apps&lt;/a&gt; or reading the &lt;a href=&quot;https://en.wikipedia.org/wiki/VLC_media_player&quot;&gt;Wikipedia page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The TL;DR is this:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Plays all audio and video formats&lt;/li&gt;
+  &lt;li&gt;Network browsing for distant filesystems (SMB, FTP, SFTP, NFS…).&lt;/li&gt;
+  &lt;li&gt;HDMI pass-through for Audio HD codecs, like E-AC3, TrueHD or DTS-HD.&lt;/li&gt;
+  &lt;li&gt;Stream to distant renderers, like Chromecast.&lt;/li&gt;
+  &lt;li&gt;360 video and 3D audio playback with viewpoint change.&lt;/li&gt;
+  &lt;li&gt;Support for Ambisonics audio and more than 8 audio channels.&lt;/li&gt;
+  &lt;li&gt;Subtitles size modification live.&lt;/li&gt;
+  &lt;li&gt;Hardware and software decoding on all platforms.&lt;/li&gt;
+  &lt;li&gt;DVD playback and menu navigation.&lt;/li&gt;
+  &lt;li&gt;Equalizer support.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And a lot more…&lt;/p&gt;
+
+&lt;h1 id=&quot;supports-all-major-platforms&quot;&gt;Supports all major platforms&lt;/h1&gt;
+
+&lt;p&gt;This is the first crossplatform libvlc binding by &lt;em&gt;VideoLAN&lt;/em&gt; that is available and integrated with such a wide range of platforms.&lt;/p&gt;
+
+&lt;p&gt;LibVLCSharp can now be used on Mac, Linux or Windows to develop applications in C#, F# and VB.NET.&lt;/p&gt;
+
+&lt;p&gt;It is integrated with most GUI toolkits such as &lt;strong&gt;Windows Forms&lt;/strong&gt;, &lt;strong&gt;WPF&lt;/strong&gt;, &lt;strong&gt;UWP&lt;/strong&gt;, &lt;strong&gt;Cocoa&lt;/strong&gt; and &lt;strong&gt;GTK&lt;/strong&gt; so it can be used seamlessly to display video and output audio on &lt;strong&gt;Android&lt;/strong&gt;, &lt;strong&gt;iOS&lt;/strong&gt;, &lt;strong&gt;macOS&lt;/strong&gt;, &lt;strong&gt;tvOS&lt;/strong&gt;, &lt;strong&gt;Windows&lt;/strong&gt; (including Xbox and Mobile) and &lt;strong&gt;Linux&lt;/strong&gt;!&lt;/p&gt;
+
+&lt;p&gt;With LibVLCSharp.Forms, we also support Xamarin.Forms application for &lt;strong&gt;native crossplatform UI development&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you would like to have a quick look at minimal samples, you can find those &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp/tree/master/Samples&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You could also follow our &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp/blob/master/GETTING-STARTED.md&quot;&gt;Getting Started guide&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;versioning&quot;&gt;Versioning&lt;/h1&gt;
+
+&lt;p&gt;Our versioning story is tied to the libvlc major versions as explained in our &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp/blob/master/VERSIONING.md&quot;&gt;versioning&lt;/a&gt; document. Other LibVLC bindings also follow that versioning scheme. This explains why the first stable release is not a 1.0 version.&lt;/p&gt;
+
+&lt;h1 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;More platform support, notably game engines (Unity, Unreal, Godot…).&lt;/li&gt;
+  &lt;li&gt;Implement libvlc 4.0 APIs and demo new features.&lt;/li&gt;
+  &lt;li&gt;Docs: Since we closely follow the libvlc API you can also refer to the C header for docs, we are in the process of setting up docs for LibVLCSharp specific information.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/kakone/LibVLCSharp.Forms.MediaPlayerElement&quot;&gt;MediaElement&lt;/a&gt;, a Xamarin.Forms crossplatform full featured MediaElement. Work has been started by one of our contributor, &lt;a href=&quot;https://github.com/kakone&quot;&gt;kakone&lt;/a&gt;, and we are looking for help.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We are always looking for new contributors, so feel free to reach out on our &lt;a href=&quot;https://gitter.im/libvlcsharp/Lobby&quot;&gt;Gitter&lt;/a&gt; or &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp&quot;&gt;GitLab&lt;/a&gt; if you are interested :-)&lt;/p&gt;
+
+&lt;p&gt;If you would like to contribute, we accept pull requests on both GitHub and GitLab. Please read and follow our &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp/blob/master/CONTRIBUTING.md&quot;&gt;contributing guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As always, you may download the packages from our &lt;a href=&quot;https://www.nuget.org/profiles/videolan&quot;&gt;NuGet&lt;/a&gt; account.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 13 May 2019 11:10:40 +0700</pubDate>
+        <link>https://mfkl.github.io/libvlc/crossplatform/xamarin/forms/release/2019/05/13/LibVLCSharp-goes-stable.html</link>
+        <guid isPermaLink="true">https://mfkl.github.io/libvlc/crossplatform/xamarin/forms/release/2019/05/13/LibVLCSharp-goes-stable.html</guid>
+        
+        
+        <category>libvlc</category>
+        
+        <category>crossplatform</category>
+        
+        <category>xamarin</category>
+        
+        <category>forms</category>
+        
+        <category>release</category>
+        
+      </item>
     
       <item>
         <title>Fun with crossplatform gestures and 360 videos</title>
         <description>&lt;h1 id=&quot;crossplatform-gestures-and-360-videos&quot;&gt;Crossplatform gestures and 360 videos&lt;/h1&gt;
 
 &lt;p&gt;Touch management is handled quite differently on Android and iOS. Xamarin.Forms offers a nicely designed abstraction, inspired from the iOS APIs, which works across Android, iOS and UWP.&lt;/p&gt;
+
+&lt;h4 id=&quot;seek-and-volume&quot;&gt;Seek and volume&lt;/h4&gt;
 
 &lt;p&gt;Gestures can be useful to provide effective UX for seeking on videos and changing volume. Let’s see how we can implement exactly that.&lt;/p&gt;
 
@@ -127,7 +210,56 @@
 
 &lt;p&gt;This code works on both Android and iOS.&lt;/p&gt;
 
-&lt;p&gt;That very same logic can used to navigate 360 videos and change viewpoints, in a crossplatform way as well.&lt;/p&gt;
+&lt;h4 id=&quot;videos&quot;&gt;360 videos&lt;/h4&gt;
+
+&lt;p&gt;That very same logic can used to navigate 360 videos and change viewpoints, in a crossplatform way as well, albeit a few more considerations.&lt;/p&gt;
+
+&lt;p&gt;You need to check if the video being played is actually a 360 video. If it is, then the seeking/volume gestures should be disabled.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Is360Video&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_media&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tracks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Video&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Projection&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VideoProjection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Equirectangular&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You need to be aware of the screen dimensions for 360 navigation calculations.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;OnSizeAllocated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;OnSizeAllocated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;ScreenWidth&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ScreenHeight&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now, you are ready to handle the touch events. Here is a basic example code.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PanUpdated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PanUpdatedEventArgs&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StatusType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GestureStatus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Running&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ScreenWidth&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ScreenHeight&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;range&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ScreenWidth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ScreenHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yaw&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fov&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TotalX&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// up/down
+&lt;/span&gt;                &lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pitch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fov&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TotalY&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// left/right
+&lt;/span&gt;                &lt;span class=&quot;n&quot;&gt;MediaPlayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UpdateViewpoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Yaw&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yaw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Pitch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pitch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Roll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Fov&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GestureStatus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Started&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GestureStatus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Canceled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GestureStatus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Completed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Fov&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MediaPlayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Viewpoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fov&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Pitch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MediaPlayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Viewpoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Pitch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Roll&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MediaPlayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Viewpoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Roll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Yaw&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MediaPlayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Viewpoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Yaw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;Below is a demonstration of the 360 capability in the VLC Android application. Note that the sample code linked below also includes a screen with 360 gestures support with LibVLCSharp.&lt;/p&gt;
 
