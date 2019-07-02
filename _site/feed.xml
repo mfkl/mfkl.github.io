@@ -5,15 +5,147 @@
     <description></description>
     <link>https://mfkl.github.io/</link>
     <atom:link href="https://mfkl.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 13 May 2019 17:03:28 +0700</pubDate>
-    <lastBuildDate>Mon, 13 May 2019 17:03:28 +0700</lastBuildDate>
+    <pubDate>Tue, 02 Jul 2019 15:05:16 +0700</pubDate>
+    <lastBuildDate>Tue, 02 Jul 2019 15:05:16 +0700</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
-        <title>LibVLCSharp 3.0: The first stable release of VideoLAN&#39;s crossplatform binding for LibVLC</title>
-        <description>&lt;h1 id=&quot;libvlcsharp-30-the-first-stable-release-of-videolans-crossplatform-binding-for-libvlc&quot;&gt;LibVLCSharp 3.0: The first stable release of VideoLAN’s crossplatform binding for LibVLC&lt;/h1&gt;
+        <title>Crossplatform local network browsing and media playback</title>
+        <description>&lt;h1 id=&quot;crossplatform-local-network-browsing-and-media-playback&quot;&gt;Crossplatform local network browsing and media playback&lt;/h1&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp&quot;&gt;LibVLCSharp&lt;/a&gt; is the first official &lt;strong&gt;VideoLAN&lt;/strong&gt; binding for the multimedia LibVLC library that is &lt;em&gt;fully cross-platform&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;One of the great features of libvlc is that it can play all sorts of network streams. This is possible thanks to a huge number of supported network protocols.&lt;/p&gt;
+
+&lt;p&gt;Classic network protocols such as FTP, HTTP, RTP and RTSP are well supported, but what about the usual media servers / network shares protocols?&lt;/p&gt;
+
+&lt;h1 id=&quot;browsing-your-own-medialibrary-at-home&quot;&gt;Browsing your own medialibrary at home&lt;/h1&gt;
+
+&lt;p&gt;Home media servers, &lt;a href=&quot;https://en.wikipedia.org/wiki/Network-attached_storage&quot;&gt;NAS&lt;/a&gt; and other network shares most frequently communicate through &lt;a href=&quot;https://en.wikipedia.org/wiki/Server_Message_Block&quot;&gt;SMB&lt;/a&gt; or &lt;a href=&quot;https://en.wikipedia.org/wiki/Universal_Plug_and_Play&quot;&gt;UPnP&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;LibVLC can browse these remote file systems and play their content.&lt;/p&gt;
+
+&lt;p&gt;Let’s see how we can achieve this in a crossplatform way using &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp&quot;&gt;LibVLCSharp&lt;/a&gt; and Xamarin.Forms.&lt;/p&gt;
+
+&lt;h1 id=&quot;show-me-the-code&quot;&gt;Show me the code&lt;/h1&gt;
+
+&lt;p&gt;I used the &lt;code class=&quot;highlighter-rouge&quot;&gt;MasterDetail&lt;/code&gt; Xamarin.Forms template to build this sample, since it has the initial navigation setup built-in.&lt;/p&gt;
+
+&lt;p&gt;To tell &lt;code class=&quot;highlighter-rouge&quot;&gt;libvlc&lt;/code&gt; to start looking for local network shares, you need to create and start the &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp/blob/master/LibVLCSharp/Shared/MediaDiscoverer.cs&quot;&gt;MediaDiscoverer&lt;/a&gt; objects.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Do not confuse it with the &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp/blob/master/LibVLCSharp/Shared/RendererDiscoverer.cs&quot;&gt;RendererDiscoverer&lt;/a&gt; type, which is used for finding remote &lt;em&gt;renderers&lt;/em&gt; such as Chromecasts.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The code would look like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Core&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;_libVLC&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;LibVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;md&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_libVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;MediaDiscoverers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MediaDiscovererCategory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Lan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;discoverer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MediaDiscoverer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_libVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;md&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;discoverer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MediaList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ItemAdded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MediaList_ItemAdded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;discoverer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MediaList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ItemDeleted&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MediaList_ItemDeleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;discoverer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_mediaDiscoverers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;discoverer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ItemAdded&lt;/code&gt; event provides us with a newly found &lt;code class=&quot;highlighter-rouge&quot;&gt;Media&lt;/code&gt; which can be a new share, or a directory/file within a share we are currently browsing. I created a simple model class for the &lt;code class=&quot;highlighter-rouge&quot;&gt;ListView&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Media&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;media&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Media&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;media&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;media&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Meta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MetadataType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;IsDirectory&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;media&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MediaType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Directory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IsDirectory&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Directory&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;File&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This is what the main &lt;code class=&quot;highlighter-rouge&quot;&gt;ListView&lt;/code&gt; code looks like. I added databinding for a few things, such as loading new items with pull to refresh gestures and names of directories and files.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;StackLayout&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;ListView&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;x:Name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ItemsListView&quot;&lt;/span&gt;
+                  &lt;span class=&quot;na&quot;&gt;ItemsSource=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{Binding Items}&quot;&lt;/span&gt;
+                  &lt;span class=&quot;na&quot;&gt;VerticalOptions=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;FillAndExpand&quot;&lt;/span&gt;
+                  &lt;span class=&quot;na&quot;&gt;HasUnevenRows=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
+                  &lt;span class=&quot;na&quot;&gt;RefreshCommand=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{Binding LoadItemsCommand}&quot;&lt;/span&gt;
+                  &lt;span class=&quot;na&quot;&gt;IsPullToRefreshEnabled=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
+                  &lt;span class=&quot;na&quot;&gt;IsRefreshing=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{Binding IsBusy, Mode=OneWay}&quot;&lt;/span&gt;
+                  &lt;span class=&quot;na&quot;&gt;CachingStrategy=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;RecycleElement&quot;&lt;/span&gt;
+                  &lt;span class=&quot;na&quot;&gt;ItemSelected=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;OnItemSelected&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;ListView.ItemTemplate&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;DataTemplate&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;ViewCell&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;StackLayout&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Padding=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;10&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                            &lt;span class=&quot;nt&quot;&gt;&amp;lt;Label&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Text=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{Binding Name}&quot;&lt;/span&gt; 
+                                &lt;span class=&quot;na&quot;&gt;LineBreakMode=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;NoWrap&quot;&lt;/span&gt; 
+                                &lt;span class=&quot;na&quot;&gt;Style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{DynamicResource ListItemTextStyle}&quot;&lt;/span&gt; 
+                                &lt;span class=&quot;na&quot;&gt;FontSize=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;16&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                            &lt;span class=&quot;nt&quot;&gt;&amp;lt;Label&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Text=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{Binding Type}&quot;&lt;/span&gt; 
+                                &lt;span class=&quot;na&quot;&gt;LineBreakMode=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;NoWrap&quot;&lt;/span&gt;
+                                &lt;span class=&quot;na&quot;&gt;Style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{DynamicResource ListItemDetailTextStyle}&quot;&lt;/span&gt;
+                                &lt;span class=&quot;na&quot;&gt;FontSize=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;13&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/StackLayout&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ViewCell&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/DataTemplate&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ListView.ItemTemplate&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ListView&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/StackLayout&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;For WPF, it gives this layout:&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/localnetwork.png&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Just as a typical file system, each item in this list is either:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A directory. It can be parsed and its content(s) will represent a new list of files and/or directories (and so on). It can be the root shares.&lt;/li&gt;
+  &lt;li&gt;A file. It can be parsed and played by the libvlc engine.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once the desired media has been found, it can be played transparently by using a simple page with a &lt;code class=&quot;highlighter-rouge&quot;&gt;VideoView&lt;/code&gt; element and setting the &lt;code class=&quot;highlighter-rouge&quot;&gt;Media&lt;/code&gt; on the &lt;code class=&quot;highlighter-rouge&quot;&gt;MediaPlayer&lt;/code&gt; as usual.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+&lt;video width=&quot;640&quot; height=&quot;360&quot; controls=&quot;&quot;&gt;
+  &lt;source src=&quot;/assets/localnetwork-record.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+&lt;/video&gt;
+&lt;/p&gt;
+
+&lt;h5 id=&quot;note-there-is-a-current-limitationhttpscodevideolanorgvideolanlibvlcsharpissues151-with-the-ios-libvlc-build&quot;&gt;Note: there is a current &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp/issues/151&quot;&gt;limitation&lt;/a&gt; with the iOS libvlc build.&lt;/h5&gt;
+
+&lt;p&gt;As of now, the code produces native &lt;strong&gt;iOS&lt;/strong&gt;, &lt;strong&gt;Android&lt;/strong&gt; and &lt;strong&gt;WPF&lt;/strong&gt; (Windows) apps with 100% shared code.&lt;/p&gt;
+
+&lt;p&gt;Support for &lt;strong&gt;Linux&lt;/strong&gt; (GTK) and &lt;strong&gt;macOS&lt;/strong&gt; (Cocoa) can be easily added without any (current code) change.&lt;/p&gt;
+
+&lt;p&gt;The full working sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/LocalNetwork&quot;&gt;VideoLAN GitLab&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 02 Jul 2019 11:10:40 +0700</pubDate>
+        <link>https://mfkl.github.io/libvlc/crossplatform/xamarin/forms/2019/07/02/Crossplatform-local-network-browsing-and-media-playback.html</link>
+        <guid isPermaLink="true">https://mfkl.github.io/libvlc/crossplatform/xamarin/forms/2019/07/02/Crossplatform-local-network-browsing-and-media-playback.html</guid>
+        
+        
+        <category>libvlc</category>
+        
+        <category>crossplatform</category>
+        
+        <category>xamarin</category>
+        
+        <category>forms</category>
+        
+      </item>
+    
+      <item>
+        <title>LibVLCSharp 3.0: The first stable release of VideoLAN&#39;s crossplatform .NET binding for LibVLC</title>
+        <description>&lt;h1 id=&quot;libvlcsharp-30-the-first-stable-release-of-videolans-crossplatform-net-binding-for-libvlc&quot;&gt;LibVLCSharp 3.0: The first stable release of VideoLAN’s crossplatform .NET binding for LibVLC&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp&quot;&gt;LibVLCSharp&lt;/a&gt; is the first official &lt;strong&gt;VideoLAN&lt;/strong&gt; .NET binding for the multimedia LibVLC library that is &lt;em&gt;fully cross-platform&lt;/em&gt;. It has been downloaded over 10K times.&lt;/p&gt;
 
 &lt;p&gt;It provides a simple cross-platform audio and video API for .NET on all platforms. Its comprehensive multimedia API can be used across mobile, server and desktop to render video and output audio as well as encode and stream.&lt;/p&gt;
 
@@ -46,9 +178,9 @@
 
 &lt;p&gt;LibVLCSharp can now be used on Mac, Linux or Windows to develop applications in C#, F# and VB.NET.&lt;/p&gt;
 
-&lt;p&gt;It is integrated with most GUI toolkits such as &lt;strong&gt;Windows Forms&lt;/strong&gt;, &lt;strong&gt;WPF&lt;/strong&gt;, &lt;strong&gt;UWP&lt;/strong&gt;, &lt;strong&gt;Cocoa&lt;/strong&gt; and &lt;strong&gt;GTK&lt;/strong&gt; so it can be used seamlessly to display video and output audio on &lt;strong&gt;Android&lt;/strong&gt;, &lt;strong&gt;iOS&lt;/strong&gt;, &lt;strong&gt;macOS&lt;/strong&gt;, &lt;strong&gt;tvOS&lt;/strong&gt;, &lt;strong&gt;Windows&lt;/strong&gt; (including Xbox and Mobile) and &lt;strong&gt;Linux&lt;/strong&gt;!&lt;/p&gt;
+&lt;p&gt;It is integrated with most GUI toolkits such as &lt;strong&gt;Windows Forms&lt;/strong&gt;, &lt;strong&gt;WPF&lt;/strong&gt;, &lt;strong&gt;UWP&lt;/strong&gt;, &lt;strong&gt;Cocoa&lt;/strong&gt; and &lt;strong&gt;GTK&lt;/strong&gt; so it can be used seamlessly to display video and output audio on &lt;strong&gt;Android&lt;/strong&gt;, &lt;strong&gt;iOS&lt;/strong&gt;, &lt;strong&gt;macOS&lt;/strong&gt;, &lt;strong&gt;tvOS&lt;/strong&gt;, &lt;strong&gt;Windows&lt;/strong&gt; (including Xbox and Mobile) as well as &lt;strong&gt;Linux&lt;/strong&gt; (including Raspberry Pi).&lt;/p&gt;
 
-&lt;p&gt;With LibVLCSharp.Forms, we also support Xamarin.Forms application for &lt;strong&gt;native crossplatform UI development&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;With LibVLCSharp.Forms, we also support Xamarin.Forms for &lt;strong&gt;native crossplatform UI development&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you would like to have a quick look at minimal samples, you can find those &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp/tree/master/Samples&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
@@ -58,12 +190,14 @@
 
 &lt;p&gt;Our versioning story is tied to the libvlc major versions as explained in our &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp/blob/master/VERSIONING.md&quot;&gt;versioning&lt;/a&gt; document. Other LibVLC bindings also follow that versioning scheme. This explains why the first stable release is not a 1.0 version.&lt;/p&gt;
 
+&lt;p&gt;LibVLCSharp 3.x works with LibVLC 3.x. LibVLCSharp 4.x will work with LibVLC 4.x.&lt;/p&gt;
+
 &lt;h1 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h1&gt;
 
 &lt;ul&gt;
   &lt;li&gt;More platform support, notably game engines (Unity, Unreal, Godot…).&lt;/li&gt;
   &lt;li&gt;Implement libvlc 4.0 APIs and demo new features.&lt;/li&gt;
-  &lt;li&gt;Docs: Since we closely follow the libvlc API you can also refer to the C header for docs, we are in the process of setting up docs for LibVLCSharp specific information.&lt;/li&gt;
+  &lt;li&gt;Documentation. Since we closely follow the libvlc API you can always refer to the C header for docs, but we are in the process of setting up docs for LibVLCSharp/.NET specific information.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/kakone/LibVLCSharp.Forms.MediaPlayerElement&quot;&gt;MediaElement&lt;/a&gt;, a Xamarin.Forms crossplatform full featured MediaElement. Work has been started by one of our contributor, &lt;a href=&quot;https://github.com/kakone&quot;&gt;kakone&lt;/a&gt;, and we are looking for help.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -72,6 +206,8 @@
 &lt;p&gt;If you would like to contribute, we accept pull requests on both GitHub and GitLab. Please read and follow our &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp/blob/master/CONTRIBUTING.md&quot;&gt;contributing guide&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;As always, you may download the packages from our &lt;a href=&quot;https://www.nuget.org/profiles/videolan&quot;&gt;NuGet&lt;/a&gt; account.&lt;/p&gt;
+
+&lt;p&gt;Thanks to &lt;a href=&quot;https://github.com/jeremyVignelles&quot;&gt;@JeremyVignelles&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/jsuarezruiz&quot;&gt;@jsuarezruiz&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/mitermite&quot;&gt;@mitermite&lt;/a&gt;, &lt;a href=&quot;https://github.com/wjax&quot;&gt;@wjax&lt;/a&gt; and &lt;a href=&quot;https://github.com/Ch4rg3r&quot;&gt;@Ch4rg3r&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Mon, 13 May 2019 11:10:40 +0700</pubDate>
         <link>https://mfkl.github.io/libvlc/crossplatform/xamarin/forms/release/2019/05/13/LibVLCSharp-goes-stable.html</link>
