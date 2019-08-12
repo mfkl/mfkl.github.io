@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Cross-platform RTSP Mosaic views with LibVLCSharp</title>
-  <meta name="description" content="Cross-platform RTSP Mosaic views with LibVLCSharp">
+  <meta name="description" content="Cross-platform RTSP Mosaic views with LibVLCSharpVLC and the LibVLC library handle many different streaming formats and protocols to read media from any sour...">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="https://mfkl.github.io/libvlc/rtsp/xamarin/forms/2018/12/05/crossplatform-RTSP-mosaic-views-with-libvlcsharp.html">
@@ -54,7 +54,7 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Cross-platform RTSP Mosaic views with LibVLCSharp</h1>
-    <p class="post-meta"><time datetime="2018-12-05T16:10:40+07:00" itemprop="datePublished">Dec 5, 2018</time></p>
+    <p class="post-meta"><time datetime="2018-12-05T10:10:40+01:00" itemprop="datePublished">Dec 5, 2018</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
@@ -72,7 +72,7 @@
 
 <p>For the UI, we will divide a grid in 4 equally sized views. A simple way to do this in XAML would be</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
 <span class="nt">&lt;ContentPage</span> <span class="na">xmlns=</span><span class="s">"http://xamarin.com/schemas/2014/forms"</span>
              <span class="na">xmlns:x=</span><span class="s">"http://schemas.microsoft.com/winfx/2009/xaml"</span>
              <span class="na">xmlns:local=</span><span class="s">"clr-namespace:VideoMosaic"</span>
@@ -93,14 +93,13 @@
         <span class="nt">&lt;shared:VideoView</span> <span class="na">x:Name=</span><span class="s">"VideoView3"</span> <span class="na">Grid.Row=</span><span class="s">"1"</span> <span class="na">Grid.Column=</span><span class="s">"1"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/Grid&gt;</span>
 <span class="nt">&lt;/ContentPage&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Ok, our <code class="highlighter-rouge">Grid</code> is setup with 4 cross-platform <em>native</em> libvlc <code class="highlighter-rouge">VideoView</code>.</p>
 
 <p>For playback, we need to instantiate a <code class="highlighter-rouge">LibVLC</code> object, 4 <code class="highlighter-rouge">MediaPlayer</code> objects (one for each <code class="highlighter-rouge">VideoView</code>) and 4 <code class="highlighter-rouge">Media</code> objects which represent the RTSP streams.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MainPage</span> <span class="p">:</span> <span class="n">ContentPage</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MainPage</span> <span class="p">:</span> <span class="n">ContentPage</span>
 <span class="p">{</span>
     <span class="k">const</span> <span class="kt">string</span> <span class="n">VIDEO_URL</span> <span class="p">=</span> <span class="s">"rtsp://184.72.239.149/vod/mp4:BigBuckBunny_175k.mov"</span><span class="p">;</span>
     <span class="k">readonly</span> <span class="n">LibVLC</span> <span class="n">_libvlc</span><span class="p">;</span>
@@ -109,21 +108,21 @@
     <span class="p">{</span>
         <span class="nf">InitializeComponent</span><span class="p">();</span>
 
-        <span class="c1">// this will load the native libvlc library (if needed, depending on the platform). 
-</span>        <span class="n">Core</span><span class="p">.</span><span class="nf">Initialize</span><span class="p">();</span>
+        <span class="c1">// this will load the native libvlc library (if needed, depending on the platform). </span>
+        <span class="n">Core</span><span class="p">.</span><span class="nf">Initialize</span><span class="p">();</span>
 
-        <span class="c1">// instantiate the main libvlc object
-</span>        <span class="n">_libvlc</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">();</span>
+        <span class="c1">// instantiate the main libvlc object</span>
+        <span class="n">_libvlc</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">();</span>
     <span class="p">}</span>
 
     <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnAppearing</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">base</span><span class="p">.</span><span class="nf">OnAppearing</span><span class="p">();</span>
 
-        <span class="c1">// create mediaplayer objects,
-</span>        <span class="c1">// attach them to their respective VideoViews
-</span>        <span class="c1">// create media objects and start playback
-</span>
+        <span class="c1">// create mediaplayer objects,</span>
+        <span class="c1">// attach them to their respective VideoViews</span>
+        <span class="c1">// create media objects and start playback</span>
+
         <span class="n">VideoView0</span><span class="p">.</span><span class="n">MediaPlayer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MediaPlayer</span><span class="p">(</span><span class="n">_libvlc</span><span class="p">);</span>
         <span class="n">VideoView0</span><span class="p">.</span><span class="n">MediaPlayer</span><span class="p">.</span><span class="nf">Play</span><span class="p">(</span><span class="k">new</span> <span class="nf">Media</span><span class="p">(</span><span class="n">_libvlc</span><span class="p">,</span> <span class="n">VIDEO_URL</span><span class="p">,</span> <span class="n">Media</span><span class="p">.</span><span class="n">FromType</span><span class="p">.</span><span class="n">FromLocation</span><span class="p">));</span>
 
@@ -137,8 +136,7 @@
         <span class="n">VideoView3</span><span class="p">.</span><span class="n">MediaPlayer</span><span class="p">.</span><span class="nf">Play</span><span class="p">(</span><span class="k">new</span> <span class="nf">Media</span><span class="p">(</span><span class="n">_libvlc</span><span class="p">,</span> <span class="n">VIDEO_URL</span><span class="p">,</span> <span class="n">Media</span><span class="p">.</span><span class="n">FromType</span><span class="p">.</span><span class="n">FromLocation</span><span class="p">));</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>It is safe to create as many <code class="highlighter-rouge">MediaPlayer</code> objects as you want, from a single <code class="highlighter-rouge">LibVLC</code> object.</p>
 

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>High performance, cross-platform media streaming with libvlc and Chromecast</title>
-  <meta name="description" content="High performance, cross-platform media streaming with libvlc and Chromecast on .NET">
+  <meta name="description" content="High performance, cross-platform media streaming with libvlc and Chromecast on .NETWith the release of libvlc 3.0, casting your media to your TV is finally p...">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="https://mfkl.github.io/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html">
@@ -54,7 +54,7 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">High performance, cross-platform media streaming with libvlc and Chromecast</h1>
-    <p class="post-meta"><time datetime="2018-10-21T10:10:40+07:00" itemprop="datePublished">Oct 21, 2018</time></p>
+    <p class="post-meta"><time datetime="2018-10-21T05:10:40+02:00" itemprop="datePublished">Oct 21, 2018</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
@@ -74,7 +74,7 @@ That’s where it becomes complicated, Chromecast only supports very few codecs 
 With VLC, you have media of any format. So VLC has to be a http server like youtube.com, and provide the video in a Chromecast compatible format. And of course in real time, which is challenging on Android because phones are less powerful than computers […].</p>
 </blockquote>
 
-<h5 id="note-if-you-want-to-have-a-look-at-how-it-works-under-the-hood-herehttpsgithubcomvideolanvlc-30treemastermodulesstreamoutchromecast-is-a-good-place-to-start">Note: if you want to have a look at how it works under the hood, <a href="https://github.com/videolan/vlc-3.0/tree/master/modules/stream_out/chromecast">here</a> is a good place to start.</h5>
+<h5 id="note-if-you-want-to-have-a-look-at-how-it-works-under-the-hood-here-is-a-good-place-to-start">Note: if you want to have a look at how it works under the hood, <a href="https://github.com/videolan/vlc-3.0/tree/master/modules/stream_out/chromecast">here</a> is a good place to start.</h5>
 
 <p>So I can cast my DVDs to my Chromecast, that’s cool… but how do I make use of this from .NET, on any platform?</p>
 
@@ -82,17 +82,17 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
 
 <p>The first step is to find a Chromecast on our local network.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">void</span> <span class="nf">DiscoverChromecasts</span><span class="p">()</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">DiscoverChromecasts</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="c1">// load native libvlc libraries
-</span>    <span class="n">Core</span><span class="p">.</span><span class="nf">Initialize</span><span class="p">();</span>
+    <span class="c1">// load native libvlc libraries</span>
+    <span class="n">Core</span><span class="p">.</span><span class="nf">Initialize</span><span class="p">();</span>
 
-    <span class="c1">// create core libvlc object
-</span>    <span class="n">_libVLC</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">();</span>
+    <span class="c1">// create core libvlc object</span>
+    <span class="n">_libVLC</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">();</span>
 
-    <span class="c1">// choose the correct service discovery protocol depending on the host platform
-</span>    <span class="c1">// Apple platforms use the Bonjour protocol
-</span>    <span class="n">RendererDescription</span> <span class="n">renderer</span><span class="p">;</span>
+    <span class="c1">// choose the correct service discovery protocol depending on the host platform</span>
+    <span class="c1">// Apple platforms use the Bonjour protocol</span>
+    <span class="n">RendererDescription</span> <span class="n">renderer</span><span class="p">;</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">Device</span><span class="p">.</span><span class="n">RuntimePlatform</span> <span class="p">==</span> <span class="n">Device</span><span class="p">.</span><span class="n">iOS</span><span class="p">)</span>
         <span class="n">renderer</span> <span class="p">=</span> <span class="n">_libVLC</span><span class="p">.</span><span class="n">RendererList</span><span class="p">.</span><span class="nf">FirstOrDefault</span><span class="p">(</span><span class="n">r</span> <span class="p">=&gt;</span> <span class="n">r</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="nf">Equals</span><span class="p">(</span><span class="s">"Bonjour_renderer"</span><span class="p">));</span>
@@ -100,56 +100,53 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
         <span class="n">renderer</span> <span class="p">=</span> <span class="n">_libVLC</span><span class="p">.</span><span class="n">RendererList</span><span class="p">.</span><span class="nf">FirstOrDefault</span><span class="p">(</span><span class="n">r</span> <span class="p">=&gt;</span> <span class="n">r</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="nf">Equals</span><span class="p">(</span><span class="s">"microdns_renderer"</span><span class="p">));</span>
     <span class="k">else</span> <span class="k">throw</span> <span class="k">new</span> <span class="nf">PlatformNotSupportedException</span><span class="p">(</span><span class="s">"Only Android and iOS are currently supported in this sample"</span><span class="p">);</span>
 
-    <span class="c1">// create a renderer discoverer
-</span>    <span class="n">_rendererDiscoverer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RendererDiscoverer</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">,</span> <span class="n">renderer</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+    <span class="c1">// create a renderer discoverer</span>
+    <span class="n">_rendererDiscoverer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RendererDiscoverer</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">,</span> <span class="n">renderer</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
 
-    <span class="c1">// register callback when a new renderer is found
-</span>    <span class="n">_rendererDiscoverer</span><span class="p">.</span><span class="n">ItemAdded</span> <span class="p">+=</span> <span class="n">RendererDiscoverer_ItemAdded</span><span class="p">;</span>
+    <span class="c1">// register callback when a new renderer is found</span>
+    <span class="n">_rendererDiscoverer</span><span class="p">.</span><span class="n">ItemAdded</span> <span class="p">+=</span> <span class="n">RendererDiscoverer_ItemAdded</span><span class="p">;</span>
 
-    <span class="c1">// start discovery on the local network
-</span>    <span class="n">_rendererDiscoverer</span><span class="p">.</span><span class="nf">Start</span><span class="p">();</span>
+    <span class="c1">// start discovery on the local network</span>
+    <span class="n">_rendererDiscoverer</span><span class="p">.</span><span class="nf">Start</span><span class="p">();</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>So when a new RendererItem (typically a chromecast, or other distant renderers) has been discovered, the <code class="highlighter-rouge">ItemAdded</code> event is raised.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">void</span> <span class="nf">RendererDiscoverer_ItemAdded</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RendererDiscovererItemAddedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">RendererDiscoverer_ItemAdded</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RendererDiscovererItemAddedEventArgs</span> <span class="n">e</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="nf">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">"New item discovered: {e.RendererItem.Name} of type {e.RendererItem.Type}"</span><span class="p">);</span>
+    <span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"New item discovered: </span><span class="p">{</span><span class="n">e</span><span class="p">.</span><span class="n">RendererItem</span><span class="p">.</span><span class="n">Name</span><span class="p">}</span><span class="s"> of type </span><span class="p">{</span><span class="n">e</span><span class="p">.</span><span class="n">RendererItem</span><span class="p">.</span><span class="n">Type</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">RendererItem</span><span class="p">.</span><span class="n">CanRenderVideo</span><span class="p">)</span>
         <span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Can render video"</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">RendererItem</span><span class="p">.</span><span class="n">CanRenderAudio</span><span class="p">)</span>
         <span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Can render audio"</span><span class="p">);</span>
 
-    <span class="c1">// add newly found renderer item to local collection
-</span>    <span class="n">_rendererItems</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">RendererItem</span><span class="p">);</span>
+    <span class="c1">// add newly found renderer item to local collection</span>
+    <span class="n">_rendererItems</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">RendererItem</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>We will now start casting a media. In this example, I will use a HTTP URL, but of course local content works as well (using a crossplatform native file picker, for instance).</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">void</span> <span class="nf">StartCasting</span><span class="p">()</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">StartCasting</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="c1">// create a media
-</span>    <span class="n">var</span> <span class="n">media</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Media</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">,</span>
+    <span class="c1">// create a media</span>
+    <span class="kt">var</span> <span class="n">media</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Media</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">,</span>
         <span class="s">"http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4"</span><span class="p">,</span>
         <span class="n">Media</span><span class="p">.</span><span class="n">FromType</span><span class="p">.</span><span class="n">FromLocation</span><span class="p">);</span>
 
-    <span class="c1">// create the mediaplayer
-</span>    <span class="n">_mediaPlayer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MediaPlayer</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">);</span>
+    <span class="c1">// create the mediaplayer</span>
+    <span class="n">_mediaPlayer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MediaPlayer</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">);</span>
 
-    <span class="c1">// set the first discovered renderer item (chromecast) on the mediaplayer
-</span>    <span class="c1">// if you set it to null, it will start to render normally (i.e. locally) again
-</span>    <span class="n">_mediaPlayer</span><span class="p">.</span><span class="nf">SetRenderer</span><span class="p">(</span><span class="n">_rendererItems</span><span class="p">.</span><span class="nf">First</span><span class="p">());</span>
+    <span class="c1">// set the first discovered renderer item (chromecast) on the mediaplayer</span>
+    <span class="c1">// if you set it to null, it will start to render normally (i.e. locally) again</span>
+    <span class="n">_mediaPlayer</span><span class="p">.</span><span class="nf">SetRenderer</span><span class="p">(</span><span class="n">_rendererItems</span><span class="p">.</span><span class="nf">First</span><span class="p">());</span>
 
-    <span class="c1">// start the playback
-</span>    <span class="n">_mediaPlayer</span><span class="p">.</span><span class="nf">Play</span><span class="p">(</span><span class="n">media</span><span class="p">);</span>
+    <span class="c1">// start the playback</span>
+    <span class="n">_mediaPlayer</span><span class="p">.</span><span class="nf">Play</span><span class="p">(</span><span class="n">media</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The full sample is available on the <a href="https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/Chromecast">VideoLAN GitLab</a>.</p>
 

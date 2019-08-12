@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Introducing LibVLCSharp</title>
-  <meta name="description" content="Introducing LibVLCSharp">
+  <meta name="description" content="Introducing LibVLCSharpLibVLCSharp are .NET/Mono bindings for libvlc, the multimedia framework powering the VLC applications.We support all .NET runtimes (Xa...">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="https://mfkl.github.io/libvlc/intro/2018/10/06/introducing-libvlcsharp.html">
@@ -54,7 +54,7 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Introducing LibVLCSharp</h1>
-    <p class="post-meta"><time datetime="2018-10-06T10:10:40+07:00" itemprop="datePublished">Oct 6, 2018</time></p>
+    <p class="post-meta"><time datetime="2018-10-06T05:10:40+02:00" itemprop="datePublished">Oct 6, 2018</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
@@ -77,23 +77,22 @@
   <li>DVD playback and menu navigation.</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="c1">// Loading the native libvlc library
-</span>        <span class="n">Core</span><span class="p">.</span><span class="nf">Initialize</span><span class="p">();</span>
+        <span class="c1">// Loading the native libvlc library</span>
+        <span class="n">Core</span><span class="p">.</span><span class="nf">Initialize</span><span class="p">();</span>
 
-        <span class="k">using</span> <span class="p">(</span><span class="n">var</span> <span class="n">libVLC</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">())</span>
-        <span class="k">using</span> <span class="p">(</span><span class="n">var</span> <span class="n">mediaPlayer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MediaPlayer</span><span class="p">(</span><span class="n">libVLC</span><span class="p">))</span>
+        <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">libVLC</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">())</span>
+        <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">mediaPlayer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MediaPlayer</span><span class="p">(</span><span class="n">libVLC</span><span class="p">))</span>
         <span class="p">{</span>
-            <span class="n">var</span> <span class="n">media</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Media</span><span class="p">(</span><span class="n">libVLC</span><span class="p">,</span> 
+            <span class="kt">var</span> <span class="n">media</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Media</span><span class="p">(</span><span class="n">libVLC</span><span class="p">,</span> 
                                 <span class="s">"http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4"</span><span class="p">,</span> 
                                 <span class="n">Media</span><span class="p">.</span><span class="n">FromType</span><span class="p">.</span><span class="n">FromLocation</span><span class="p">)</span>
             <span class="n">mediaPlayer</span><span class="p">.</span><span class="nf">Play</span><span class="p">(</span><span class="n">media</span><span class="p">);</span>
             <span class="n">Console</span><span class="p">.</span><span class="nf">ReadKey</span><span class="p">();</span>
         <span class="p">}</span>
     <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>LibVLCSharp aims to always support the latest <code class="highlighter-rouge">libvlc</code> major version (currently version 3).</p>
 

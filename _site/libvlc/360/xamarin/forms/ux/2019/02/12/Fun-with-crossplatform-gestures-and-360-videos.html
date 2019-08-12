@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Fun with crossplatform gestures and 360 videos</title>
-  <meta name="description" content="Crossplatform gestures and 360 videos">
+  <meta name="description" content="Crossplatform gestures and 360 videosTouch management is handled quite differently on Android and iOS. Xamarin.Forms offers a nicely designed abstraction, in...">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="https://mfkl.github.io/libvlc/360/xamarin/forms/ux/2019/02/12/Fun-with-crossplatform-gestures-and-360-videos.html">
@@ -54,7 +54,7 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Fun with crossplatform gestures and 360 videos</h1>
-    <p class="post-meta"><time datetime="2019-02-12T11:10:40+07:00" itemprop="datePublished">Feb 12, 2019</time></p>
+    <p class="post-meta"><time datetime="2019-02-12T05:10:40+01:00" itemprop="datePublished">Feb 12, 2019</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
@@ -68,7 +68,7 @@
 
 <p>We need a view that receives touch and we will display information on which actions it takes depending on the gestures.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ContentPage.Content&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ContentPage.Content&gt;</span>
     <span class="nt">&lt;Grid&gt;</span>
         <span class="nt">&lt;Grid.GestureRecognizers&gt;</span>
             <span class="nt">&lt;PanGestureRecognizer</span> <span class="na">PanUpdated=</span><span class="s">"PanUpdated"</span><span class="nt">/&gt;</span>
@@ -87,8 +87,7 @@
         <span class="nt">&lt;/AbsoluteLayout&gt;</span>
     <span class="nt">&lt;/Grid&gt;</span>
 <span class="nt">&lt;/ContentPage.Content&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The <a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/gestures/pan">PanGestureRecognizer</a> is what we need.</p>
 
@@ -100,14 +99,14 @@
 
 <p>On the C# side, the interesting bit is how the <code class="highlighter-rouge">PanUpdated</code> event is handled.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">internal</span> <span class="k">void</span> <span class="nf">OnGesture</span><span class="p">(</span><span class="n">PanUpdatedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">internal</span> <span class="k">void</span> <span class="nf">OnGesture</span><span class="p">(</span><span class="n">PanUpdatedEventArgs</span> <span class="n">e</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">switch</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">StatusType</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="k">case</span> <span class="n">GestureStatus</span><span class="p">.</span><span class="n">Running</span><span class="p">:</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalX</span> <span class="p">&lt;</span> <span class="m">0</span> <span class="p">&amp;&amp;</span> <span class="n">Math</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalX</span><span class="p">)</span> <span class="p">&gt;</span> <span class="n">Math</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalY</span><span class="p">))</span>
             <span class="p">{</span>
-                <span class="n">var</span> <span class="n">timeDiff</span> <span class="p">=</span> <span class="n">Convert</span><span class="p">.</span><span class="nf">ToInt64</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalX</span> <span class="p">*</span> <span class="m">1000</span><span class="p">);</span>
+                <span class="kt">var</span> <span class="n">timeDiff</span> <span class="p">=</span> <span class="n">Convert</span><span class="p">.</span><span class="nf">ToInt64</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalX</span> <span class="p">*</span> <span class="m">1000</span><span class="p">);</span>
                 <span class="n">_finalTime</span> <span class="p">=</span> <span class="n">MediaPlayer</span><span class="p">.</span><span class="n">Time</span> <span class="p">+</span> <span class="n">timeDiff</span><span class="p">;</span>
 
                 <span class="k">if</span> <span class="p">(</span><span class="n">WillOverflow</span><span class="p">)</span>
@@ -118,7 +117,7 @@
             <span class="p">}</span>
             <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalX</span> <span class="p">&gt;</span> <span class="m">0</span> <span class="p">&amp;&amp;</span> <span class="n">Math</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalX</span><span class="p">)</span> <span class="p">&gt;</span> <span class="n">Math</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalY</span><span class="p">))</span>
             <span class="p">{</span>
-                <span class="n">var</span> <span class="n">timeDiff</span> <span class="p">=</span> <span class="n">Convert</span><span class="p">.</span><span class="nf">ToInt64</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalX</span> <span class="p">*</span> <span class="m">1000</span><span class="p">);</span>
+                <span class="kt">var</span> <span class="n">timeDiff</span> <span class="p">=</span> <span class="n">Convert</span><span class="p">.</span><span class="nf">ToInt64</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalX</span> <span class="p">*</span> <span class="m">1000</span><span class="p">);</span>
                 <span class="n">_finalTime</span> <span class="p">=</span> <span class="n">MediaPlayer</span><span class="p">.</span><span class="n">Time</span> <span class="p">+</span> <span class="n">timeDiff</span><span class="p">;</span>
 
                 <span class="k">if</span> <span class="p">(</span><span class="n">WillOverflow</span><span class="p">)</span>
@@ -129,7 +128,7 @@
             <span class="p">}</span>
             <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalY</span> <span class="p">&lt;</span> <span class="m">0</span> <span class="p">&amp;&amp;</span> <span class="n">Math</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalY</span><span class="p">)</span> <span class="p">&gt;</span> <span class="n">Math</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalX</span><span class="p">))</span>
             <span class="p">{</span>
-                <span class="n">var</span> <span class="n">volume</span> <span class="p">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">MediaPlayer</span><span class="p">.</span><span class="n">Volume</span> <span class="p">+</span> <span class="n">e</span><span class="p">.</span><span class="n">TotalY</span> <span class="p">*</span> <span class="p">-</span><span class="m">1</span><span class="p">);</span>
+                <span class="kt">var</span> <span class="n">volume</span> <span class="p">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">MediaPlayer</span><span class="p">.</span><span class="n">Volume</span> <span class="p">+</span> <span class="n">e</span><span class="p">.</span><span class="n">TotalY</span> <span class="p">*</span> <span class="p">-</span><span class="m">1</span><span class="p">);</span>
                 <span class="n">_finalVolume</span> <span class="p">=</span> <span class="nf">VolumeRangeCheck</span><span class="p">(</span><span class="n">volume</span><span class="p">);</span>
 
                 <span class="n">Message</span> <span class="p">=</span> <span class="nf">FormatVolumeMessage</span><span class="p">(</span><span class="n">_finalVolume</span><span class="p">,</span> <span class="n">Direction</span><span class="p">.</span><span class="n">Top</span><span class="p">);</span>
@@ -137,7 +136,7 @@
             <span class="p">}</span>
             <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalY</span> <span class="p">&gt;</span> <span class="m">0</span> <span class="p">&amp;&amp;</span> <span class="n">e</span><span class="p">.</span><span class="n">TotalY</span> <span class="p">&gt;</span> <span class="n">Math</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">TotalX</span><span class="p">))</span>
             <span class="p">{</span>
-                <span class="n">var</span> <span class="n">volume</span> <span class="p">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">MediaPlayer</span><span class="p">.</span><span class="n">Volume</span> <span class="p">+</span> <span class="n">e</span><span class="p">.</span><span class="n">TotalY</span> <span class="p">*</span> <span class="p">-</span><span class="m">1</span><span class="p">);</span>
+                <span class="kt">var</span> <span class="n">volume</span> <span class="p">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">MediaPlayer</span><span class="p">.</span><span class="n">Volume</span> <span class="p">+</span> <span class="n">e</span><span class="p">.</span><span class="n">TotalY</span> <span class="p">*</span> <span class="p">-</span><span class="m">1</span><span class="p">);</span>
                 <span class="n">_finalVolume</span> <span class="p">=</span> <span class="nf">VolumeRangeCheck</span><span class="p">(</span><span class="n">volume</span><span class="p">);</span>
 
                 <span class="n">Message</span> <span class="p">=</span> <span class="nf">FormatVolumeMessage</span><span class="p">(</span><span class="n">_finalVolume</span><span class="p">,</span> <span class="n">Direction</span><span class="p">.</span><span class="n">Bottom</span><span class="p">);</span>
@@ -160,8 +159,7 @@
             <span class="k">break</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li>The gesture has 4 states, we mostly do something during the <em>Running</em> and <em>Completed</em> ones.</li>
@@ -176,31 +174,29 @@
 
 <p>This code works on both Android and iOS.</p>
 
-<h4 id="videos">360 videos</h4>
+<h4 id="360-videos">360 videos</h4>
 
 <p>That very same logic can used to navigate 360 videos and change viewpoints, in a crossplatform way as well, albeit a few more considerations.</p>
 
 <p>You need to check if the video being played is actually a 360 video. If it is, then the seeking/volume gestures should be disabled.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">Is360Video</span> <span class="p">=&gt;</span> <span class="n">_media</span><span class="p">.</span><span class="n">Tracks</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">Data</span><span class="p">.</span><span class="n">Video</span><span class="p">.</span><span class="n">Projection</span> <span class="p">==</span> <span class="n">VideoProjection</span><span class="p">.</span><span class="n">Equirectangular</span><span class="p">;</span>
-</code></pre>
-</div>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">Is360Video</span> <span class="p">=&gt;</span> <span class="n">_media</span><span class="p">.</span><span class="n">Tracks</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">Data</span><span class="p">.</span><span class="n">Video</span><span class="p">.</span><span class="n">Projection</span> <span class="p">==</span> <span class="n">VideoProjection</span><span class="p">.</span><span class="n">Equirectangular</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>You need to be aware of the screen dimensions for 360 navigation calculations.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnSizeAllocated</span><span class="p">(</span><span class="kt">double</span> <span class="n">width</span><span class="p">,</span> <span class="kt">double</span> <span class="n">height</span><span class="p">)</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnSizeAllocated</span><span class="p">(</span><span class="kt">double</span> <span class="n">width</span><span class="p">,</span> <span class="kt">double</span> <span class="n">height</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">base</span><span class="p">.</span><span class="nf">OnSizeAllocated</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
 
     <span class="n">ScreenWidth</span> <span class="p">=</span> <span class="n">width</span><span class="p">;</span>
     <span class="n">ScreenHeight</span> <span class="p">=</span> <span class="n">height</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Now, you are ready to handle the touch events. Here is a basic example code.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">void</span> <span class="nf">PanUpdated</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">PanUpdatedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">PanUpdated</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">PanUpdatedEventArgs</span> <span class="n">e</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">switch</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">StatusType</span><span class="p">)</span>
     <span class="p">{</span>
@@ -208,9 +204,9 @@
             <span class="k">if</span> <span class="p">(</span><span class="n">ScreenWidth</span> <span class="p">&gt;</span> <span class="m">0</span> <span class="p">&amp;&amp;</span> <span class="n">ScreenHeight</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
             <span class="p">{</span>
                 <span class="kt">double</span> <span class="n">range</span> <span class="p">=</span> <span class="n">Math</span><span class="p">.</span><span class="nf">Max</span><span class="p">(</span><span class="n">ScreenWidth</span><span class="p">,</span> <span class="n">ScreenHeight</span><span class="p">);</span>
-                <span class="kt">float</span> <span class="n">yaw</span> <span class="p">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">Fov</span> <span class="p">*</span> <span class="p">-</span><span class="n">e</span><span class="p">.</span><span class="n">TotalX</span> <span class="p">/</span> <span class="n">range</span><span class="p">);</span><span class="c1">// up/down
-</span>                <span class="kt">float</span> <span class="n">pitch</span> <span class="p">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">Fov</span> <span class="p">*</span> <span class="p">-</span><span class="n">e</span><span class="p">.</span><span class="n">TotalY</span> <span class="p">/</span> <span class="n">range</span><span class="p">);</span><span class="c1">// left/right
-</span>                <span class="n">MediaPlayer</span><span class="p">.</span><span class="nf">UpdateViewpoint</span><span class="p">(</span><span class="n">Yaw</span> <span class="p">+</span> <span class="n">yaw</span><span class="p">,</span> <span class="n">Pitch</span> <span class="p">+</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">Roll</span><span class="p">,</span> <span class="n">Fov</span><span class="p">);</span>
+                <span class="kt">float</span> <span class="n">yaw</span> <span class="p">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">Fov</span> <span class="p">*</span> <span class="p">-</span><span class="n">e</span><span class="p">.</span><span class="n">TotalX</span> <span class="p">/</span> <span class="n">range</span><span class="p">);</span><span class="c1">// up/down</span>
+                <span class="kt">float</span> <span class="n">pitch</span> <span class="p">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">Fov</span> <span class="p">*</span> <span class="p">-</span><span class="n">e</span><span class="p">.</span><span class="n">TotalY</span> <span class="p">/</span> <span class="n">range</span><span class="p">);</span><span class="c1">// left/right</span>
+                <span class="n">MediaPlayer</span><span class="p">.</span><span class="nf">UpdateViewpoint</span><span class="p">(</span><span class="n">Yaw</span> <span class="p">+</span> <span class="n">yaw</span><span class="p">,</span> <span class="n">Pitch</span> <span class="p">+</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">Roll</span><span class="p">,</span> <span class="n">Fov</span><span class="p">);</span>
             <span class="p">}</span>
             <span class="k">break</span><span class="p">;</span>
         <span class="k">case</span> <span class="n">GestureStatus</span><span class="p">.</span><span class="n">Started</span><span class="p">:</span>
@@ -224,8 +220,7 @@
             <span class="k">break</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Below is a demonstration of the 360 capability in the VLC Android application. Note that the sample code linked below also includes a screen with 360 gestures support with LibVLCSharp.</p>
 

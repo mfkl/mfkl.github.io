@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Crossplatform local network browsing and media playback</title>
-  <meta name="description" content="Crossplatform local network browsing and media playback">
+  <meta name="description" content="Crossplatform local network browsing and media playbackOne of the great features of libvlc is that it can play all sorts of network streams. This is possible...">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="https://mfkl.github.io/libvlc/crossplatform/xamarin/forms/2019/07/02/Crossplatform-local-network-browsing-and-media-playback.html">
@@ -54,7 +54,7 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Crossplatform local network browsing and media playback</h1>
-    <p class="post-meta"><time datetime="2019-07-02T11:10:40+07:00" itemprop="datePublished">Jul 2, 2019</time></p>
+    <p class="post-meta"><time datetime="2019-07-02T06:10:40+02:00" itemprop="datePublished">Jul 2, 2019</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
@@ -84,36 +84,34 @@
 
 <p>The code would look like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">Core</span><span class="p">.</span><span class="nf">Initialize</span><span class="p">();</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Core</span><span class="p">.</span><span class="nf">Initialize</span><span class="p">();</span>
 
 <span class="n">_libVLC</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">();</span>
 
-<span class="k">foreach</span> <span class="p">(</span><span class="n">var</span> <span class="n">md</span> <span class="k">in</span> <span class="n">_libVLC</span><span class="p">.</span><span class="nf">MediaDiscoverers</span><span class="p">(</span><span class="n">MediaDiscovererCategory</span><span class="p">.</span><span class="n">Lan</span><span class="p">))</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">md</span> <span class="k">in</span> <span class="n">_libVLC</span><span class="p">.</span><span class="nf">MediaDiscoverers</span><span class="p">(</span><span class="n">MediaDiscovererCategory</span><span class="p">.</span><span class="n">Lan</span><span class="p">))</span>
 <span class="p">{</span>
-    <span class="n">var</span> <span class="n">discoverer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MediaDiscoverer</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">,</span> <span class="n">md</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+    <span class="kt">var</span> <span class="n">discoverer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MediaDiscoverer</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">,</span> <span class="n">md</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
     <span class="n">discoverer</span><span class="p">.</span><span class="n">MediaList</span><span class="p">.</span><span class="n">ItemAdded</span> <span class="p">+=</span> <span class="n">MediaList_ItemAdded</span><span class="p">;</span>
     <span class="n">discoverer</span><span class="p">.</span><span class="n">MediaList</span><span class="p">.</span><span class="n">ItemDeleted</span> <span class="p">+=</span> <span class="n">MediaList_ItemDeleted</span><span class="p">;</span>
     <span class="n">discoverer</span><span class="p">.</span><span class="nf">Start</span><span class="p">();</span>
     <span class="n">_mediaDiscoverers</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">discoverer</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">ItemAdded</code> event provides us with a newly found <code class="highlighter-rouge">Media</code> which can be a new share, or a directory/file within a share we are currently browsing. I created a simple model class for the <code class="highlighter-rouge">ListView</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">public</span> <span class="nf">Item</span><span class="p">(</span><span class="n">Media</span> <span class="n">media</span><span class="p">)</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="nf">Item</span><span class="p">(</span><span class="n">Media</span> <span class="n">media</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">Media</span> <span class="p">=</span> <span class="n">media</span><span class="p">;</span>
     <span class="n">Name</span> <span class="p">=</span> <span class="n">media</span><span class="p">.</span><span class="nf">Meta</span><span class="p">(</span><span class="n">MetadataType</span><span class="p">.</span><span class="n">Title</span><span class="p">);</span>
     <span class="n">IsDirectory</span> <span class="p">=</span> <span class="n">media</span><span class="p">.</span><span class="n">Type</span> <span class="p">==</span> <span class="n">MediaType</span><span class="p">.</span><span class="n">Directory</span><span class="p">;</span>
     <span class="n">Type</span> <span class="p">=</span> <span class="n">IsDirectory</span> <span class="p">?</span> <span class="s">"Directory"</span> <span class="p">:</span> <span class="s">"File"</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This is what the main <code class="highlighter-rouge">ListView</code> code looks like. I added databinding for a few things, such as loading new items with pull to refresh gestures and names of directories and files.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;StackLayout&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;StackLayout&gt;</span>
     <span class="nt">&lt;ListView</span> <span class="na">x:Name=</span><span class="s">"ItemsListView"</span>
                 <span class="na">ItemsSource=</span><span class="s">"{Binding Items}"</span>
                 <span class="na">VerticalOptions=</span><span class="s">"FillAndExpand"</span>
@@ -141,8 +139,7 @@
         <span class="nt">&lt;/ListView.ItemTemplate&gt;</span>
     <span class="nt">&lt;/ListView&gt;</span>
 <span class="nt">&lt;/StackLayout&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>For WPF, it gives this layout:</p>
 
@@ -165,7 +162,7 @@
 </video>
 </p>
 
-<h5 id="note-there-is-a-current-limitationhttpscodevideolanorgvideolanlibvlcsharpissues151-with-the-ios-libvlc-build">Note: there is a current <a href="https://code.videolan.org/videolan/LibVLCSharp/issues/151">limitation</a> with the iOS libvlc build.</h5>
+<h5 id="note-there-is-a-current-limitation-with-the-ios-libvlc-build">Note: there is a current <a href="https://code.videolan.org/videolan/LibVLCSharp/issues/151">limitation</a> with the iOS libvlc build.</h5>
 
 <p>As of now, the code produces native <strong>iOS</strong>, <strong>Android</strong> and <strong>WPF</strong> (Windows) apps with 100% shared code.</p>
 

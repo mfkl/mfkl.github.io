@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>PulseMusic - music player design with Skia and LibVLC</title>
-  <meta name="description" content="PulseMusic - stylish music player with Skia and LibVLC">
+  <meta name="description" content="PulseMusic - stylish music player with Skia and LibVLCIn February 2015, Anish Chandran, a Microsoft UX and Visual designer, posted on Dribble and Behance an ...">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="https://mfkl.github.io/libvlc/skia/xamarin/forms/ux/2018/12/31/PulseMusic-music-player-design.html">
@@ -54,7 +54,7 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">PulseMusic - music player design with Skia and LibVLC</h1>
-    <p class="post-meta"><time datetime="2018-12-31T11:10:40+07:00" itemprop="datePublished">Dec 31, 2018</time></p>
+    <p class="post-meta"><time datetime="2018-12-31T05:10:40+01:00" itemprop="datePublished">Dec 31, 2018</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
@@ -78,7 +78,7 @@
 
 <p>This is an extract from the existing <a href="https://github.com/jsuarezruiz/PulseMusic/blob/master/src/PulseMusic/PulseMusic/Views/PlayerView.xaml">PlayerView.xaml</a>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;controls:CircleProgress</span> 
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;controls:CircleProgress</span> 
     <span class="na">Grid.Row=</span><span class="s">"0"</span>
     <span class="na">VerticalOptions=</span><span class="s">"FillAndExpand"</span>
     <span class="na">HorizontalOptions=</span><span class="s">"FillAndExpand"</span>
@@ -125,26 +125,25 @@
         <span class="na">Text=</span><span class="s">"{Binding RemainTime, Converter={StaticResource TimeSpanToStringConverter}}"</span>
         <span class="na">Style=</span><span class="s">"{StaticResource TimeTextStyle}"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/Grid&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">Binding</code> XAML keyword indicates the value is databinded to the corresponding ViewModel. For the demo code, Javier had used an artificial countdown to make the UI seem alive (ticks for position and time). Let’s hook up a real player!</p>
 
 <p>Xamarin.Forms has a pub/sub concept called <a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/messaging-center">MessagingCenter</a>, we will use it to propagate LibVLCSharp’s playback events in the app.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">readonly</span> <span class="n">MediaPlayer</span> <span class="n">_mp</span><span class="p">;</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">readonly</span> <span class="n">MediaPlayer</span> <span class="n">_mp</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">string</span> <span class="n">URL</span> <span class="p">=</span> <span class="s">"https://archive.org/download/ImagineDragons_201410/imagine%20dragons.mp4"</span><span class="p">;</span>
 
 <span class="k">public</span> <span class="k">void</span> <span class="nf">Init</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="c1">// create a libvlc media
-</span>    <span class="n">_mp</span><span class="p">.</span><span class="n">Media</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Media</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">,</span> <span class="n">URL</span><span class="p">,</span> <span class="n">Media</span><span class="p">.</span><span class="n">FromType</span><span class="p">.</span><span class="n">FromLocation</span><span class="p">);</span>
+    <span class="c1">// create a libvlc media</span>
+    <span class="n">_mp</span><span class="p">.</span><span class="n">Media</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Media</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">,</span> <span class="n">URL</span><span class="p">,</span> <span class="n">Media</span><span class="p">.</span><span class="n">FromType</span><span class="p">.</span><span class="n">FromLocation</span><span class="p">);</span>
 
-    <span class="c1">// disable video output, we only need audio
-</span>    <span class="n">_mp</span><span class="p">.</span><span class="n">Media</span><span class="p">.</span><span class="nf">AddOption</span><span class="p">(</span><span class="s">":no-video"</span><span class="p">);</span>
+    <span class="c1">// disable video output, we only need audio</span>
+    <span class="n">_mp</span><span class="p">.</span><span class="n">Media</span><span class="p">.</span><span class="nf">AddOption</span><span class="p">(</span><span class="s">":no-video"</span><span class="p">);</span>
 
-    <span class="c1">// subscribe to libvlc playback events
-</span>    <span class="n">_mp</span><span class="p">.</span><span class="n">TimeChanged</span> <span class="p">+=</span> <span class="n">TimeChanged</span><span class="p">;</span>
+    <span class="c1">// subscribe to libvlc playback events</span>
+    <span class="n">_mp</span><span class="p">.</span><span class="n">TimeChanged</span> <span class="p">+=</span> <span class="n">TimeChanged</span><span class="p">;</span>
     <span class="n">_mp</span><span class="p">.</span><span class="n">PositionChanged</span> <span class="p">+=</span> <span class="n">PositionChanged</span><span class="p">;</span>
     <span class="n">_mp</span><span class="p">.</span><span class="n">LengthChanged</span> <span class="p">+=</span> <span class="n">LengthChanged</span><span class="p">;</span>
     <span class="n">_mp</span><span class="p">.</span><span class="n">EndReached</span> <span class="p">+=</span> <span class="n">EndReached</span><span class="p">;</span>
@@ -152,8 +151,8 @@
     <span class="n">_mp</span><span class="p">.</span><span class="n">Paused</span> <span class="p">+=</span> <span class="n">Paused</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="c1">// when the libvlc mediaplayer events fire, publish an event with the MessagingCenter
-</span><span class="k">private</span> <span class="k">void</span> <span class="nf">PositionChanged</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">MediaPlayerPositionChangedEventArgs</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
+<span class="c1">// when the libvlc mediaplayer events fire, publish an event with the MessagingCenter</span>
+<span class="k">private</span> <span class="k">void</span> <span class="nf">PositionChanged</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">MediaPlayerPositionChangedEventArgs</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
     <span class="n">MessagingCenter</span><span class="p">.</span><span class="nf">Send</span><span class="p">(</span><span class="n">MessengerKeys</span><span class="p">.</span><span class="n">App</span><span class="p">,</span> <span class="n">MessengerKeys</span><span class="p">.</span><span class="n">Position</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">Position</span><span class="p">);</span>
 
 <span class="k">private</span> <span class="k">void</span> <span class="nf">Paused</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
@@ -170,25 +169,23 @@
 
 <span class="k">private</span> <span class="k">void</span> <span class="nf">TimeChanged</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">MediaPlayerTimeChangedEventArgs</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
     <span class="n">MessagingCenter</span><span class="p">.</span><span class="nf">Send</span><span class="p">(</span><span class="n">MessengerKeys</span><span class="p">.</span><span class="n">App</span><span class="p">,</span> <span class="n">MessengerKeys</span><span class="p">.</span><span class="n">Time</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">Time</span><span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>We <em>could</em> also use the reverse event stream to control playback (one of several ways to do so).</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">const</span> <span class="kt">long</span> <span class="n">OFFSET</span> <span class="p">=</span> <span class="m">5000</span><span class="p">;</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">long</span> <span class="n">OFFSET</span> <span class="p">=</span> <span class="m">5000</span><span class="p">;</span>
 
-<span class="c1">// subscribe to UI app events for seeking.
-</span><span class="n">MessagingCenter</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;(</span><span class="n">MessengerKeys</span><span class="p">.</span><span class="n">App</span><span class="p">,</span> 
+<span class="c1">// subscribe to UI app events for seeking.</span>
+<span class="n">MessagingCenter</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;(</span><span class="n">MessengerKeys</span><span class="p">.</span><span class="n">App</span><span class="p">,</span> 
     <span class="n">MessengerKeys</span><span class="p">.</span><span class="n">Rewind</span><span class="p">,</span> <span class="n">vm</span> <span class="p">=&gt;</span> <span class="n">_mp</span><span class="p">.</span><span class="n">Time</span> <span class="p">-=</span> <span class="n">OFFSET</span><span class="p">);</span>
 
 <span class="n">MessagingCenter</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;(</span><span class="n">MessengerKeys</span><span class="p">.</span><span class="n">App</span><span class="p">,</span> 
     <span class="n">MessengerKeys</span><span class="p">.</span><span class="n">Forward</span><span class="p">,</span> <span class="n">vm</span> <span class="p">=&gt;</span> <span class="n">_mp</span><span class="p">.</span><span class="n">Time</span> <span class="p">+=</span> <span class="n">OFFSET</span><span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Now that our playback service is up and running, we need to use it from the ViewModel (which is bound to the UI). This is one way of doing so:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">public</span> <span class="k">override</span> <span class="n">Task</span> <span class="nf">LoadAsync</span><span class="p">()</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">override</span> <span class="n">Task</span> <span class="nf">LoadAsync</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">_playbackService</span><span class="p">.</span><span class="nf">Init</span><span class="p">();</span>
 
@@ -214,8 +211,7 @@
 
     <span class="k">return</span> <span class="k">base</span><span class="p">.</span><span class="nf">LoadAsync</span><span class="p">();</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Updating ViewModel properties such as <code class="highlighter-rouge">Progress</code>, <code class="highlighter-rouge">RemainTime</code> and <code class="highlighter-rouge">StartTime</code> will automatically refresh the UI and trigger Skia animations accordingly.</p>
 
@@ -232,7 +228,7 @@
   <li><a href="https://twitter.com/jsuarezruiz">Javier Suárez Ruiz</a> for the PulseMusic Xamarin.Forms <a href="https://github.com/jsuarezruiz/PulseMusic">UI implementation</a>.</li>
 </ul>
 
-<h6 id="note-i-deliberately-picked-a-creative-commons-licensed-version-of-the-song-imagine-dragons---radioactive-remix-see-httpsarchiveorgdetailsimaginedragons201410httpsarchiveorgdetailsimaginedragons201410-and-its-licensehttpscreativecommonsorglicensesby-nd30-for-more-information"><em>Note: I deliberately picked a Creative Commons licensed version of the song “Imagine Dragons - Radioactive” (remix). See <a href="https://archive.org/details/ImagineDragons_201410">https://archive.org/details/ImagineDragons_201410</a> and its <a href="https://creativecommons.org/licenses/by-nd/3.0/">license</a> for more information</em>.</h6>
+<h6 id="note-i-deliberately-picked-a-creative-commons-licensed-version-of-the-song-imagine-dragons---radioactive-remix-see-httpsarchiveorgdetailsimaginedragons_201410-and-its-license-for-more-information"><em>Note: I deliberately picked a Creative Commons licensed version of the song “Imagine Dragons - Radioactive” (remix). See <a href="https://archive.org/details/ImagineDragons_201410">https://archive.org/details/ImagineDragons_201410</a> and its <a href="https://creativecommons.org/licenses/by-nd/3.0/">license</a> for more information</em>.</h6>
 
 <p>This sample is available on the <a href="https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/PulseMusic">VideoLAN GitLab</a>.</p>
 

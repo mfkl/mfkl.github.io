@@ -54,7 +54,7 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">How to record an HLS stream with LibVLCSharp and .NET Core</h1>
-    <p class="post-meta"><time datetime="2018-10-10T10:10:40+07:00" itemprop="datePublished">Oct 10, 2018</time></p>
+    <p class="post-meta"><time datetime="2018-10-10T05:10:40+02:00" itemprop="datePublished">Oct 10, 2018</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
@@ -70,7 +70,7 @@
 
 <p>So, to get started we need to pull 2 packages from the VideoLAN <a href="https://www.nuget.org/profiles/videolan">NuGet</a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;Project</span> <span class="na">Sdk=</span><span class="s">"Microsoft.NET.Sdk"</span><span class="nt">&gt;</span>  
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;Project</span> <span class="na">Sdk=</span><span class="s">"Microsoft.NET.Sdk"</span><span class="nt">&gt;</span>  
   <span class="nt">&lt;PropertyGroup&gt;</span>
     <span class="nt">&lt;OutputType&gt;</span>Exe<span class="nt">&lt;/OutputType&gt;</span>
     <span class="nt">&lt;TargetFramework&gt;</span>netcoreapp2.1<span class="nt">&lt;/TargetFramework&gt;</span>
@@ -82,8 +82,7 @@
     <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">"LibVLCSharp"</span> <span class="na">Version=</span><span class="s">"0.0.3"</span> <span class="nt">/&gt;</span>
    <span class="nt">&lt;/ItemGroup&gt;</span>
 <span class="nt">&lt;/Project&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><code class="highlighter-rouge">VideoLAN.LibVLC.Windows</code> is the <code class="highlighter-rouge">libvlc</code> (C/C++) library compiled for the Windows platform. More info at <a href="https://github.com/mfkl/libvlc-nuget">here</a>.</p>
 
@@ -91,43 +90,42 @@
 
 <p>Now onto the actual code</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="c1">// Record in a file "record.ts" located in the bin folder next to the app
-</span>    <span class="n">var</span> <span class="n">currentDirectory</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">GetDirectoryName</span><span class="p">(</span><span class="n">Assembly</span><span class="p">.</span><span class="nf">GetEntryAssembly</span><span class="p">().</span><span class="n">Location</span><span class="p">);</span>
-    <span class="n">var</span> <span class="n">destination</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">Combine</span><span class="p">(</span><span class="n">currentDirectory</span><span class="p">,</span> <span class="s">"record.ts"</span><span class="p">);</span>
+    <span class="c1">// Record in a file "record.ts" located in the bin folder next to the app</span>
+    <span class="kt">var</span> <span class="n">currentDirectory</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">GetDirectoryName</span><span class="p">(</span><span class="n">Assembly</span><span class="p">.</span><span class="nf">GetEntryAssembly</span><span class="p">().</span><span class="n">Location</span><span class="p">);</span>
+    <span class="kt">var</span> <span class="n">destination</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">Combine</span><span class="p">(</span><span class="n">currentDirectory</span><span class="p">,</span> <span class="s">"record.ts"</span><span class="p">);</span>
 
-    <span class="c1">// Load native libvlc library
-</span>    <span class="n">Core</span><span class="p">.</span><span class="nf">Initialize</span><span class="p">();</span>
+    <span class="c1">// Load native libvlc library</span>
+    <span class="n">Core</span><span class="p">.</span><span class="nf">Initialize</span><span class="p">();</span>
 
-    <span class="k">using</span> <span class="p">(</span><span class="n">var</span> <span class="n">libvlc</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">())</span>
-    <span class="k">using</span> <span class="p">(</span><span class="n">var</span> <span class="n">mediaPlayer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MediaPlayer</span><span class="p">(</span><span class="n">libvlc</span><span class="p">))</span>
+    <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">libvlc</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">())</span>
+    <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">mediaPlayer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MediaPlayer</span><span class="p">(</span><span class="n">libvlc</span><span class="p">))</span>
     <span class="p">{</span>
-        <span class="c1">// Redirect log output to the console
-</span>        <span class="n">libvlc</span><span class="p">.</span><span class="n">Log</span> <span class="p">+=</span> <span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> 
-            <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">"[{e.Level}] {e.Module}:{e.Message}"</span><span class="p">);</span>
+        <span class="c1">// Redirect log output to the console</span>
+        <span class="n">libvlc</span><span class="p">.</span><span class="n">Log</span> <span class="p">+=</span> <span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> 
+            <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"[</span><span class="p">{</span><span class="n">e</span><span class="p">.</span><span class="n">Level</span><span class="p">}</span><span class="s">] </span><span class="p">{</span><span class="n">e</span><span class="p">.</span><span class="n">Module</span><span class="p">}</span><span class="s">:</span><span class="p">{</span><span class="n">e</span><span class="p">.</span><span class="n">Message</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
 
-        <span class="c1">// Create new media with HLS link
-</span>        <span class="n">var</span> <span class="n">media</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Media</span><span class="p">(</span><span class="n">libvlc</span><span class="p">,</span> 
+        <span class="c1">// Create new media with HLS link</span>
+        <span class="kt">var</span> <span class="n">media</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Media</span><span class="p">(</span><span class="n">libvlc</span><span class="p">,</span> 
                     <span class="s">"http://hls1.addictradio.net/addictrock_aac_hls/playlist.m3u8"</span><span class="p">,</span> 
                     <span class="n">Media</span><span class="p">.</span><span class="n">FromType</span><span class="p">.</span><span class="n">FromLocation</span><span class="p">);</span>
 
-        <span class="c1">// Define stream output options. 
-</span>        <span class="c1">// In this case stream to a file with the given path
-</span>        <span class="c1">// and play locally the stream while streaming it.
-</span>        <span class="n">media</span><span class="p">.</span><span class="nf">AddOption</span><span class="p">(</span><span class="s">":sout=#file{dst="</span> <span class="p">+</span> <span class="n">destination</span> <span class="p">+</span> <span class="s">"}"</span><span class="p">);</span>
+        <span class="c1">// Define stream output options. </span>
+        <span class="c1">// In this case stream to a file with the given path</span>
+        <span class="c1">// and play locally the stream while streaming it.</span>
+        <span class="n">media</span><span class="p">.</span><span class="nf">AddOption</span><span class="p">(</span><span class="s">":sout=#file{dst="</span> <span class="p">+</span> <span class="n">destination</span> <span class="p">+</span> <span class="s">"}"</span><span class="p">);</span>
         <span class="n">media</span><span class="p">.</span><span class="nf">AddOption</span><span class="p">(</span><span class="s">":sout-keep"</span><span class="p">);</span>
 
-        <span class="c1">// Start recording
-</span>        <span class="n">mediaPlayer</span><span class="p">.</span><span class="nf">Play</span><span class="p">(</span><span class="n">media</span><span class="p">);</span>
+        <span class="c1">// Start recording</span>
+        <span class="n">mediaPlayer</span><span class="p">.</span><span class="nf">Play</span><span class="p">(</span><span class="n">media</span><span class="p">);</span>
 
-        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">"Recording in {destination}"</span><span class="p">);</span>
+        <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"Recording in </span><span class="p">{</span><span class="n">destination</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
         <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Press any key to exit"</span><span class="p">);</span>
         <span class="n">Console</span><span class="p">.</span><span class="nf">ReadKey</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ol>
   <li>First we load the <code class="highlighter-rouge">libvlc</code> dlls (included in the <code class="highlighter-rouge">VideoLAN.LibVLC.Windows</code> nuget package).</li>
