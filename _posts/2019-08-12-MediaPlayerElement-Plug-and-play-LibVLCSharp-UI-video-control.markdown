@@ -56,7 +56,7 @@ A minimal sample is available to get you up and running instantly [here](https:/
 
 ## What's next?
 
-Below are sone of our plans to improve the `MediaPlayerElement`. If you see something missing or would like to suggest a new feature, feel free to open a [feature request](https://code.videolan.org/videolan/LibVLCSharp/issues) or a [bug report](https://code.videolan.org/videolan/LibVLCSharp/issues)!
+Below are some of our plans to improve the `MediaPlayerElement`. If you see something missing or would like to suggest a new feature, feel free to open a [feature request](https://code.videolan.org/videolan/LibVLCSharp/issues) or a [bug report](https://code.videolan.org/videolan/LibVLCSharp/issues)!
 
 - [Improve Track management](https://code.videolan.org/videolan/LibVLCSharp/issues/196) (audio/subs delay, external subtitle selection/download).
 - [Icon management](https://code.videolan.org/videolan/LibVLCSharp/issues/178): Currently, the `MediaPlayerElement` control expects you to bundle the [fontawesome icon fonts](https://fontawesome.com/icons) in your app projects by default. This is NOT ideal for a "plug and play" experience. We want this to be handled automatically and transparently for you. If you want to use different icons however, this is already supported.
@@ -77,6 +77,6 @@ Below are sone of our plans to improve the `MediaPlayerElement`. If you see some
 
 As always, you can find the full code for this on [code.videolan.org](https://code.videolan.org/videolan/LibVLCSharp).
 
-The best and fastest way to get started is to clone our [libvlcsharp-samples](https://code.videolan.org/mfkl/libvlcsharp-samples) repository and start the `MediaElement` sample. Building the samples will pull the necessary VideoLAN packages from [NuGet](https://www.nuget.org/profiles/videolan) for your target platform.
+The best and fastest way to get started is to clone our [libvlcsharp-samples](https://code.videolan.org/mfkl/libvlcsharp-samples) repository and start the `MediaElement` iOS and Android sample apps. Building the samples will pull the necessary VideoLAN packages from [NuGet](https://www.nuget.org/profiles/videolan) for your target platform.
 
 If you would like to contribute a new feature or a bugfix, we accept pull requests on [GitHub](https://github.com/videolan/LibVLCSharp/pulls) and merge requests on [GitLab](https://code.videolan.org/videolan/LibVLCSharp/merge_requests).
