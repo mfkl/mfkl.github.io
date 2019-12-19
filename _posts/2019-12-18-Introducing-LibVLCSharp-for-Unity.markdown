@@ -39,7 +39,7 @@ And more.
 
 This plugin uses a **LibVLC 4.0** build which has seen a lot of improvements regarding performance in the past year. The plugin also makes use of a new, low-level, LibVLC API consisting of [Zero Copy](https://en.wikipedia.org/wiki/Zero-copy) GPU callbacks.
 
-This means your (slow) CPU is bypassed and only your GPU is working to provide decoded textures. The LibVLC API offers Direct3D and OpenGL hooks, but this is all taken care for you inside the Unity plugin. Have a look [here](https://code.videolan.org/mfkl/vlc-unity/blob/master/Assets/VLC-Unity-Windows/Plugins/Source/RenderAPI_D3D11.cpp) if you're curious about it.
+This means your (slow) CPU is bypassed and only your GPU is working to provide decoded textures. The LibVLC API offers Direct3D and OpenGL hooks, but this is all taken care of for you inside the Unity plugin. Have a look [here](https://code.videolan.org/mfkl/vlc-unity/blob/master/Assets/VLC-Unity-Windows/Plugins/Source/RenderAPI_D3D11.cpp) if you're curious about it.
 
 With this plugin and this new API, you can get similar performance to [VLC](https://www.videolan.org/) Desktop in your Unity games and enjoy low CPU use and optimized battery life on your devices when playing high definition medias.
 
