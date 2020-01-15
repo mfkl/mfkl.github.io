@@ -67,7 +67,7 @@
 <p>This Unity plugin allows you to use a LibVLC-powered video player in your games and Unity apps. Whether you need to support a strange format, live streaming or play a 4K video in your latest production, we got you covered.</p>
 
 <h2 id="commercial-support">Commercial support</h2>
-<p>While this Unity plugin is <a href="https://code.videolan.org/mfkl/vlc-unity/">opensource</a>, its Unity Store price is <strong>100USD</strong>.</p>
+<p>While this Unity plugin is <a href="https://code.videolan.org/videolan/vlc-unity/">opensource</a>, its Unity Store price is <strong>100USD</strong>.</p>
 
 <p>This price is intended to help sponsor the development and the commercial support of this Unity plugin by <a href="https://videolabs.io">Videolabs</a>, the main commercial contributor to the VLC apps.</p>
 
@@ -76,16 +76,16 @@
 <p>Given that this plugin is using <a href="https://code.videolan.org/videolan/LibVLCSharp">LibVLCSharp</a> (which uses LibVLC), it exposes more or less the <a href="https://code.videolan.org/videolan/LibVLCSharp#features">same feature set</a> and same codecs support than VLC, such as:</p>
 
 <ul>
-  <li>Plays <a href="https://wiki.videolan.org/VLC_Features_Formats/">all formats</a></li>
-  <li>Network browsing for distant filesystems (SMB, FTP, SFTP, NFS…).</li>
-  <li>HDMI pass-through for Audio HD codecs, like E-AC3, TrueHD or DTS-HD.</li>
-  <li>Stream to distant renderers, like Chromecast.</li>
-  <li>360 video and 3D audio playback with viewpoint change.</li>
-  <li>Support for Ambisonics audio and more than 8 audio channels.</li>
-  <li>Subtitles live size modification.</li>
-  <li>Hardware and software decoding on all platforms.</li>
-  <li>DVD playback and menu navigation.</li>
-  <li>Equalizer support</li>
+  <li>Play every media file formats, every codec and every streaming protocols</li>
+  <li>Run on every platform, from desktop (Windows, Linux, Mac) to mobile (Android, iOS) and TVs</li>
+  <li>Hardware and efficient decoding on every platform, up to 8K</li>
+  <li>Network browsing for distant filesystems (SMB, FTP, SFTP, NFS…) and servers (UPnP, DLNA)</li>
+  <li>Playback of Audio CD, DVD and Bluray with menu navigation</li>
+  <li>Support for HDR, including tonemapping for SDR streams</li>
+  <li>Audio passthrough with SPDIF and HDMI, including for Audio HD codecs, like DD+, TrueHD or DTS-HD</li>
+  <li>Support for video and audio filters</li>
+  <li>Support for 360 video and 3D audio playback, including Ambisonics</li>
+  <li>Able to cast and stream to distant renderers, like Chromecast and UPnP renderers.</li>
 </ul>
 
 <p>And more.</p>
@@ -94,7 +94,7 @@
 
 <p>This plugin uses a <strong>LibVLC 4.0</strong> build which has seen a lot of improvements regarding performance in the past year. The plugin also makes use of a new, low-level, LibVLC API consisting of <a href="https://en.wikipedia.org/wiki/Zero-copy">Zero Copy</a> GPU callbacks.</p>
 
-<p>This means your (slow) CPU is bypassed and only your GPU is working to provide decoded textures. The LibVLC API offers Direct3D and OpenGL hooks, but this is all taken care of for you inside the Unity plugin. Have a look <a href="https://code.videolan.org/mfkl/vlc-unity/blob/master/Assets/VLC-Unity-Windows/Plugins/Source/RenderAPI_D3D11.cpp">here</a> if you’re curious about it.</p>
+<p>This means your (slow) CPU is bypassed and only your GPU is working to provide decoded textures. The LibVLC API offers Direct3D and OpenGL hooks, but this is all taken care of for you inside the Unity plugin. Have a look <a href="https://code.videolan.org/videolan/vlc-unity/blob/master/Assets/PluginSource/RenderAPI_D3D11.cpp">here</a> if you’re curious about it.</p>
 
 <p>With this plugin and this new API, you can get similar performance to <a href="https://www.videolan.org/">VLC</a> Desktop in your Unity games and enjoy low CPU use and optimized battery life on your devices when playing high definition medias.</p>
 
@@ -105,15 +105,15 @@
 <p>The public API of this plugin is strictly the same than LibVLCSharp for all but one additional method on the <strong>MediaPlayer</strong>:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">/// &lt;summary&gt;
-/// Retrieve a video frame from the Unity plugin.
+/// Retrieve a video frame from the Unity plugin as a texture.
 /// &lt;/summary&gt;
 /// &lt;param name="updated"&gt;True if the video frame has been updated&lt;/param&gt;
 /// &lt;returns&gt;A decoded texture&lt;/returns&gt;
-</span><span class="k">public</span> <span class="n">IntPtr</span> <span class="nf">GetFrame</span><span class="p">(</span><span class="k">out</span> <span class="kt">bool</span> <span class="n">updated</span><span class="p">)</span>
+</span><span class="k">public</span> <span class="n">IntPtr</span> <span class="nf">GetTexture</span><span class="p">(</span><span class="k">out</span> <span class="kt">bool</span> <span class="n">updated</span><span class="p">)</span>
 </code></pre>
 </div>
 
-<p>This is the method that you need to call in a <a href="https://docs.unity3d.com/Manual/Coroutines.html">Unity coroutine</a> in your script and give its result to your <a href="https://docs.unity3d.com/ScriptReference/Texture2D.UpdateExternalTexture.html">texture</a>’s <code class="highlighter-rouge">UpdateExternalTexture</code> method. Full script example can be found <a href="https://code.videolan.org/mfkl/vlc-unity/blob/master/Assets/VLC-Unity-Windows/Scripts/UseRenderingPlugin.cs">here</a>.</p>
+<p>This is the method that you need to call in a <a href="https://docs.unity3d.com/Manual/Coroutines.html">Unity coroutine</a> in your script and give its result to your <a href="https://docs.unity3d.com/ScriptReference/Texture2D.UpdateExternalTexture.html">texture</a>’s <code class="highlighter-rouge">UpdateExternalTexture</code> method. Full script example can be found <a href="https://code.videolan.org/videolan/vlc-unity/blob/master/Assets/VLC-Unity-Windows/Scripts/UseRenderingPlugin.cs">here</a>.</p>
 
 <p align="center">
     <img src="/assets/unity-scene.jpg" />
@@ -152,7 +152,7 @@
 </ul>
 
 <p align="center">
-    <img src="/assets/unity-logo.png" />
+    <a href="https://assetstore.unity.com/packages/tools/video/vlc-for-unity-windows-133979"><img src="/assets/unity-logo.png" /></a>
 </p>
 
   </div>
