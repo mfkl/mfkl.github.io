@@ -77,7 +77,7 @@ This way we can watch the movie seamlessly as we download it onto the device usi
 For local playback, we have a couple solutions. 
 - By default, if running from a CLI app, the VLC engine will create a new Window that will be used for video output.
 - We could integrate this feature with the crossplatform [MediaElement](http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html) control.
-- Another possiblity would be to have this CLI app stream to `localhost:port`, and play that stream in any VLC app (need a VLC app).
+- Playing in any VLC app would also be possible by having this CLI app stream to to `localhost:port`, and play that stream in VLC.
 
 But... VLC also supports chromecast, and so, [LibVLCSharp does too](https://mfkl.github.io/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html).
 
@@ -85,6 +85,26 @@ But... VLC also supports chromecast, and so, [LibVLCSharp does too](https://mfkl
 
 **Yes**, and VLC will also transcode the media in real time if the chromecast does not natively support it.
 
-You can find the sample here: https://github.com/mfkl/lvst
+## LVST
 
-This is a CLI .NET Core 3.1 app running on Linux, macOS and Windows. Xamarin integration is possible as well.
+[LVST](https://github.com/mfkl/lvst) is a CLI .NET Core 3.1 app running on Linux, macOS and Windows. Xamarin support would be trivial to add, but I wanted this to be a CLI sample.
+
+It is designed to be a simple sample. Just provide it with a `.torrent` file URL with `--torrent` and it will start to download and play it. Enabling the chromecast is as easy as giving it the `--cast` flag.
+
+```
+.\LVST.exe --help
+LVST 1.0.0
+Copyright (C) 2020 LVST
+
+  -v, --verbose    Set output to verbose messages.
+
+  -t, --torrent    The torrent link to download and play
+
+  -c, --cast       Cast to the chromecast
+
+  -s, --save       Whether to save the media file. Defaults to true.
+
+  -p, --path       Set the path where to save the media file.
+```
+
+Feel free to fork away if you'd like to play around with [LVST](https://github.com/mfkl/lvst).
