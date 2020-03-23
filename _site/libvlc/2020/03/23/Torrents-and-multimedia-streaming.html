@@ -60,9 +60,11 @@
   <div class="post-content" itemprop="articleBody">
     <h3 id="torrents-and-multimedia-streaming-with-libvlcsharp-and-monotorrent">Torrents and multimedia streaming with LibVLCSharp and MonoTorrent</h3>
 
-<p>This post explores possibilities of torrenting and streaming technologies in .NET by combining interesting features from several libraries to make a unique and fun CLI sample app. First, some context.</p>
+<p>This post explores possibilities of torrenting and streaming technologies in .NET by combining key features from several libraries to build a unique and fun CLI sample app. But first, some context.</p>
 
 <h2 id="the-bittorrent-protocol">The BitTorrent protocol</h2>
+
+<p>The BitTorrent protocol is a protocol used to share files between users over internet.</p>
 
 <p>According to <a href="https://en.wikipedia.org/wiki/BitTorrent">Wikipedia</a>,</p>
 <blockquote>
@@ -73,7 +75,7 @@
   <p>BitTorrent is one of the most common protocols for transferring large files, such as digital video files containing TV shows or video clips or digital audio files containing songs. Peer-to-peer networks have been estimated to collectively account for approximately 43% to 70% of all Internet traffic (depending on location) as of February 2009. In February 2013, BitTorrent was responsible for 3.35% of all worldwide bandwidth, more than half of the 6% of total bandwidth dedicated to file sharing.</p>
 </blockquote>
 
-<p>Since the BitTorrent is so well suited to transfer large files (such as multimedia files), integration with mediaplayers like VLC has commonly been an area of interest for a while.</p>
+<p>Since the BitTorrent is so well suited to transfer large files (such as multimedia files), the idea of embedding it in mediaplayers like VLC has commonly been an area of interest for some time.</p>
 
 <p align="center">
     <img src="/assets/file-sharing.png" />
@@ -81,16 +83,18 @@
 
 <h2 id="popular-torrenting-libraries">Popular torrenting libraries</h2>
 
+<p>A few words on torrenting libraries you can use in your code.</p>
+
 <ul>
   <li>
-    <p>The most popular BitTorrent protocol implementation is <a href="https://github.com/arvidn/libtorrent/">libtorrent</a>, written in C++. This will be relevant later in the post.</p>
+    <p>The most popular BitTorrent protocol implementation is <a href="https://github.com/arvidn/libtorrent/">libtorrent</a>, written in C++. We will come back to it later in this blog post.</p>
   </li>
   <li>
     <p>Currently maintained by <a href="https://github.com/alanmcgovern">Alan McGovern</a>, <a href="https://github.com/alanmcgovern/monotorrent">MonoTorrent</a> seems to be the obvious choice for .NET. Do note that it is not merely a binding over <code class="highlighter-rouge">libtorrent</code> but a complete C# implementation of the BitTorrent protocol.</p>
   </li>
 </ul>
 
-<h2 id="torrent-support-in-vlc">Torrent support in VLC</h2>
+<h2 id="torrenting-with-vlc">Torrenting with VLC</h2>
 
 <p>Integrating torrent support for VLC is not a new idea, and there are several ways to go about it. Here are 2 possible approaches:</p>
 
@@ -100,18 +104,18 @@
 
     <p>Since VLC has been designed from early on with a plugin-based architecture, one could <a href="https://wiki.videolan.org/Hacker_Guide/How_To_Write_a_Module/">write a plugin</a> for it, usually using C/C++ or Rust.</p>
 
-    <p>That is the approach that <a href="https://github.com/johang">Johan Gunnarsson</a> chose with <a href="https://github.com/johang/vlc-bittorrent">vlc-bittorrent</a>. It uses <a href="https://github.com/arvidn/libtorrent/">libtorrent</a>, the C++ BitTorrent implementation mentioned above and hooks into VLC at the plugin interface.</p>
+    <p>That is the approach that <a href="https://github.com/johang">Johan Gunnarsson</a> chose with <a href="https://github.com/johang/vlc-bittorrent">vlc-bittorrent</a>. <a href="https://github.com/johang/vlc-bittorrent">vlc-bittorrent</a> uses <a href="https://github.com/arvidn/libtorrent/">libtorrent</a>, the C++ BitTorrent implementation mentioned above and hooks into VLC at the plugin interface.</p>
 
     <p>The VLC core would load the plugin and raise its callbacks.</p>
 
-    <p>A downside of this approach is that you have to build and link the native plugin for each platform you want to support.</p>
+    <p>A downside of this approach is that you must build and link the native plugin for each platform you want to support.</p>
   </li>
   <li>
     <p>Use the LibVLC API.</p>
 
-    <p>LibVLC is a more high level interface to access the VLC features. It abstracts away intricacies of the APIs to provide a simple yet powerful crossplatform API. This is what LibVLCSharp is based on and what I went with for this sample. But first, let’s have a look at recent developments of MonoTorrent.</p>
+    <p>LibVLC is a higher level interface to access the VLC features. It abstracts away intricacies of the APIs to provide a simple yet powerful crossplatform API. This is what LibVLCSharp is based on and what I chose to use for this sample. To continue, let’s have a look at recent developments of MonoTorrent.</p>
 
-    <p>In pull request <a href="https://github.com/alanmcgovern/monotorrent/pull/271">271</a>, a new media streaming API has just been introduced by Alan:</p>
+    <p>In the pull request <a href="https://github.com/alanmcgovern/monotorrent/pull/271">271</a>, Alain introduced a new media streaming API:</p>
 
     <blockquote>
       <p>Added MonoTorrent.Streaming.StreamProvider.</p>
@@ -125,13 +129,13 @@
       <p>In other words - if you are streaming a video file you can seek to the middle of the file and MonoTorrent will immediately start downloading pieces from that point onwards…</p>
     </blockquote>
 
-    <p>It sounds like exactly what we need to get this working smoothly with LibVLC.</p>
+    <p>It sounds like exactly what we need to get torrenting working smoothly with LibVLCSharp. With this API, we can feed a <code class="highlighter-rouge">.torrent</code> file to MonoTorrent and get back a .NET <code class="highlighter-rouge">Stream</code>.</p>
 
-    <p>On the LibVLC side, the <code class="highlighter-rouge">Media</code> type has a constructor which takes a .NET stream through the <a href="https://github.com/videolan/libvlcsharp/blob/3.x/LibVLCSharp/Shared/StreamMediaInput.cs">StreamMediaInput</a> type.</p>
+    <p>This .NET <code class="highlighter-rouge">Stream</code> is representing the media content, which is being downloaded in real time from the BitTorrent network.</p>
 
-    <p>The idea is then to feed a <code class="highlighter-rouge">.torrent</code> file (local or from a URL) of our choosing to MonoTorrent, start its engine and get a stream from it.</p>
+    <p>On the LibVLC side, the <code class="highlighter-rouge">Media</code> type has a constructor which takes a .NET stream using the <a href="https://github.com/videolan/libvlcsharp/blob/3.x/LibVLCSharp/Shared/StreamMediaInput.cs">StreamMediaInput</a> type.</p>
 
-    <p>With the .NET <code class="highlighter-rouge">Stream</code>, create a LibVLCSharp <code class="highlighter-rouge">Media</code> object and start the playback.</p>
+    <p>With the .NET <code class="highlighter-rouge">Stream</code> from MonoTorrent, it is then possible to create a LibVLCSharp <code class="highlighter-rouge">Media</code> object and finally start the playback.</p>
   </li>
 </ol>
 
@@ -146,12 +150,15 @@
 
 <h2 id="local-or-remote-playback">Local or remote playback</h2>
 
+<h4 id="local">Local</h4>
 <p>For local playback, we have a couple solutions.</p>
 <ul>
   <li>By default, if running from a CLI app, the VLC engine will create a new Window that will be used for video output.</li>
   <li>We could use the crossplatform <a href="http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html">MediaElement</a> control and combine it to this.</li>
   <li>Playing in any VLC app would also be possible by having this CLI app stream to to <code class="highlighter-rouge">localhost:port</code>, and play that stream in VLC.</li>
 </ul>
+
+<h4 id="remote">Remote</h4>
 
 <p>But… VLC also supports chromecast, and so, <a href="https://mfkl.github.io/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html">LibVLCSharp does too</a>.</p>
 
@@ -163,9 +170,11 @@
 
 <h2 id="lvst">LVST</h2>
 
-<p><a href="https://github.com/mfkl/lvst">LVST</a> is a CLI .NET Core 3.1 app running on Linux, macOS and Windows. Xamarin support would be trivial to add, but I wanted this to be a CLI sample.</p>
+<p><a href="https://github.com/mfkl/lvst">LVST</a> is a CLI .NET Core 3.1 app running on Linux, macOS and Windows. Xamarin support would be simple to add, but I wanted this to be a CLI sample.</p>
 
-<p>It is designed to be a simple sample. Just provide it with a <code class="highlighter-rouge">.torrent</code> file URL with <code class="highlighter-rouge">--torrent</code> and it will start to download and play it. Enabling the chromecast is as easy as giving it the <code class="highlighter-rouge">--cast</code> flag.</p>
+<p><a href="https://github.com/mfkl/lvst">LVST</a> is designed to be a basic sample and focused on the torrenting feature, there is currently no playback controls.</p>
+
+<p>Just provide it with a <code class="highlighter-rouge">.torrent</code> file URL with <code class="highlighter-rouge">--torrent</code> and it will start to download and play it. Casting to the chromecast is as easy as giving it the <code class="highlighter-rouge">--cast</code> flag.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.\LVST.exe --help
 LVST 1.0.0
@@ -183,6 +192,14 @@ Copyright (C) 2020 LVST
 </code></pre></div></div>
 
 <p>Feel free to fork away if you’d like to play around with <a href="https://github.com/mfkl/lvst">LVST</a>.</p>
+
+<h2 id="possible-improvements">Possible improvements</h2>
+
+<ul>
+  <li>Make mobile samples</li>
+  <li>In case of multiple chromecasts on the network, allow selecting one chromecast from the CLI.</li>
+  <li>Integrate this with the MediaElement control.</li>
+</ul>
 
   </div>
 
