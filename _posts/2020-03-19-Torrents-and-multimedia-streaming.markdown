@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "Multimedia streaming and torrents with LibVLCSharp and MonoTorrent"
+title:  "Torrents and multimedia streaming with LibVLCSharp and MonoTorrent"
 date:   2020-03-23 11:10:40 +0700
 categories: libvlc
 ---
 
-### Multimedia streaming and torrents with LibVLCSharp and MonoTorrent
+### Torrents and multimedia streaming with LibVLCSharp and MonoTorrent
 
 This post explores possibilities of torrenting and streaming technologies in .NET by combining interesting features from several libraries to make a unique and fun CLI sample app. First, some context.
 
@@ -76,7 +76,7 @@ This way we can watch the movie seamlessly as we download it onto the device usi
 
 For local playback, we have a couple solutions. 
 - By default, if running from a CLI app, the VLC engine will create a new Window that will be used for video output.
-- We could integrate this feature with the crossplatform [MediaElement](http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html) control.
+- We could use the crossplatform [MediaElement](http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html) control and combine it to this.
 - Playing in any VLC app would also be possible by having this CLI app stream to to `localhost:port`, and play that stream in VLC.
 
 But... VLC also supports chromecast, and so, [LibVLCSharp does too](https://mfkl.github.io/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html).

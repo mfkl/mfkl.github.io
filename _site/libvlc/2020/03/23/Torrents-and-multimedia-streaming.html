@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Multimedia streaming and torrents with LibVLCSharp and MonoTorrent</title>
-  <meta name="description" content="Multimedia streaming and torrents with LibVLCSharp and MonoTorrentThis post explores possibilities of torrenting and streaming technologies in .NET by combin...">
+  <title>Torrents and multimedia streaming with LibVLCSharp and MonoTorrent</title>
+  <meta name="description" content="Torrents and multimedia streaming with LibVLCSharp and MonoTorrentThis post explores possibilities of torrenting and streaming technologies in .NET by combin...">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://mfkl.github.io/libvlc/2020/03/23/Multimedia-streaming-and-torrents.html">
+  <link rel="canonical" href="https://mfkl.github.io/libvlc/2020/03/23/Torrents-and-multimedia-streaming.html">
   <link rel="alternate" type="application/rss+xml" title="mfkl" href="https://mfkl.github.io/feed.xml">
 </head>
 
@@ -53,12 +53,12 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Multimedia streaming and torrents with LibVLCSharp and MonoTorrent</h1>
+    <h1 class="post-title" itemprop="name headline">Torrents and multimedia streaming with LibVLCSharp and MonoTorrent</h1>
     <p class="post-meta"><time datetime="2020-03-23T05:10:40+01:00" itemprop="datePublished">Mar 23, 2020</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <h3 id="multimedia-streaming-and-torrents-with-libvlcsharp-and-monotorrent">Multimedia streaming and torrents with LibVLCSharp and MonoTorrent</h3>
+    <h3 id="torrents-and-multimedia-streaming-with-libvlcsharp-and-monotorrent">Torrents and multimedia streaming with LibVLCSharp and MonoTorrent</h3>
 
 <p>This post explores possibilities of torrenting and streaming technologies in .NET by combining interesting features from several libraries to make a unique and fun CLI sample app. First, some context.</p>
 
@@ -149,7 +149,7 @@
 <p>For local playback, we have a couple solutions.</p>
 <ul>
   <li>By default, if running from a CLI app, the VLC engine will create a new Window that will be used for video output.</li>
-  <li>We could integrate this feature with the crossplatform <a href="http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html">MediaElement</a> control.</li>
+  <li>We could use the crossplatform <a href="http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html">MediaElement</a> control and combine it to this.</li>
   <li>Playing in any VLC app would also be possible by having this CLI app stream to to <code class="highlighter-rouge">localhost:port</code>, and play that stream in VLC.</li>
 </ul>
 
