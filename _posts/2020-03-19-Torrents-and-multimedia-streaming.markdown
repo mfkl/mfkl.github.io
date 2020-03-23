@@ -120,6 +120,10 @@ Feel free to fork away if you'd like to play around with [LVST](https://github.c
 
 ## Possible improvements
 
+What else could be done with regard to LibVLCSharp and MonoTorrent?
+
 - Make mobile samples
 - In case of multiple chromecasts on the network, allow selecting one chromecast from the CLI.
 - Integrate this with the MediaElement control.
+
+I am also considering making a `LibVLCSharp.MonoTorrent` package to make torrent support transparent in LibVLCSharp. Feel free to reach out if that is something you would like to see!
