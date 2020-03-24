@@ -50,7 +50,7 @@ Integrating torrent support for VLC is not a new idea, and there are several way
 
     LibVLC is a higher level interface to access the VLC features. It abstracts away intricacies of the APIs to provide a simple yet powerful crossplatform API. This is what LibVLCSharp is based on and what I chose to use for this sample. To continue, let's have a look at recent developments of MonoTorrent.
 
-    In the pull request [271](https://github.com/alanmcgovern/monotorrent/pull/271), Alain introduced a new media streaming API:
+    In the pull request [271](https://github.com/alanmcgovern/monotorrent/pull/271), Alan introduced a new media streaming API:
 
     > Added MonoTorrent.Streaming.StreamProvider. 
 
