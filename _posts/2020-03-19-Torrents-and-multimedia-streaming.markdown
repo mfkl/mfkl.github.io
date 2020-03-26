@@ -40,7 +40,7 @@ Integrating torrent support for VLC is not a new idea, and there are several way
 
     Since VLC has been designed from early on with a plugin-based architecture, one could [write a plugin](https://wiki.videolan.org/Hacker_Guide/How_To_Write_a_Module/) for it, usually using C/C++ or Rust.
 
-    That is the approach that [Johan Gunnarsson](https://github.com/johang) chose with [vlc-bittorrent](https://github.com/johang/vlc-bittorrent). [vlc-bittorrent](https://github.com/johang/vlc-bittorrent) uses [libtorrent](https://github.com/arvidn/libtorrent/), the C++ BitTorrent implementation mentioned above and hooks into VLC at the plugin interface. 
+    That is the approach that [Johan Gunnarsson](https://github.com/johang) chose with [vlc-bittorrent](https://github.com/johang/vlc-bittorrent). [vlc-bittorrent](https://github.com/johang/vlc-bittorrent) uses [libtorrent](https://github.com/arvidn/libtorrent/), the C++ BitTorrent implementation mentioned above and hooks into VLC at the plugin interface level. 
 
     The VLC core would load the plugin and raise its callbacks.
 
@@ -82,7 +82,7 @@ This way we can watch the movie seamlessly as we download it onto the device usi
 For local playback, we have a couple solutions. 
 - By default, if running from a CLI app, the VLC engine will create a new Window that will be used for video output.
 - We could use the crossplatform [MediaElement](http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html) control and combine it to this.
-- Playing in any VLC app would also be possible by having this CLI app stream to to `localhost:port`, and play that stream in VLC.
+- Playing in any VLC app would also be possible by having this CLI app stream to the `localhost:port`, and play that stream in VLC.
 
 #### Remote
 
@@ -96,7 +96,7 @@ But... VLC also supports chromecast, and so, [LibVLCSharp does too](https://mfkl
 
 [LVST](https://github.com/mfkl/lvst) is a CLI .NET Core 3.1 app running on Linux, macOS and Windows. Xamarin support would be simple to add, but I wanted this to be a CLI sample.
 
-[LVST](https://github.com/mfkl/lvst) is designed to be a basic sample and focused on the torrenting feature, there is currently no playback controls.
+[LVST](https://github.com/mfkl/lvst) is designed to be a basic sample and focused on the torrenting feature, there are currently no playback controls.
 
 Just provide it with a `.torrent` file URL with `--torrent` and it will start to download and play it. Casting to the chromecast is as easy as giving it the `--cast` flag.
 
