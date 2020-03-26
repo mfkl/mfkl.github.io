@@ -90,18 +90,8 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
     <span class="c1">// create core libvlc object</span>
     <span class="n">_libVLC</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">LibVLC</span><span class="p">();</span>
 
-    <span class="c1">// choose the correct service discovery protocol depending on the host platform</span>
-    <span class="c1">// Apple platforms use the Bonjour protocol</span>
-    <span class="n">RendererDescription</span> <span class="n">renderer</span><span class="p">;</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">Device</span><span class="p">.</span><span class="n">RuntimePlatform</span> <span class="p">==</span> <span class="n">Device</span><span class="p">.</span><span class="n">iOS</span><span class="p">)</span>
-        <span class="n">renderer</span> <span class="p">=</span> <span class="n">_libVLC</span><span class="p">.</span><span class="n">RendererList</span><span class="p">.</span><span class="nf">FirstOrDefault</span><span class="p">(</span><span class="n">r</span> <span class="p">=&gt;</span> <span class="n">r</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="nf">Equals</span><span class="p">(</span><span class="s">"Bonjour_renderer"</span><span class="p">));</span>
-    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">Device</span><span class="p">.</span><span class="n">RuntimePlatform</span> <span class="p">==</span> <span class="n">Device</span><span class="p">.</span><span class="n">Android</span><span class="p">)</span>
-        <span class="n">renderer</span> <span class="p">=</span> <span class="n">_libVLC</span><span class="p">.</span><span class="n">RendererList</span><span class="p">.</span><span class="nf">FirstOrDefault</span><span class="p">(</span><span class="n">r</span> <span class="p">=&gt;</span> <span class="n">r</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="nf">Equals</span><span class="p">(</span><span class="s">"microdns_renderer"</span><span class="p">));</span>
-    <span class="k">else</span> <span class="k">throw</span> <span class="k">new</span> <span class="nf">PlatformNotSupportedException</span><span class="p">(</span><span class="s">"Only Android and iOS are currently supported in this sample"</span><span class="p">);</span>
-
     <span class="c1">// create a renderer discoverer</span>
-    <span class="n">_rendererDiscoverer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RendererDiscoverer</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">,</span> <span class="n">renderer</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+    <span class="n">_rendererDiscoverer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RendererDiscoverer</span><span class="p">(</span><span class="n">_libVLC</span><span class="p">);</span>
 
     <span class="c1">// register callback when a new renderer is found</span>
     <span class="n">_rendererDiscoverer</span><span class="p">.</span><span class="n">ItemAdded</span> <span class="p">+=</span> <span class="n">RendererDiscoverer_ItemAdded</span><span class="p">;</span>

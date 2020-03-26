@@ -33,18 +33,8 @@ void DiscoverChromecasts()
     // create core libvlc object
     _libVLC = new LibVLC();
 
-    // choose the correct service discovery protocol depending on the host platform
-    // Apple platforms use the Bonjour protocol
-    RendererDescription renderer;
-
-    if (Device.RuntimePlatform == Device.iOS)
-        renderer = _libVLC.RendererList.FirstOrDefault(r => r.Name.Equals("Bonjour_renderer"));
-    else if (Device.RuntimePlatform == Device.Android)
-        renderer = _libVLC.RendererList.FirstOrDefault(r => r.Name.Equals("microdns_renderer"));
-    else throw new PlatformNotSupportedException("Only Android and iOS are currently supported in this sample");
-
     // create a renderer discoverer
-    _rendererDiscoverer = new RendererDiscoverer(_libVLC, renderer.Name);
+    _rendererDiscoverer = new RendererDiscoverer(_libVLC);
 
     // register callback when a new renderer is found
     _rendererDiscoverer.ItemAdded += RendererDiscoverer_ItemAdded;
