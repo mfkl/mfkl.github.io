@@ -1,11 +1,10 @@
 ---
-layout: post
+# layout: post
 title:  "How to record an HLS stream with LibVLCSharp and .NET Core"
 date:   2018-10-10 10:10:40 +0700
 categories: hls
+classes: wide
 ---
-# How to record an HLS stream with LibVLCSharp and .NET Core
-
 In this post, I will show you how to record an HTTP Live Streaming (HLS) stream using LibVLCSharp in a .NET Core CLI app on Windows.
 
 HLS is a streaming protocol originally developped by Apple which is supported in most internet browser and streaming media servers. [Wikipedia](https://en.wikipedia.org/wiki/HTTP_Live_Streaming) has some info about it:

@@ -1,12 +1,10 @@
 ---
-layout: post
+# layout: post
 title:  "Crossplatform local network browsing and media playback"
 date:   2019-07-02 11:10:40 +0700
 categories: libvlc crossplatform xamarin forms
+classes: wide
 ---
-
-# Crossplatform local network browsing and media playback
-
 One of the great features of libvlc is that it can play all sorts of network streams. This is possible thanks to a huge number of supported network protocols.
 
 Classic network protocols such as FTP, HTTP, RTP and RTSP are well supported, but what about the usual media servers / network shares protocols?

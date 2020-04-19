@@ -1,12 +1,10 @@
 ---
-layout: post
+# layout: post
 title:  "Introducing LibVLCSharp"
 date:   2018-10-06 10:10:40 +0700
 categories: libvlc intro
+classes: wide
 ---
-
-# Introducing LibVLCSharp
-
 LibVLCSharp are .NET/Mono bindings for `libvlc`, the multimedia framework powering the VLC applications.
 
 We support all .NET runtimes (Xamarin/Mono, .NET Core and .NET Framework) on most platfoms by targeting .NET Standard 2.0.

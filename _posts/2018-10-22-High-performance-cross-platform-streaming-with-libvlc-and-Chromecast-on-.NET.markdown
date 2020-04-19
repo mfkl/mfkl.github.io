@@ -1,11 +1,10 @@
 ---
-layout: post
+# layout: post
 title:  "High performance, cross-platform media streaming with libvlc and Chromecast"
 date:   2018-10-21 10:10:40 +0700
 categories: chromecast
+classes: wide
 ---
-# High performance, cross-platform media streaming with libvlc and Chromecast on .NET
-
 With the release of [libvlc 3.0](https://www.videolan.org/vlc/releases/3.0.0.html), casting your media to your TV is finally possible with libvlc (and the VLC apps). In this post, I will show you how to cast a media using LibVLCSharp, in a cross-platform way.
 
 But before I do so, there are a few prerequisites that you should know regarding VLC's Chromecast module, as it is a bit _special_. To quote [Geoffrey Metais](https://geoffreymetais.github.io/features/vlc-30/), the [Android VLC port](https://code.videolan.org/videolan/vlc-android) maintainer:

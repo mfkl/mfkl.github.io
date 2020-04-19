@@ -1,12 +1,10 @@
 ---
-layout: post
+# layout: post
 title:  "Cross-platform RTSP Mosaic views with LibVLCSharp"
 date:   2018-12-05 16:10:40 +0700
 categories: libvlc rtsp xamarin forms
+classes: wide
 ---
-
-# Cross-platform RTSP Mosaic views with LibVLCSharp
-
 VLC and the LibVLC library handle many different streaming formats and protocols to read media from any source. One of them is called Real Time Streaming Protocol (RTSP). According to the [VideoLAN Wiki](https://wiki.videolan.org/RTSP/):
 
 > The RTSP (Real Time Streaming Protocol) protocol is a client-server multimedia presentation control protocol, designed to address the needs for efficient delivery of streamed multimedia over IP networks. It leverages existing web infrastructure (for example, inheriting authentication and PICS from HTTP) and works well both for large audiences as well as single-viewer media-on-demand.

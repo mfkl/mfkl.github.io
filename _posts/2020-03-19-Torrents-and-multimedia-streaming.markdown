@@ -1,12 +1,10 @@
 ---
-layout: post
+# layout: post
 title:  "Torrents and multimedia streaming with LibVLCSharp and MonoTorrent"
 date:   2020-03-23 11:10:40 +0700
 categories: libvlc
+classes: wide
 ---
-
-### Torrents and multimedia streaming with LibVLCSharp and MonoTorrent
-
 This post explores possibilities of torrenting and streaming technologies in .NET by combining key features from several libraries to build a unique and fun CLI sample app. But first, some context.
 
 ## The BitTorrent protocol

@@ -1,17 +1,241 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>mfkl</title>
-    <description></description>
-    <link>https://mfkl.github.io/</link>
-    <atom:link href="https://mfkl.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 13 Aug 2019 17:34:09 +0200</pubDate>
-    <lastBuildDate>Tue, 13 Aug 2019 17:34:09 +0200</lastBuildDate>
-    <generator>Jekyll v3.1.6</generator>
-    
-      <item>
-        <title>MediaPlayerElement: Plug and play and crossplatform UI video control</title>
-        <description>&lt;p&gt;Apple and Google already provide MediaPlayer frameworks for iOS and Android developers, but they are quite limited compared to what VLC can do in terms of compatible formats and protocols (amongst other things).&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-19T16:07:04+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">mfkl</title><subtitle>mfkl</subtitle><author><name>Martin Finkel</name></author><entry><title type="html">Torrents and multimedia streaming with LibVLCSharp and MonoTorrent</title><link href="http://localhost:4000/libvlc/2020/03/23/Torrents-and-multimedia-streaming.html" rel="alternate" type="text/html" title="Torrents and multimedia streaming with LibVLCSharp and MonoTorrent" /><published>2020-03-23T05:10:40+01:00</published><updated>2020-03-23T05:10:40+01:00</updated><id>http://localhost:4000/libvlc/2020/03/23/Torrents-and-multimedia-streaming</id><content type="html" xml:base="http://localhost:4000/libvlc/2020/03/23/Torrents-and-multimedia-streaming.html">&lt;p&gt;This post explores possibilities of torrenting and streaming technologies in .NET by combining key features from several libraries to build a unique and fun CLI sample app. But first, some context.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-bittorrent-protocol&quot;&gt;The BitTorrent protocol&lt;/h2&gt;
+
+&lt;p&gt;The BitTorrent protocol is a protocol used to share files between users over internet.&lt;/p&gt;
+
+&lt;p&gt;According to &lt;a href=&quot;https://en.wikipedia.org/wiki/BitTorrent&quot;&gt;Wikipedia&lt;/a&gt;,&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;BitTorrent (abbreviated to BT) is a communication protocol for peer-to-peer file sharing (P2P) which is used to distribute data and electronic files over the Internet.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;BitTorrent is one of the most common protocols for transferring large files, such as digital video files containing TV shows or video clips or digital audio files containing songs. Peer-to-peer networks have been estimated to collectively account for approximately 43% to 70% of all Internet traffic (depending on location) as of February 2009. In February 2013, BitTorrent was responsible for 3.35% of all worldwide bandwidth, more than half of the 6% of total bandwidth dedicated to file sharing.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Since the BitTorrent is so well suited to transfer large files (such as multimedia files), the idea of embedding it in mediaplayers like VLC has commonly been an area of interest for some time.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/file-sharing.png&quot; /&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&quot;popular-torrenting-libraries&quot;&gt;Popular torrenting libraries&lt;/h2&gt;
+
+&lt;p&gt;A few words on torrenting libraries you can use in your code.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The most popular BitTorrent protocol implementation is &lt;a href=&quot;https://github.com/arvidn/libtorrent/&quot;&gt;libtorrent&lt;/a&gt;, written in C++. We will come back to it later in this blog post.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Currently maintained by &lt;a href=&quot;https://github.com/alanmcgovern&quot;&gt;Alan McGovern&lt;/a&gt;, &lt;a href=&quot;https://github.com/alanmcgovern/monotorrent&quot;&gt;MonoTorrent&lt;/a&gt; seems to be the obvious choice for .NET. Do note that it is not merely a binding over &lt;code class=&quot;highlighter-rouge&quot;&gt;libtorrent&lt;/code&gt; but a complete C# implementation of the BitTorrent protocol.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;torrenting-with-vlc&quot;&gt;Torrenting with VLC&lt;/h2&gt;
+
+&lt;p&gt;Integrating torrent support for VLC is not a new idea, and there are several ways to go about it. Here are 2 possible approaches:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Write a VLC plugin.&lt;/p&gt;
+
+    &lt;p&gt;Since VLC has been designed from early on with a plugin-based architecture, one could &lt;a href=&quot;https://wiki.videolan.org/Hacker_Guide/How_To_Write_a_Module/&quot;&gt;write a plugin&lt;/a&gt; for it, usually using C/C++ or Rust.&lt;/p&gt;
+
+    &lt;p&gt;That is the approach that &lt;a href=&quot;https://github.com/johang&quot;&gt;Johan Gunnarsson&lt;/a&gt; chose with &lt;a href=&quot;https://github.com/johang/vlc-bittorrent&quot;&gt;vlc-bittorrent&lt;/a&gt;. &lt;a href=&quot;https://github.com/johang/vlc-bittorrent&quot;&gt;vlc-bittorrent&lt;/a&gt; uses &lt;a href=&quot;https://github.com/arvidn/libtorrent/&quot;&gt;libtorrent&lt;/a&gt;, the C++ BitTorrent implementation mentioned above and hooks into VLC at the plugin interface level.&lt;/p&gt;
+
+    &lt;p&gt;The VLC core would load the plugin and raise its callbacks.&lt;/p&gt;
+
+    &lt;p&gt;A downside of this approach is that you must build and link the native plugin for each platform you want to support.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use the LibVLC API.&lt;/p&gt;
+
+    &lt;p&gt;LibVLC is a higher level interface to access the VLC features. It abstracts away intricacies of the APIs to provide a simple yet powerful crossplatform API. This is what LibVLCSharp is based on and what I chose to use for this sample. To continue, let’s have a look at recent developments of MonoTorrent.&lt;/p&gt;
+
+    &lt;p&gt;In the pull request &lt;a href=&quot;https://github.com/alanmcgovern/monotorrent/pull/271&quot;&gt;271&lt;/a&gt;, Alan introduced a new media streaming API:&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;Added MonoTorrent.Streaming.StreamProvider.&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;This class allows files in a torrent to be accessed using a readable and seekable Stream while the Torrent is still being downloaded. The Stream instance returned by StreamProvider.CreateStreamAsync uses a special PiecePicker so that it downloads data sequentially starting at the current Stream.Position.&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;In other words - if you are streaming a video file you can seek to the middle of the file and MonoTorrent will immediately start downloading pieces from that point onwards…&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;It sounds like exactly what we need to get torrenting working smoothly with LibVLCSharp. With this API, we can feed a &lt;code class=&quot;highlighter-rouge&quot;&gt;.torrent&lt;/code&gt; file to MonoTorrent and get back a .NET &lt;code class=&quot;highlighter-rouge&quot;&gt;Stream&lt;/code&gt;.&lt;/p&gt;
+
+    &lt;p&gt;This .NET &lt;code class=&quot;highlighter-rouge&quot;&gt;Stream&lt;/code&gt; is representing the media content, which is being downloaded in real time from the BitTorrent network.&lt;/p&gt;
+
+    &lt;p&gt;On the LibVLC side, the &lt;code class=&quot;highlighter-rouge&quot;&gt;Media&lt;/code&gt; type has a constructor which takes a .NET stream using the &lt;a href=&quot;https://github.com/videolan/libvlcsharp/blob/3.x/LibVLCSharp/Shared/StreamMediaInput.cs&quot;&gt;StreamMediaInput&lt;/a&gt; type.&lt;/p&gt;
+
+    &lt;p&gt;With the .NET &lt;code class=&quot;highlighter-rouge&quot;&gt;Stream&lt;/code&gt; from MonoTorrent, it is then possible to create a LibVLCSharp &lt;code class=&quot;highlighter-rouge&quot;&gt;Media&lt;/code&gt; object and finally start the playback.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/lvst.gif&quot; /&gt;
+&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;
+    &lt;i&gt;LVST CLI app&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;This way we can watch the movie seamlessly as we download it onto the device using the BitTorrent protocol. And with MonoTorrent and LibVLCSharp both targeting .NET Standard, this works on pretty much &lt;strong&gt;all&lt;/strong&gt; platforms.&lt;/p&gt;
+
+&lt;h2 id=&quot;local-or-remote-playback&quot;&gt;Local or remote playback&lt;/h2&gt;
+
+&lt;h4 id=&quot;local&quot;&gt;Local&lt;/h4&gt;
+&lt;p&gt;For local playback, we have a couple solutions.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;By default, if running from a CLI app, the VLC engine will create a new Window that will be used for video output.&lt;/li&gt;
+  &lt;li&gt;We could use the crossplatform &lt;a href=&quot;http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html&quot;&gt;MediaElement&lt;/a&gt; control and combine it to this.&lt;/li&gt;
+  &lt;li&gt;Playing in any VLC app would also be possible by having this CLI app stream to the &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost:port&lt;/code&gt;, and play that stream in VLC.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;remote&quot;&gt;Remote&lt;/h4&gt;
+
+&lt;p&gt;But… VLC also supports chromecast, and so, &lt;a href=&quot;https://mfkl.github.io/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html&quot;&gt;LibVLCSharp does too&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Would it be possible to send the movie stream to the local chromecast while downloading it from the P2P network with MonoTorrent?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Yes&lt;/strong&gt;, and VLC will also transcode the media in real time if the chromecast does not natively support it.&lt;/p&gt;
+
+&lt;h2 id=&quot;lvst&quot;&gt;LVST&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/mfkl/lvst&quot;&gt;LVST&lt;/a&gt; is a CLI .NET Core 3.1 app running on Linux, macOS and Windows. Xamarin support would be simple to add, but I wanted this to be a CLI sample.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/mfkl/lvst&quot;&gt;LVST&lt;/a&gt; is designed to be a basic sample and focused on the torrenting feature, there are currently no playback controls.&lt;/p&gt;
+
+&lt;p&gt;Just provide it with a &lt;code class=&quot;highlighter-rouge&quot;&gt;.torrent&lt;/code&gt; file URL with &lt;code class=&quot;highlighter-rouge&quot;&gt;--torrent&lt;/code&gt; and it will start to download and play it. Casting to the chromecast is as easy as giving it the &lt;code class=&quot;highlighter-rouge&quot;&gt;--cast&lt;/code&gt; flag.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.\LVST.exe --help
+LVST 1.0.0
+Copyright (C) 2020 LVST
+
+  -v, --verbose    Set output to verbose messages.
+
+  -t, --torrent    The torrent link to download and play
+
+  -c, --cast       Cast to the chromecast
+
+  -s, --save       Whether to save the media file. Defaults to true.
+
+  -p, --path       Set the path where to save the media file.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Feel free to fork away if you’d like to play around with &lt;a href=&quot;https://github.com/mfkl/lvst&quot;&gt;LVST&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;possible-improvements&quot;&gt;Possible improvements&lt;/h2&gt;
+
+&lt;p&gt;What else could be done with regard to LibVLCSharp and MonoTorrent?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Make mobile samples&lt;/li&gt;
+  &lt;li&gt;In case of multiple chromecasts on the network, allow selecting one chromecast from the CLI.&lt;/li&gt;
+  &lt;li&gt;Integrate this with the MediaElement control.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I am also considering making a &lt;code class=&quot;highlighter-rouge&quot;&gt;LibVLCSharp.MonoTorrent&lt;/code&gt; package to make torrent support transparent in LibVLCSharp. Feel free to reach out if that is something you would like to see!&lt;/p&gt;</content><author><name>Martin Finkel</name></author><summary type="html">This post explores possibilities of torrenting and streaming technologies in .NET by combining key features from several libraries to build a unique and fun CLI sample app. But first, some context.</summary></entry><entry><title type="html">Introducing LibVLCSharp for Unity3D</title><link href="http://localhost:4000/libvlc/unity/2019/12/18/Introducing-LibVLCSharp-for-Unity.html" rel="alternate" type="text/html" title="Introducing LibVLCSharp for Unity3D" /><published>2019-12-18T05:10:40+01:00</published><updated>2019-12-18T05:10:40+01:00</updated><id>http://localhost:4000/libvlc/unity/2019/12/18/Introducing-LibVLCSharp-for-Unity</id><content type="html" xml:base="http://localhost:4000/libvlc/unity/2019/12/18/Introducing-LibVLCSharp-for-Unity.html">&lt;h3 id=&quot;today-we-are-announcing-the-initial-release-of-vlc-for-unity-windows-on-the-unity-store&quot;&gt;Today, we are announcing the initial release of &lt;a href=&quot;https://assetstore.unity.com/packages/tools/video/vlc-for-unity-windows-133979&quot;&gt;VLC for Unity (Windows)&lt;/a&gt; on the Unity Store!&lt;/h3&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/unity-cover-image.png&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;This Unity plugin allows you to use a LibVLC-powered video player in your games and Unity apps. Whether you need to support a strange format, live streaming or play a 4K video in your latest production, we got you covered.&lt;/p&gt;
+
+&lt;h2 id=&quot;commercial-support&quot;&gt;Commercial support&lt;/h2&gt;
+&lt;p&gt;While this Unity plugin is &lt;a href=&quot;https://code.videolan.org/videolan/vlc-unity/&quot;&gt;opensource&lt;/a&gt;, its Unity Store price is &lt;strong&gt;100USD&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;This price is intended to help sponsor the development and the commercial support of this Unity plugin by &lt;a href=&quot;https://videolabs.io&quot;&gt;Videolabs&lt;/a&gt;, the main commercial contributor to the VLC apps.&lt;/p&gt;
+
+&lt;h2 id=&quot;all-libvlc-features-available-in-your-unity-game&quot;&gt;All LibVLC features available in your Unity game&lt;/h2&gt;
+
+&lt;p&gt;Given that this plugin is using &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp&quot;&gt;LibVLCSharp&lt;/a&gt; (which uses LibVLC), it exposes more or less the &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp#features&quot;&gt;same feature set&lt;/a&gt; and same codecs support than VLC, such as:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Play every media file formats, every codec and every streaming protocols&lt;/li&gt;
+  &lt;li&gt;Run on every platform, from desktop (Windows, Linux, Mac) to mobile (Android, iOS) and TVs&lt;/li&gt;
+  &lt;li&gt;Hardware and efficient decoding on every platform, up to 8K&lt;/li&gt;
+  &lt;li&gt;Network browsing for distant filesystems (SMB, FTP, SFTP, NFS…) and servers (UPnP, DLNA)&lt;/li&gt;
+  &lt;li&gt;Playback of Audio CD, DVD and Bluray with menu navigation&lt;/li&gt;
+  &lt;li&gt;Support for HDR, including tonemapping for SDR streams&lt;/li&gt;
+  &lt;li&gt;Audio passthrough with SPDIF and HDMI, including for Audio HD codecs, like DD+, TrueHD or DTS-HD&lt;/li&gt;
+  &lt;li&gt;Support for video and audio filters&lt;/li&gt;
+  &lt;li&gt;Support for 360 video and 3D audio playback, including Ambisonics&lt;/li&gt;
+  &lt;li&gt;Able to cast and stream to distant renderers, like Chromecast and UPnP renderers.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And more.&lt;/p&gt;
+
+&lt;h2 id=&quot;performance-focus&quot;&gt;Performance focus&lt;/h2&gt;
+
+&lt;p&gt;This plugin uses a &lt;strong&gt;LibVLC 4.0&lt;/strong&gt; build which has seen a lot of improvements regarding performance in the past year. The plugin also makes use of a new, low-level, LibVLC API consisting of &lt;a href=&quot;https://en.wikipedia.org/wiki/Zero-copy&quot;&gt;Zero Copy&lt;/a&gt; GPU callbacks.&lt;/p&gt;
+
+&lt;p&gt;This means your (slow) CPU is bypassed and only your GPU is working to provide decoded textures. The LibVLC API offers Direct3D and OpenGL hooks, but this is all taken care of for you inside the Unity plugin. Have a look &lt;a href=&quot;https://code.videolan.org/videolan/vlc-unity/blob/master/Assets/PluginSource/RenderAPI_D3D11.cpp&quot;&gt;here&lt;/a&gt; if you’re curious about it.&lt;/p&gt;
+
+&lt;p&gt;With this plugin and this new API, you can get similar performance to &lt;a href=&quot;https://www.videolan.org/&quot;&gt;VLC&lt;/a&gt; Desktop in your Unity games and enjoy low CPU use and optimized battery life on your devices when playing high definition medias.&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-started&quot;&gt;Getting started&lt;/h2&gt;
+
+&lt;p&gt;As usual, you need to load the libvlc libraries and create your LibVLC, MediaPlayer and Media objects as you would on any other platform with &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp&quot;&gt;LibVLCSharp&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The public API of this plugin is strictly the same than LibVLCSharp for all but one additional method on the &lt;strong&gt;MediaPlayer&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;/// &amp;lt;summary&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;/// Retrieve a video frame from the Unity plugin as a texture.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;/// &amp;lt;/summary&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;/// &amp;lt;param name=&quot;updated&quot;&amp;gt;True if the video frame has been updated&amp;lt;/param&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;/// &amp;lt;returns&amp;gt;A decoded texture&amp;lt;/returns&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IntPtr&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;GetTexture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This is the method that you need to call in a &lt;a href=&quot;https://docs.unity3d.com/Manual/Coroutines.html&quot;&gt;Unity coroutine&lt;/a&gt; in your script and give its result to your &lt;a href=&quot;https://docs.unity3d.com/ScriptReference/Texture2D.UpdateExternalTexture.html&quot;&gt;texture&lt;/a&gt;’s &lt;code class=&quot;highlighter-rouge&quot;&gt;UpdateExternalTexture&lt;/code&gt; method. Full script example can be found &lt;a href=&quot;https://code.videolan.org/videolan/vlc-unity/blob/master/Assets/VLC-Unity-Windows/Scripts/UseRenderingPlugin.cs&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;img src=&quot;/assets/unity-scene.jpg&quot; /&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&quot;whats-next&quot;&gt;What’s next&lt;/h2&gt;
+
+&lt;h3 id=&quot;platforms-support&quot;&gt;Platforms support&lt;/h3&gt;
+
+&lt;p&gt;Currently, this plugin only supports Windows Classic 64bit with Direct3D11. We aim to bring support to the following platforms during the coming year:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Windows 32bit,&lt;/li&gt;
+  &lt;li&gt;UWP,&lt;/li&gt;
+  &lt;li&gt;macOS, iOS, tvOS,&lt;/li&gt;
+  &lt;li&gt;Android (prototype working),&lt;/li&gt;
+  &lt;li&gt;Linux.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And the following graphics APIs:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;OpenGL ES,&lt;/li&gt;
+  &lt;li&gt;OpenGL,&lt;/li&gt;
+  &lt;li&gt;Metal,&lt;/li&gt;
+  &lt;li&gt;Direct3D9.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We currently have a prototype working on Android with OpenGL ES.&lt;/p&gt;
+
+&lt;h3 id=&quot;other-goals&quot;&gt;Other goals&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Provide various easy to use, ready-to-run samples and improved documentation.&lt;/li&gt;
+  &lt;li&gt;Provide in-Editor MediaPlayer customization, so you can customize LibVLC and playback parameters directly from the Unity Editor.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+    &lt;a href=&quot;https://assetstore.unity.com/packages/tools/video/vlc-for-unity-windows-133979&quot;&gt;&lt;img src=&quot;/assets/unity-logo.png&quot; /&gt;&lt;/a&gt;
+&lt;/p&gt;</content><author><name>Martin Finkel</name></author><summary type="html">Today, we are announcing the initial release of VLC for Unity (Windows) on the Unity Store!</summary></entry><entry><title type="html">MediaPlayerElement: Plug and play and crossplatform UI video control</title><link href="http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html" rel="alternate" type="text/html" title="MediaPlayerElement: Plug and play and crossplatform UI video control" /><published>2019-08-13T06:10:40+02:00</published><updated>2019-08-13T06:10:40+02:00</updated><id>http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control</id><content type="html" xml:base="http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html">&lt;p&gt;Apple and Google already provide MediaPlayer frameworks for iOS and Android developers, but they are quite limited compared to what VLC can do in terms of compatible formats and protocols (amongst other things).&lt;/p&gt;
 
 &lt;p&gt;Until now, &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp&quot;&gt;LibVLCSharp.Forms&lt;/a&gt; was providing you with a Xamarin.Forms &lt;code class=&quot;highlighter-rouge&quot;&gt;View&lt;/code&gt; with video: the &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp/blob/master/LibVLCSharp.Forms/Shared/VideoView.cs&quot;&gt;VideoView&lt;/a&gt;. You had to implement the usual media player controls and buttons yourself, which was not very convenient when all you want is to get up and running quickly, to focus on your core app functionality (which may not be video playback).&lt;/p&gt;
 
@@ -91,28 +315,7 @@
 
 &lt;p&gt;The best and fastest way to get started is to clone our &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples&quot;&gt;libvlcsharp-samples&lt;/a&gt; repository and start the &lt;code class=&quot;highlighter-rouge&quot;&gt;MediaElement&lt;/code&gt; iOS and Android sample apps. Building the samples will pull the necessary VideoLAN packages from &lt;a href=&quot;https://www.nuget.org/profiles/videolan&quot;&gt;NuGet&lt;/a&gt; for your target platform.&lt;/p&gt;
 
-&lt;p&gt;If you would like to contribute a new feature or a bugfix, we accept pull requests on &lt;a href=&quot;https://github.com/videolan/LibVLCSharp/pulls&quot;&gt;GitHub&lt;/a&gt; and merge requests on &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp/merge_requests&quot;&gt;GitLab&lt;/a&gt;.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 13 Aug 2019 06:10:40 +0200</pubDate>
-        <link>https://mfkl.github.io/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html</link>
-        <guid isPermaLink="true">https://mfkl.github.io/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html</guid>
-        
-        
-        <category>libvlc</category>
-        
-        <category>crossplatform</category>
-        
-        <category>xamarin</category>
-        
-        <category>forms</category>
-        
-      </item>
-    
-      <item>
-        <title>Crossplatform local network browsing and media playback</title>
-        <description>&lt;h1 id=&quot;crossplatform-local-network-browsing-and-media-playback&quot;&gt;Crossplatform local network browsing and media playback&lt;/h1&gt;
-
-&lt;p&gt;One of the great features of libvlc is that it can play all sorts of network streams. This is possible thanks to a huge number of supported network protocols.&lt;/p&gt;
+&lt;p&gt;If you would like to contribute a new feature or a bugfix, we accept pull requests on &lt;a href=&quot;https://github.com/videolan/LibVLCSharp/pulls&quot;&gt;GitHub&lt;/a&gt; and merge requests on &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp/merge_requests&quot;&gt;GitLab&lt;/a&gt;.&lt;/p&gt;</content><author><name>Martin Finkel</name></author><summary type="html">Apple and Google already provide MediaPlayer frameworks for iOS and Android developers, but they are quite limited compared to what VLC can do in terms of compatible formats and protocols (amongst other things).</summary></entry><entry><title type="html">Crossplatform local network browsing and media playback</title><link href="http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/07/02/Crossplatform-local-network-browsing-and-media-playback.html" rel="alternate" type="text/html" title="Crossplatform local network browsing and media playback" /><published>2019-07-02T06:10:40+02:00</published><updated>2019-07-02T06:10:40+02:00</updated><id>http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/07/02/Crossplatform-local-network-browsing-and-media-playback</id><content type="html" xml:base="http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/07/02/Crossplatform-local-network-browsing-and-media-playback.html">&lt;p&gt;One of the great features of libvlc is that it can play all sorts of network streams. This is possible thanks to a huge number of supported network protocols.&lt;/p&gt;
 
 &lt;p&gt;Classic network protocols such as FTP, HTTP, RTP and RTSP are well supported, but what about the usual media servers / network shares protocols?&lt;/p&gt;
 
@@ -220,28 +423,7 @@
 
 &lt;p&gt;Support for &lt;strong&gt;Linux&lt;/strong&gt; (GTK) and &lt;strong&gt;macOS&lt;/strong&gt; (Cocoa) can be easily added without any (current code) change.&lt;/p&gt;
 
-&lt;p&gt;The full working sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/LocalNetwork&quot;&gt;VideoLAN GitLab&lt;/a&gt;.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 02 Jul 2019 06:10:40 +0200</pubDate>
-        <link>https://mfkl.github.io/libvlc/crossplatform/xamarin/forms/2019/07/02/Crossplatform-local-network-browsing-and-media-playback.html</link>
-        <guid isPermaLink="true">https://mfkl.github.io/libvlc/crossplatform/xamarin/forms/2019/07/02/Crossplatform-local-network-browsing-and-media-playback.html</guid>
-        
-        
-        <category>libvlc</category>
-        
-        <category>crossplatform</category>
-        
-        <category>xamarin</category>
-        
-        <category>forms</category>
-        
-      </item>
-    
-      <item>
-        <title>LibVLCSharp 3.0: The first stable release of VideoLAN&#39;s crossplatform .NET binding for LibVLC</title>
-        <description>&lt;h1 id=&quot;libvlcsharp-30-the-first-stable-release-of-videolans-crossplatform-net-binding-for-libvlc&quot;&gt;LibVLCSharp 3.0: The first stable release of VideoLAN’s crossplatform .NET binding for LibVLC&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp&quot;&gt;LibVLCSharp&lt;/a&gt; is the first official &lt;strong&gt;VideoLAN&lt;/strong&gt; .NET binding for the multimedia LibVLC library that is &lt;em&gt;fully cross-platform&lt;/em&gt;. It has been downloaded over 10K times.&lt;/p&gt;
+&lt;p&gt;The full working sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/LocalNetwork&quot;&gt;VideoLAN GitLab&lt;/a&gt;.&lt;/p&gt;</content><author><name>Martin Finkel</name></author><summary type="html">One of the great features of libvlc is that it can play all sorts of network streams. This is possible thanks to a huge number of supported network protocols.</summary></entry><entry><title type="html">LibVLCSharp 3.0: The first stable release of VideoLAN’s crossplatform .NET binding for LibVLC</title><link href="http://localhost:4000/libvlc/crossplatform/xamarin/forms/release/2019/05/13/LibVLCSharp-goes-stable.html" rel="alternate" type="text/html" title="LibVLCSharp 3.0: The first stable release of VideoLAN's crossplatform .NET binding for LibVLC" /><published>2019-05-13T06:10:40+02:00</published><updated>2019-05-13T06:10:40+02:00</updated><id>http://localhost:4000/libvlc/crossplatform/xamarin/forms/release/2019/05/13/LibVLCSharp-goes-stable</id><content type="html" xml:base="http://localhost:4000/libvlc/crossplatform/xamarin/forms/release/2019/05/13/LibVLCSharp-goes-stable.html">&lt;p&gt;&lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp&quot;&gt;LibVLCSharp&lt;/a&gt; is the first official &lt;strong&gt;VideoLAN&lt;/strong&gt; .NET binding for the multimedia LibVLC library that is &lt;em&gt;fully cross-platform&lt;/em&gt;. It has been downloaded over 10K times.&lt;/p&gt;
 
 &lt;p&gt;It provides a simple cross-platform audio and video API for .NET on all platforms. Its comprehensive multimedia API can be used across mobile, server and desktop to render video and output audio as well as encode and stream.&lt;/p&gt;
 
@@ -303,30 +485,7 @@
 
 &lt;p&gt;As always, you may download the packages from our &lt;a href=&quot;https://www.nuget.org/profiles/videolan&quot;&gt;NuGet&lt;/a&gt; account.&lt;/p&gt;
 
-&lt;p&gt;Thanks to &lt;a href=&quot;https://github.com/jeremyVignelles&quot;&gt;@JeremyVignelles&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/jsuarezruiz&quot;&gt;@jsuarezruiz&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/mitermite&quot;&gt;@mitermite&lt;/a&gt;, &lt;a href=&quot;https://github.com/wjax&quot;&gt;@wjax&lt;/a&gt; and &lt;a href=&quot;https://github.com/Ch4rg3r&quot;&gt;@Ch4rg3r&lt;/a&gt;.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 13 May 2019 06:10:40 +0200</pubDate>
-        <link>https://mfkl.github.io/libvlc/crossplatform/xamarin/forms/release/2019/05/13/LibVLCSharp-goes-stable.html</link>
-        <guid isPermaLink="true">https://mfkl.github.io/libvlc/crossplatform/xamarin/forms/release/2019/05/13/LibVLCSharp-goes-stable.html</guid>
-        
-        
-        <category>libvlc</category>
-        
-        <category>crossplatform</category>
-        
-        <category>xamarin</category>
-        
-        <category>forms</category>
-        
-        <category>release</category>
-        
-      </item>
-    
-      <item>
-        <title>Fun with crossplatform gestures and 360 videos</title>
-        <description>&lt;h1 id=&quot;crossplatform-gestures-and-360-videos&quot;&gt;Crossplatform gestures and 360 videos&lt;/h1&gt;
-
-&lt;p&gt;Touch management is handled quite differently on Android and iOS. Xamarin.Forms offers a nicely designed abstraction, inspired from the iOS APIs, which works across Android, iOS and UWP.&lt;/p&gt;
+&lt;p&gt;Thanks to &lt;a href=&quot;https://github.com/jeremyVignelles&quot;&gt;@JeremyVignelles&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/jsuarezruiz&quot;&gt;@jsuarezruiz&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/mitermite&quot;&gt;@mitermite&lt;/a&gt;, &lt;a href=&quot;https://github.com/wjax&quot;&gt;@wjax&lt;/a&gt; and &lt;a href=&quot;https://github.com/Ch4rg3r&quot;&gt;@Ch4rg3r&lt;/a&gt;.&lt;/p&gt;</content><author><name>Martin Finkel</name></author><summary type="html">LibVLCSharp is the first official VideoLAN .NET binding for the multimedia LibVLC library that is fully cross-platform. It has been downloaded over 10K times.</summary></entry><entry><title type="html">Fun with crossplatform gestures and 360 videos</title><link href="http://localhost:4000/libvlc/360/xamarin/forms/ux/2019/02/12/Fun-with-crossplatform-gestures-and-360-videos.html" rel="alternate" type="text/html" title="Fun with crossplatform gestures and 360 videos" /><published>2019-02-12T05:10:40+01:00</published><updated>2019-02-12T05:10:40+01:00</updated><id>http://localhost:4000/libvlc/360/xamarin/forms/ux/2019/02/12/Fun-with-crossplatform-gestures-and-360-videos</id><content type="html" xml:base="http://localhost:4000/libvlc/360/xamarin/forms/ux/2019/02/12/Fun-with-crossplatform-gestures-and-360-videos.html">&lt;p&gt;Touch management is handled quite differently on Android and iOS. Xamarin.Forms offers a nicely designed abstraction, inspired from the iOS APIs, which works across Android, iOS and UWP.&lt;/p&gt;
 
 &lt;h4 id=&quot;seek-and-volume&quot;&gt;Seek and volume&lt;/h4&gt;
 
@@ -494,30 +653,7 @@
 &lt;iframe src=&quot;https://player.vimeo.com/video/254723180&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;p&gt;&lt;a href=&quot;https://vimeo.com/254723180&quot;&gt;VLC 3.0 playing 8K 48fps 360 video on Android Galaxy S8&lt;/a&gt; from &lt;a href=&quot;https://vimeo.com/videolan&quot;&gt;VideoLAN&lt;/a&gt; on &lt;a href=&quot;https://vimeo.com&quot;&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;
 &lt;/p&gt;
-&lt;p&gt;This sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/Gestures/Gestures&quot;&gt;VideoLAN GitLab&lt;/a&gt;.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 12 Feb 2019 05:10:40 +0100</pubDate>
-        <link>https://mfkl.github.io/libvlc/360/xamarin/forms/ux/2019/02/12/Fun-with-crossplatform-gestures-and-360-videos.html</link>
-        <guid isPermaLink="true">https://mfkl.github.io/libvlc/360/xamarin/forms/ux/2019/02/12/Fun-with-crossplatform-gestures-and-360-videos.html</guid>
-        
-        
-        <category>libvlc</category>
-        
-        <category>360</category>
-        
-        <category>xamarin</category>
-        
-        <category>forms</category>
-        
-        <category>ux</category>
-        
-      </item>
-    
-      <item>
-        <title>PulseMusic - music player design with Skia and LibVLC</title>
-        <description>&lt;h1 id=&quot;pulsemusic---stylish-music-player-with-skia-and-libvlc&quot;&gt;PulseMusic - stylish music player with Skia and LibVLC&lt;/h1&gt;
-
-&lt;p&gt;In February 2015, &lt;a href=&quot;https://twitter.com/canish91&quot;&gt;Anish Chandran&lt;/a&gt;, a Microsoft UX and Visual designer, posted on &lt;a href=&quot;https://dribbble.com/shots/1939991-Music-Player-App-WIP&quot;&gt;Dribble&lt;/a&gt; and &lt;a href=&quot;https://www.behance.net/gallery/23846315/Pulse-Music-App-Identity-UI-UX&quot;&gt;Behance&lt;/a&gt; an original music player UX concept.&lt;/p&gt;
+&lt;p&gt;This sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/Gestures/Gestures&quot;&gt;VideoLAN GitLab&lt;/a&gt;.&lt;/p&gt;</content><author><name>Martin Finkel</name></author><summary type="html">Touch management is handled quite differently on Android and iOS. Xamarin.Forms offers a nicely designed abstraction, inspired from the iOS APIs, which works across Android, iOS and UWP.</summary></entry><entry><title type="html">PulseMusic - music player design with Skia and LibVLC</title><link href="http://localhost:4000/libvlc/skia/xamarin/forms/ux/2018/12/31/PulseMusic-music-player-design.html" rel="alternate" type="text/html" title="PulseMusic - music player design with Skia and LibVLC" /><published>2018-12-31T05:10:40+01:00</published><updated>2018-12-31T05:10:40+01:00</updated><id>http://localhost:4000/libvlc/skia/xamarin/forms/ux/2018/12/31/PulseMusic-music-player-design</id><content type="html" xml:base="http://localhost:4000/libvlc/skia/xamarin/forms/ux/2018/12/31/PulseMusic-music-player-design.html">&lt;p&gt;In February 2015, &lt;a href=&quot;https://twitter.com/canish91&quot;&gt;Anish Chandran&lt;/a&gt;, a Microsoft UX and Visual designer, posted on &lt;a href=&quot;https://dribbble.com/shots/1939991-Music-Player-App-WIP&quot;&gt;Dribble&lt;/a&gt; and &lt;a href=&quot;https://www.behance.net/gallery/23846315/Pulse-Music-App-Identity-UI-UX&quot;&gt;Behance&lt;/a&gt; an original music player UX concept.&lt;/p&gt;
 
 &lt;p&gt;In August 2018, &lt;a href=&quot;https://github.com/jsuarezruiz&quot;&gt;Javier Suárez Ruiz&lt;/a&gt; implemented and &lt;a href=&quot;https://github.com/jsuarezruiz/PulseMusic&quot;&gt;published on GitHub&lt;/a&gt; a Xamarin.Forms (iOS/Android) UI implementation of the audio player view of the PulseMusic concept by Anish.&lt;/p&gt;
 
@@ -687,30 +823,7 @@
 
 &lt;h6 id=&quot;note-i-deliberately-picked-a-creative-commons-licensed-version-of-the-song-imagine-dragons---radioactive-remix-see-httpsarchiveorgdetailsimaginedragons_201410-and-its-license-for-more-information&quot;&gt;&lt;em&gt;Note: I deliberately picked a Creative Commons licensed version of the song “Imagine Dragons - Radioactive” (remix). See &lt;a href=&quot;https://archive.org/details/ImagineDragons_201410&quot;&gt;https://archive.org/details/ImagineDragons_201410&lt;/a&gt; and its &lt;a href=&quot;https://creativecommons.org/licenses/by-nd/3.0/&quot;&gt;license&lt;/a&gt; for more information&lt;/em&gt;.&lt;/h6&gt;
 
-&lt;p&gt;This sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/PulseMusic&quot;&gt;VideoLAN GitLab&lt;/a&gt;.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 31 Dec 2018 05:10:40 +0100</pubDate>
-        <link>https://mfkl.github.io/libvlc/skia/xamarin/forms/ux/2018/12/31/PulseMusic-music-player-design.html</link>
-        <guid isPermaLink="true">https://mfkl.github.io/libvlc/skia/xamarin/forms/ux/2018/12/31/PulseMusic-music-player-design.html</guid>
-        
-        
-        <category>libvlc</category>
-        
-        <category>skia</category>
-        
-        <category>xamarin</category>
-        
-        <category>forms</category>
-        
-        <category>ux</category>
-        
-      </item>
-    
-      <item>
-        <title>Cross-platform RTSP Mosaic views with LibVLCSharp</title>
-        <description>&lt;h1 id=&quot;cross-platform-rtsp-mosaic-views-with-libvlcsharp&quot;&gt;Cross-platform RTSP Mosaic views with LibVLCSharp&lt;/h1&gt;
-
-&lt;p&gt;VLC and the LibVLC library handle many different streaming formats and protocols to read media from any source. One of them is called Real Time Streaming Protocol (RTSP). According to the &lt;a href=&quot;https://wiki.videolan.org/RTSP/&quot;&gt;VideoLAN Wiki&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;This sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/PulseMusic&quot;&gt;VideoLAN GitLab&lt;/a&gt;.&lt;/p&gt;</content><author><name>Martin Finkel</name></author><summary type="html">In February 2015, Anish Chandran, a Microsoft UX and Visual designer, posted on Dribble and Behance an original music player UX concept.</summary></entry><entry><title type="html">Cross-platform RTSP Mosaic views with LibVLCSharp</title><link href="http://localhost:4000/libvlc/rtsp/xamarin/forms/2018/12/05/crossplatform-RTSP-mosaic-views-with-libvlcsharp.html" rel="alternate" type="text/html" title="Cross-platform RTSP Mosaic views with LibVLCSharp" /><published>2018-12-05T10:10:40+01:00</published><updated>2018-12-05T10:10:40+01:00</updated><id>http://localhost:4000/libvlc/rtsp/xamarin/forms/2018/12/05/crossplatform-RTSP-mosaic-views-with-libvlcsharp</id><content type="html" xml:base="http://localhost:4000/libvlc/rtsp/xamarin/forms/2018/12/05/crossplatform-RTSP-mosaic-views-with-libvlcsharp.html">&lt;p&gt;VLC and the LibVLC library handle many different streaming formats and protocols to read media from any source. One of them is called Real Time Streaming Protocol (RTSP). According to the &lt;a href=&quot;https://wiki.videolan.org/RTSP/&quot;&gt;VideoLAN Wiki&lt;/a&gt;:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;The RTSP (Real Time Streaming Protocol) protocol is a client-server multimedia presentation control protocol, designed to address the needs for efficient delivery of streamed multimedia over IP networks. It leverages existing web infrastructure (for example, inheriting authentication and PICS from HTTP) and works well both for large audiences as well as single-viewer media-on-demand.&lt;/p&gt;
@@ -795,28 +908,7 @@
 &lt;p&gt;&lt;img src=&quot;/assets/mosaic-ios.png&quot; width=&quot;320&quot; /&gt;
 &lt;img src=&quot;/assets/mosaic-android.png&quot; width=&quot;320&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;This sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/VideoMosaic&quot;&gt;VideoLAN GitLab&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 05 Dec 2018 10:10:40 +0100</pubDate>
-        <link>https://mfkl.github.io/libvlc/rtsp/xamarin/forms/2018/12/05/crossplatform-RTSP-mosaic-views-with-libvlcsharp.html</link>
-        <guid isPermaLink="true">https://mfkl.github.io/libvlc/rtsp/xamarin/forms/2018/12/05/crossplatform-RTSP-mosaic-views-with-libvlcsharp.html</guid>
-        
-        
-        <category>libvlc</category>
-        
-        <category>rtsp</category>
-        
-        <category>xamarin</category>
-        
-        <category>forms</category>
-        
-      </item>
-    
-      <item>
-        <title>High performance, cross-platform media streaming with libvlc and Chromecast</title>
-        <description>&lt;h1 id=&quot;high-performance-cross-platform-media-streaming-with-libvlc-and-chromecast-on-net&quot;&gt;High performance, cross-platform media streaming with libvlc and Chromecast on .NET&lt;/h1&gt;
-
-&lt;p&gt;With the release of &lt;a href=&quot;https://www.videolan.org/vlc/releases/3.0.0.html&quot;&gt;libvlc 3.0&lt;/a&gt;, casting your media to your TV is finally possible with libvlc (and the VLC apps). In this post, I will show you how to cast a media using LibVLCSharp, in a cross-platform way.&lt;/p&gt;
+&lt;p&gt;This sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/VideoMosaic&quot;&gt;VideoLAN GitLab&lt;/a&gt;&lt;/p&gt;</content><author><name>Martin Finkel</name></author><summary type="html">VLC and the LibVLC library handle many different streaming formats and protocols to read media from any source. One of them is called Real Time Streaming Protocol (RTSP). According to the VideoLAN Wiki:</summary></entry><entry><title type="html">High performance, cross-platform media streaming with libvlc and Chromecast</title><link href="http://localhost:4000/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html" rel="alternate" type="text/html" title="High performance, cross-platform media streaming with libvlc and Chromecast" /><published>2018-10-21T05:10:40+02:00</published><updated>2018-10-21T05:10:40+02:00</updated><id>http://localhost:4000/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET</id><content type="html" xml:base="http://localhost:4000/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html">&lt;p&gt;With the release of &lt;a href=&quot;https://www.videolan.org/vlc/releases/3.0.0.html&quot;&gt;libvlc 3.0&lt;/a&gt;, casting your media to your TV is finally possible with libvlc (and the VLC apps). In this post, I will show you how to cast a media using LibVLCSharp, in a cross-platform way.&lt;/p&gt;
 
 &lt;p&gt;But before I do so, there are a few prerequisites that you should know regarding VLC’s Chromecast module, as it is a bit &lt;em&gt;special&lt;/em&gt;. To quote &lt;a href=&quot;https://geoffreymetais.github.io/features/vlc-30/&quot;&gt;Geoffrey Metais&lt;/a&gt;, the &lt;a href=&quot;https://code.videolan.org/videolan/vlc-android&quot;&gt;Android VLC port&lt;/a&gt; maintainer:&lt;/p&gt;
 
@@ -846,18 +938,8 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
     &lt;span class=&quot;c1&quot;&gt;// create core libvlc object&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;_libVLC&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;LibVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// choose the correct service discovery protocol depending on the host platform&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Apple platforms use the Bonjour protocol&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;RendererDescription&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;renderer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RuntimePlatform&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iOS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;renderer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_libVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RendererList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;FirstOrDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Equals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Bonjour_renderer&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RuntimePlatform&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Android&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;renderer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_libVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RendererList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;FirstOrDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Equals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;microdns_renderer&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PlatformNotSupportedException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Only Android and iOS are currently supported in this sample&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
     &lt;span class=&quot;c1&quot;&gt;// create a renderer discoverer&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;_rendererDiscoverer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;RendererDiscoverer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_libVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;renderer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_rendererDiscoverer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;RendererDiscoverer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_libVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
     &lt;span class=&quot;c1&quot;&gt;// register callback when a new renderer is found&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;_rendererDiscoverer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ItemAdded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RendererDiscoverer_ItemAdded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -906,22 +988,7 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
 
 &lt;p&gt;The full sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/Chromecast&quot;&gt;VideoLAN GitLab&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;It is currently implemented for both iOS and Android using Xamarin.Forms. It will however work on any platform supported by libvlc and Mono/.NET.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 21 Oct 2018 05:10:40 +0200</pubDate>
-        <link>https://mfkl.github.io/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html</link>
-        <guid isPermaLink="true">https://mfkl.github.io/chromecast/2018/10/21/High-performance-cross-platform-streaming-with-libvlc-and-Chromecast-on-.NET.html</guid>
-        
-        
-        <category>chromecast</category>
-        
-      </item>
-    
-      <item>
-        <title>How to record an HLS stream with LibVLCSharp and .NET Core</title>
-        <description>&lt;h1 id=&quot;how-to-record-an-hls-stream-with-libvlcsharp-and-net-core&quot;&gt;How to record an HLS stream with LibVLCSharp and .NET Core&lt;/h1&gt;
-
-&lt;p&gt;In this post, I will show you how to record an HTTP Live Streaming (HLS) stream using LibVLCSharp in a .NET Core CLI app on Windows.&lt;/p&gt;
+&lt;p&gt;It is currently implemented for both iOS and Android using Xamarin.Forms. It will however work on any platform supported by libvlc and Mono/.NET.&lt;/p&gt;</content><author><name>Martin Finkel</name></author><summary type="html">With the release of libvlc 3.0, casting your media to your TV is finally possible with libvlc (and the VLC apps). In this post, I will show you how to cast a media using LibVLCSharp, in a cross-platform way.</summary></entry><entry><title type="html">How to record an HLS stream with LibVLCSharp and .NET Core</title><link href="http://localhost:4000/hls/2018/10/10/How-to-record-HLS-stream-with-LibVLCSharp-and-.NET-Core.html" rel="alternate" type="text/html" title="How to record an HLS stream with LibVLCSharp and .NET Core" /><published>2018-10-10T05:10:40+02:00</published><updated>2018-10-10T05:10:40+02:00</updated><id>http://localhost:4000/hls/2018/10/10/How-to-record-HLS-stream-with-LibVLCSharp-and-.NET-Core</id><content type="html" xml:base="http://localhost:4000/hls/2018/10/10/How-to-record-HLS-stream-with-LibVLCSharp-and-.NET-Core.html">&lt;p&gt;In this post, I will show you how to record an HTTP Live Streaming (HLS) stream using LibVLCSharp in a .NET Core CLI app on Windows.&lt;/p&gt;
 
 &lt;p&gt;HLS is a streaming protocol originally developped by Apple which is supported in most internet browser and streaming media servers. &lt;a href=&quot;https://en.wikipedia.org/wiki/HTTP_Live_Streaming&quot;&gt;Wikipedia&lt;/a&gt; has some info about it:&lt;/p&gt;
 
@@ -997,71 +1064,4 @@ With VLC, you have media of any format. So VLC has to be a http server like yout
   &lt;li&gt;After a while, you will find a &lt;code class=&quot;highlighter-rouge&quot;&gt;record.ts&lt;/code&gt; file located at &lt;code class=&quot;highlighter-rouge&quot;&gt;RecordHLS\bin\Debug\netcoreapp2.1&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;This sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/RecordHLS&quot;&gt;VideoLAN GitLab&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 10 Oct 2018 05:10:40 +0200</pubDate>
-        <link>https://mfkl.github.io/hls/2018/10/10/How-to-record-HLS-stream-with-LibVLCSharp-and-.NET-Core.html</link>
-        <guid isPermaLink="true">https://mfkl.github.io/hls/2018/10/10/How-to-record-HLS-stream-with-LibVLCSharp-and-.NET-Core.html</guid>
-        
-        
-        <category>hls</category>
-        
-      </item>
-    
-      <item>
-        <title>Introducing LibVLCSharp</title>
-        <description>&lt;h1 id=&quot;introducing-libvlcsharp&quot;&gt;Introducing LibVLCSharp&lt;/h1&gt;
-
-&lt;p&gt;LibVLCSharp are .NET/Mono bindings for &lt;code class=&quot;highlighter-rouge&quot;&gt;libvlc&lt;/code&gt;, the multimedia framework powering the VLC applications.&lt;/p&gt;
-
-&lt;p&gt;We support all .NET runtimes (Xamarin/Mono, .NET Core and .NET Framework) on most platfoms by targeting .NET Standard 2.0.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;libvlc&lt;/code&gt; is &lt;em&gt;modularized&lt;/em&gt; into &lt;a href=&quot;https://github.com/mfkl/libvlc-nuget/blob/master/tree.md&quot;&gt;hundreds of plugins&lt;/a&gt;, which may be loaded at runtime. This architecture provides great flexibility to developers (both VLC devs and devs consuming the library). The unified, complete and (somewhat) high level &lt;code class=&quot;highlighter-rouge&quot;&gt;libvlc&lt;/code&gt; C API allows a wide range of operations, such as:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Network browsing for distant filesystems (SMB, FTP, SFTP, NFS…).&lt;/li&gt;
-  &lt;li&gt;HDMI passthrough for Audio HD codecs, like E-AC3, TrueHD or DTS-HD.&lt;/li&gt;
-  &lt;li&gt;Stream to distant renderers, like Chromecast.&lt;/li&gt;
-  &lt;li&gt;360 video and 3D audio playback with viewpoint change.&lt;/li&gt;
-  &lt;li&gt;Support for Ambisonics audio and more than 8 audio channels.&lt;/li&gt;
-  &lt;li&gt;Subtitles size modification live.&lt;/li&gt;
-  &lt;li&gt;Hardware decoding and display on all platforms.&lt;/li&gt;
-  &lt;li&gt;DVD playback and menu navigation.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// Loading the native libvlc library&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Core&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libVLC&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;LibVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mediaPlayer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MediaPlayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;libVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;media&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Media&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;libVLC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-                                &lt;span class=&quot;s&quot;&gt;&quot;http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-                                &lt;span class=&quot;n&quot;&gt;Media&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FromType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FromLocation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;mediaPlayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Play&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;media&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ReadKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;LibVLCSharp aims to always support the latest &lt;code class=&quot;highlighter-rouge&quot;&gt;libvlc&lt;/code&gt; major version (currently version 3).&lt;/p&gt;
-
-&lt;p&gt;We are distributing packages (native and managed) through &lt;a href=&quot;https://www.nuget.org/profiles/videolan&quot;&gt;nuget&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;We use &lt;a href=&quot;https://code.videolan.org/videolan/LibVLCSharp&quot;&gt;GitLab&lt;/a&gt; and &lt;a href=&quot;https://github.com/videolan/libvlcsharp&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 06 Oct 2018 05:10:40 +0200</pubDate>
-        <link>https://mfkl.github.io/libvlc/intro/2018/10/06/introducing-libvlcsharp.html</link>
-        <guid isPermaLink="true">https://mfkl.github.io/libvlc/intro/2018/10/06/introducing-libvlcsharp.html</guid>
-        
-        
-        <category>libvlc</category>
-        
-        <category>intro</category>
-        
-      </item>
-    
-  </channel>
-</rss>
+&lt;p&gt;This sample is available on the &lt;a href=&quot;https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/RecordHLS&quot;&gt;VideoLAN GitLab&lt;/a&gt;&lt;/p&gt;</content><author><name>Martin Finkel</name></author><summary type="html">In this post, I will show you how to record an HTTP Live Streaming (HLS) stream using LibVLCSharp in a .NET Core CLI app on Windows.</summary></entry></feed>

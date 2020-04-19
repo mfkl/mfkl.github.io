@@ -1,12 +1,10 @@
 ---
-layout: post
+# layout: post
 title:  "LibVLCSharp 3.0: The first stable release of VideoLAN's crossplatform .NET binding for LibVLC"
 date:   2019-05-13 11:10:40 +0700
 categories: libvlc crossplatform xamarin forms release
+classes: wide
 ---
-
-# LibVLCSharp 3.0: The first stable release of VideoLAN's crossplatform .NET binding for LibVLC
-
 [LibVLCSharp](https://code.videolan.org/videolan/LibVLCSharp) is the first official **VideoLAN** .NET binding for the multimedia LibVLC library that is _fully cross-platform_. It has been downloaded over 10K times.
 
 It provides a simple cross-platform audio and video API for .NET on all platforms. Its comprehensive multimedia API can be used across mobile, server and desktop to render video and output audio as well as encode and stream.

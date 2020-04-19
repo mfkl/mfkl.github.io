@@ -1,15 +1,15 @@
 ---
-layout: post
+# layout: post
 title:  "Introducing LibVLCSharp for Unity3D"
 date:   2019-12-18 11:10:40 +0700
 categories: libvlc unity
+classes: wide
 ---
-
+### Today, we are announcing the initial release of [VLC for Unity (Windows)](https://assetstore.unity.com/packages/tools/video/vlc-for-unity-windows-133979) on the Unity Store!
+<br/>
 <p align="center">
     <img src="/assets/unity-cover-image.png"/>
 </p>
-
-### Today, we are announcing the initial release of [VLC for Unity (Windows)](https://assetstore.unity.com/packages/tools/video/vlc-for-unity-windows-133979) on the Unity Store!
 
 This Unity plugin allows you to use a LibVLC-powered video player in your games and Unity apps. Whether you need to support a strange format, live streaming or play a 4K video in your latest production, we got you covered.
 

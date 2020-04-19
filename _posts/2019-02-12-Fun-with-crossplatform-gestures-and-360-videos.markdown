@@ -1,12 +1,10 @@
 ---
-layout: post
+# layout: post
 title:  "Fun with crossplatform gestures and 360 videos"
 date:   2019-02-12 11:10:40 +0700
 categories: libvlc 360 xamarin forms ux
+classes: wide
 ---
-
-# Crossplatform gestures and 360 videos
-
 Touch management is handled quite differently on Android and iOS. Xamarin.Forms offers a nicely designed abstraction, inspired from the iOS APIs, which works across Android, iOS and UWP.
 
 #### Seek and volume

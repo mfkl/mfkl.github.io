@@ -1,8 +1,9 @@
 ---
-layout: post
+# layout: post
 title:  "MediaPlayerElement: Plug and play and crossplatform UI video control"
 date:   2019-08-13 11:10:40 +0700
 categories: libvlc crossplatform xamarin forms
+classes: wide
 ---
 
 Apple and Google already provide MediaPlayer frameworks for iOS and Android developers, but they are quite limited compared to what VLC can do in terms of compatible formats and protocols (amongst other things).

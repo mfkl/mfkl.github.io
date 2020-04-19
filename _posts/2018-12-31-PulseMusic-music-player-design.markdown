@@ -1,12 +1,10 @@
 ---
-layout: post
+# layout: post
 title:  "PulseMusic - music player design with Skia and LibVLC"
 date:   2018-12-31 11:10:40 +0700
 categories: libvlc skia xamarin forms ux
+classes: wide
 ---
-
-# PulseMusic - stylish music player with Skia and LibVLC
-
 In February 2015, [Anish Chandran](https://twitter.com/canish91), a Microsoft UX and Visual designer, posted on [Dribble](https://dribbble.com/shots/1939991-Music-Player-App-WIP) and [Behance](https://www.behance.net/gallery/23846315/Pulse-Music-App-Identity-UI-UX) an original music player UX concept.
 
 In August 2018, [Javier Suárez Ruiz](https://github.com/jsuarezruiz) implemented and [published on GitHub](https://github.com/jsuarezruiz/PulseMusic) a Xamarin.Forms (iOS/Android) UI implementation of the audio player view of the PulseMusic concept by Anish.
