@@ -1,7 +1,7 @@
 # main links
 main:
-  # - title: "Quick-Start Guide"
-  #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
+  # - title: "NEW: LibVLCSharp - The book"
+  #   url: https://www.libvlcsharpthebook.com/preview
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
@@ -10,3 +10,13 @@ main:
   #   url: /collection-archive/
   # - title: "Sitemap"
   #   url: /sitemap/
+
+vlc:
+  - title: "LibVLCSharp"
+    children:
+      - title: "The book"
+        text: "Subscribe for discount and release info"
+        url: https://libvlcsharpthebook.com/preview
+      - title: "VLC for Unity"
+        text: "Find the Unity assets here"
+        url: https://assetstore.unity.com/publishers/39987

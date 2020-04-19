@@ -270,3 +270,13 @@ defaults:
       comments: # true
       share: true
       related: true
+      sidebar:
+        nav: "vlc"
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+      sidebar:
+        nav: "vlc"
