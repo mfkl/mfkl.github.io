@@ -94,7 +94,7 @@ analytics:
 # Site Author
 author:
   name             : "Martin Finkel"
-  avatar           : "/assets/cat.jpg"
+  avatar           : "/assets/cat.png"
   bio              : ".NET @ VideoLAN/Videolabs"
   github           : mfkl
   twitter          : martz2804
