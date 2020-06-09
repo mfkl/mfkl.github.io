@@ -18,6 +18,8 @@ While this Unity plugin is [opensource](https://code.videolan.org/videolan/vlc-u
 
 This price is intended to help sponsor the development and the commercial support of this Unity plugin by [Videolabs](https://videolabs.io), the main commercial contributor to the VLC apps.
 
+#### [Download the Free Trial version](https://videolabs.io/#unity)
+
 ## All LibVLC features available in your Unity game
 
 Given that this plugin is using [LibVLCSharp](https://code.videolan.org/videolan/LibVLCSharp) (which uses LibVLC), it exposes more or less the [same feature set](https://code.videolan.org/videolan/LibVLCSharp#features) and same codecs support than VLC, such as:
@@ -89,6 +91,8 @@ We currently have a prototype working on Android with OpenGL ES.
 
 - Provide various easy to use, ready-to-run samples and improved documentation.
 - Provide in-Editor MediaPlayer customization, so you can customize LibVLC and playback parameters directly from the Unity Editor.
+
+#### [Download the Free Trial version](https://videolabs.io/#unity)
 
 <p align="center">
     <a href="https://assetstore.unity.com/packages/tools/video/vlc-for-unity-windows-133979"><img src="/assets/unity-logo.png"/></a>
