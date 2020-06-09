@@ -1,7 +1,11 @@
-# main links
 main:
-  # - title: "NEW: LibVLCSharp - The book"
-  #   url: https://www.libvlcsharpthebook.com/preview
+  - title: "Hire me"
+    url: /hire/
+
+# main links
+# main:
+#   - title: "Hire me"
+#     url: /hire/
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
