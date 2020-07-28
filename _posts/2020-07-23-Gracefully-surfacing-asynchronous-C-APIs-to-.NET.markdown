@@ -75,7 +75,7 @@ The actual LibVLCSharp API definition looks like this
 /// to cancel the thumbnail generation
 /// </param>
 /// <returns>A valid Picture object or null in case of failure</returns>
-public async Task<Picture> GenerateThumbnail(long time, ThumbnailerSeekSpeed speed,
+public Task<Picture> GenerateThumbnail(long time, ThumbnailerSeekSpeed speed,
                 uint width, uint height, bool crop, PictureType pictureType, long timeout = 0, 
                 CancellationToken cancellationToken = default)
 ~~~~
@@ -115,7 +115,7 @@ var result = Native.LibVLCMediaThumbnailRequestByTime(NativeReference, time, spe
                                                             height, crop, pictureType, timeout);
 request = new ThumbnailerRequest(result);
 
-await tcs.Task.ConfigureAwait(false);
+return tcs.Task;
 ~~~~
 
 If the thumbnail generation is canceled by the user from .NET using the cancellation token, we unsubscribe immediately as well as let the native library (LibVLC) know and set the task as cancelled. The `async/await` state machine will handle the rest for us and return control to the caller.
@@ -133,7 +133,7 @@ var cancellationTokenRegistration = cancellationToken.Register(() =>
 Method code in full:
 
 ~~~~csharp
-async Task<Picture> ThumbnailRequestInternal(CancellationToken cancellationToken = default)
+Task<Picture> ThumbnailRequestInternal(CancellationToken cancellationToken = default)
 {
     cancellationToken.ThrowIfCancellationRequested();
     ThumbnailerRequest request = default;
@@ -162,7 +162,7 @@ async Task<Picture> ThumbnailRequestInternal(CancellationToken cancellationToken
         var result = Native.LibVLCMediaThumbnailRequestByTime(NativeReference, time, speed, width, height, crop, pictureType, timeout);
         request = new ThumbnailerRequest(result);
 
-        return await tcs.Task.ConfigureAwait(false);
+        return tcs.Task;
     }
     finally
     {
