@@ -10,7 +10,9 @@ Announcing the LibVLC Community Discord Server!
 
 # State of LibVLC bindings
 
-LibVLC is a crossplatform, portable, C library which works across most mobile and desktop platforms. Since it is written in C, there are many community language bindings surfacing the LibVLC APIs in other programming languages and ecosystems.
+LibVLC is a crossplatform, portable, C library which works across most mobile and desktop platforms. 
+
+Since it is written in C, and that most developers don't write user-facing apps in C, the community has created LibVLC bindings surfacing the LibVLC APIs in various programming languages and ecosystems.
 
 Let's go through some of them.
 
