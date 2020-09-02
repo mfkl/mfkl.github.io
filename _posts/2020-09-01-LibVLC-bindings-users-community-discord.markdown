@@ -4,7 +4,15 @@ date:   2020-09-02 11:10:40 +0700
 categories: libvlc
 classes: wide
 ---
+Announcing the LibVLC Community Discord Server!
+
+[Join us](https://discord.gg/3h3K3JF).
+
+# State of LibVLC bindings
+
 LibVLC is a crossplatform, portable, C library which works across most mobile and desktop platforms. Since it is written in C, there are many community language bindings surfacing the LibVLC APIs in other programming languages and ecosystems.
+
+Let's go through some of them.
 
 ## By VideoLAN
 - [libvlcpp](https://code.videolan.org/videolan/libvlcpp) with C++.
@@ -35,7 +43,7 @@ There are many ways to get in touch with the VideoLAN community, such as the [fo
 
 With libvlcsharp, we had been using Gitter but due to various bugs and limitations we decided to move to Discord a while ago. We are very happy with the change so far.
 
-We are now around 100 in the LibVLC discord and opening up to LibVLC users and other bindings for **all** programming languages!
+At the time of writing, we are around 100 people in the LibVLC discord and opening up to LibVLC users and other bindings for **all** programming languages!
 
 ## Why join?
 
