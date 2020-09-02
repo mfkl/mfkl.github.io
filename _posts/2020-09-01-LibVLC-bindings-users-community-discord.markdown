@@ -6,7 +6,7 @@ classes: wide
 ---
 Announcing the LibVLC Community Discord Server!
 
-[Join us](https://discord.gg/3h3K3JF).
+Feel free to [join us](https://discord.gg/3h3K3JF), you are all welcome.
 
 # State of LibVLC bindings
 
@@ -43,13 +43,13 @@ Just ask a moderator to create a channel for your ecosystem if that has not been
 
 There are many ways to get in touch with the VideoLAN community, such as the [forum](https://forum.videolan.org/), the [developer mailing list](https://mailman.videolan.org/listinfo/vlc-devel), [StackOverflow](https://stackoverflow.com/questions/tagged/libvlc) or even [IRC](https://wiki.videolan.org/Contact_VideoLAN/#IRC). That last one is mostly aimed at core VLC developers though, which is why a space for LibVLC _consumers_ and bindings maintainers would be a great addition.
 
-With libvlcsharp, we had been using Gitter but due to various bugs and limitations we decided to move to Discord a while ago. We are very happy with the change so far.
+With libvlcsharp, we had been using Gitter for a while but due to various bugs and limitations, we decided to move to Discord a while ago. We are very happy with the change so far.
 
-At the time of writing, we are around 100 people in the LibVLC discord and opening up to LibVLC users and other bindings for **all** programming languages!
+At the time of writing, we are around 100 people in the LibVLC discord and opening up to LibVLC users/bindings maintainers from _any and all_ programming languages!
 
 ## Why join?
 
-Here are some of the value you could get by joining up:
+Here are some of the value you could get by joining up the Discord server:
 
 ### If you're a LibVLC binding user
 - Learn about various community projects,
