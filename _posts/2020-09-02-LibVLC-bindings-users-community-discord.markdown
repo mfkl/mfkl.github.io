@@ -45,7 +45,9 @@ There are many ways to get in touch with the VideoLAN community, such as the [fo
 
 With libvlcsharp, we had been using Gitter for a while but due to various bugs and limitations, we decided to move to Discord a while ago. We are very happy with the change so far.
 
-At the time of writing, we are around 100 people in the LibVLC discord and opening up to LibVLC users/bindings maintainers from _any and all_ programming languages!
+At the time of writing, we are around 100 people in the LibVLC discord, mostly from the .NET ecosystem. 
+
+We are now opening up the server to LibVLC users/binding maintainers from _any and all_ programming languages!
 
 ## Why join?
 
