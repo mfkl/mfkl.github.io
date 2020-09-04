@@ -29,7 +29,7 @@ Let's go through some of them.
 - [vlcj](https://github.com/caprica/vlcj) for Desktop plaforms using Java.
 > Currently used by over 600 OSS projects on GitHub.
 - [python-vlc](https://github.com/oaubert/python-vlc) for Desktop platforms using Python.
-> Very mature (9 years old).
+> Very mature (since 2004).
 - [vlc-rs](https://github.com/garkimasera/vlc-rs) A relatively new LibVLC binding for Rust users.
 - [libvlc-go](https://github.com/adrg/libvlc-go) A Go binding for LibVLC.
 
