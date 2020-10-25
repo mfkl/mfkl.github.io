@@ -13,11 +13,11 @@ The topic of OSS sustainability has been discussed about more and more in the pa
 
 This post is more about trying to find solutions than explaning the current issues. If you are not familiar with the concept of "opensource sustainability", and would like to understand the context of the current situation, the impacts and imbalances, these links are a good start:
 
-- http://veridicalsystems.com/blog/of-money-responsibility-and-pride/
-- https://andre.arko.net/2016/09/26/a-year-of-ruby-together/
-- https://dev.to/erikras/open-source-sustainability-3pjf
-- https://techcrunch.com/2018/06/23/open-source-sustainability/
-- https://www.youtube.com/watch?v=0t85TyH-h04
+- [http://veridicalsystems.com/blog/of-money-responsibility-and-pride](http://veridicalsystems.com/blog/of-money-responsibility-and-pride/)
+- [https://andre.arko.net/2016/09/26/a-year-of-ruby-together](https://andre.arko.net/2016/09/26/a-year-of-ruby-together)
+- [https://dev.to/erikras/open-source-sustainability-3pjf](https://dev.to/erikras/open-source-sustainability-3pjf)
+- [https://techcrunch.com/2018/06/23/open-source-sustainability](https://techcrunch.com/2018/06/23/open-source-sustainability/)
+- [https://www.youtube.com/watch?v=0t85TyH-h04](https://www.youtube.com/watch?v=0t85TyH-h04)
 
 Multiple symptoms are well identified in these posts. Solutions to the root causes are harder to come around. There are multifaceted problems which do not seem to have many fast, easy to implement solutions. 
 
