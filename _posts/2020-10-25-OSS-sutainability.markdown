@@ -1,6 +1,6 @@
 ---
-title:  "On the psychology and dynamics of OSS: passion, burnout and (im)balance."
-date:   2020-10-22 11:10:40 +0700
+title:  "On the psychology and dynamics of OSS: passion, burnout and (im)balance"
+date:   2020-10-25 11:10:40 +0700
 categories: opensource
 classes: wide
 ---
