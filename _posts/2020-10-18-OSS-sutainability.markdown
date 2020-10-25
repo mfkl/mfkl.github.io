@@ -1,136 +1,121 @@
 ---
-title:  "OSS sustainability"
+title:  "On the psychology and dynamics of OSS: passion, burnout and (im)balance."
 date:   2020-10-22 11:10:40 +0700
 categories: opensource
 classes: wide
 ---
 
-On the psychology of OSS: passion, burnout and (im)balance.
-business, ethics, relationship with technology
-Opensource dynamics
+Opensource is quite a modern social concept. You get to interact with people about technology from anywhere in the world, make friends, and improve your skills fast. Location or timezone don't really matter, which is an added benefit, to me at least.
 
-The Opensource world is a very diverse place. That's one of the reasons I enjoy it. You get to interact with people from anywhere in the world, and read very different code approaches. Location or timezone don't really matter.
+However, OSS is not a _perfect_ world.
 
-// It can be a very rich experience, both in terms of social aspect as well as technical aspect.
+The topic of OSS sustainability has been discussed about more and more in the past few years. So many widely used libraries and programs are understaffed and underfunded, and many maintainers need help while the amount of their users just keeps growing.
 
-The topic of OSS sustainability has been talked about more and more in the past few years. So many widely used libraries and programs are understaffed and underfunded, yet many companies ignore this fact or just do not care.
+This post is more about trying to find solutions than explaning the current issues. If you are not familiar with the concept of "opensource sustainability", and would like to understand the context of the current situation, the impacts and imbalances, these links are a good start:
 
-Examples:
 - http://veridicalsystems.com/blog/of-money-responsibility-and-pride/
 - https://andre.arko.net/2016/09/26/a-year-of-ruby-together/
 - https://dev.to/erikras/open-source-sustainability-3pjf
 - https://techcrunch.com/2018/06/23/open-source-sustainability/
 - https://www.youtube.com/watch?v=0t85TyH-h04
 
-Multiple symptoms are well identified in these posts but solutions to the root causes are harder to come around. There are multifaceted, hard, problem. 
+Multiple symptoms are well identified in these posts. Solutions to the root causes are harder to come around. There are multifaceted problems which do not seem to have many fast, easy to implement solutions. 
 
-It is not a _new_ problem, but with opensource changing and being used as a marketing tool, notably by big tech, as OSS usage grew, the scope of the problems did as well.
+I have been thinking about these dynamics quite a bit in the past few weeks, notably while [writing my book](https://www.libvlcsharpthebook.com/preview) which has a part dedicated to reflections on OSS, and wanted to write some things about it in a dedicated blogpost. I am hoping to suggest some possible solutions to various well identified problems. I have no idea if they would actually work in practice or can really be implemented.
 
-I have been thinking about these things quite a bit in the past few weeks, notably while [writing my book](https://www.libvlcsharpthebook.com/preview) which has a part dedicated to OSS, and wanted to write some things down in a dedicated blogpost. I am hoping to suggest some possible solutions to various well identified problems. No idea if they would actually work in practice.
+# Free costs
 
-People (that includes developers) have been accustomed to not having to **pay with money** for a lot stuff online... Free browser. Free email account. Free search engine. Free code. Free IDE. Free support. Free maintenance. It's all good!
+The vast majority of people, both users and developers, have been accustomed to not having to **pay with money** for a lot stuff online... Free browser. Free email account. Free search engine. Free code. Free IDE. Free support. Free maintenance. We take many things for granted.
 
-Forget all you know about programming, building software and the tech industry for a second.
+There is always a cost. Sometimes you pay with your data (Hello Gmail!), sometimes you don't pay - because someone else pays for you. The cost is real and often, maintainers will get negative feedback from their users when they change the license and/or want to start charging for their work. Many people do not realize digital work is still work.
 
-TL;DR: People, both developers and executives, have expectations and beliefs about software (in general). Lack of education, no experience in OSS.
+> Some OSS maintainers are not interested in any kind of compensation for their work, for a variety of reasons. That is perfectly fine but this is not what this blogpost is about.
 
-> If every single developer was made to become a maintainer of any midly/highly-sucessful OSS project for 6 months or a year, say like an OSS service, I believe there would be much more empathy and consideration in the OSS community at large.
+# Making a living from user donations does not work
 
-I'm not actually saying this military-style option would be A Good Thing, just making a point. _Not everyone is interested in becoming an opensource maintainer either, and that is very much OK_. But it's pretty safe to say that most if not all developers use and need OSS.
+Like I wrote above, people are used to having support and updates for free, why should they start paying now?
 
+Unless you have somewhat of a huge GitHub/Twitter following or something (and even then), chances of a maintainer being able to live from its user donations are rather low.
 
+In many cases, it does not matter how many millions of users you have, you cannot rely on user donations _only_ to hope to pay a team of maintainers (or just yourself) a salary every month to work on OSS. Consulting and commercial licenses are often necessary, but not always possible for the maintainer.
 
-There are good people and assholes everywhere. That you can't fix.
+## Proposal
 
-Say you're now building a real estate business. Your core business is real estate. Except you need a website, 
+I believe companies, and not individuals, should be targetted for donations. Asking the occasional hacker to contribute financially hardly works (though it is great when it happens!). The imbalance comes from the silent majority of businesses relying on OSS for their products.
 
-twitter, github, SO, folks
-### OSS
-how it has changed.
+# Maintainers burn out
 
-### (Im)balance:
-- The imbalance is real and it is invisible, in a way, for most people. If you are on Twitter and use GitHub, your experience is not representative of the majority of developers in the world.
+This one is tricky, because it relates to various interlinked and personal concepts, amongst which the maintainer's approach and relationship with technology and their self-awareness. I believe one of the key solutions to this problem would come from our current and future tooling and code sharing services.
 
-Human flaws apply. You will likely feel differently if a bomb explods on the other side of the world, and if one explods in your street.
+## Proposal 1
 
-I believe that tech leads, executives and people in decision-making positions will only act  to 
-They might care if they were aware, they might not. I don't ask myself that question, I ask how can we make them aware?
+### Educate maintainers for a healthier relationship with technology
 
+Tools are partly responsible for this. Github (because that's the popular tool of the moment) is not doing a great job here, you get auto-subbed to issues by default and notification management granularity could definitely be improved. The issues section can also be responsible for a large mental load, product design could step in here as well.
 
+This can all become overwhelming fast. For more info on this, see: https://www.humanetech.com/take-control
 
-### Possible solution
+## Proposal 2
 
-### Burnout:
-- 
+### As-is
 
-### Possible solution
+"Software is provided **as-is**" should be written down in more places (e.g. in the bug tracker when someone opens an issue, for example) and explained where programming is taught.
 
-- try to suggest new solutions:"
-* Asking the occasional coder to pay isn't really working as far as I can see. Companies should be the one paying.
-* There is a ton of SME and larger companies for which Tech isn't their main business yet they still have a tech department. That company's management team, including sometimes their tech team's lead, They're not on twitter, they don't use github. Yet they consume a lot of OSS. They don't actually know how critical OSS is for their operations and products developement.
+## Proposal 3
 
-There is an education work to do here.
+### Provide a space for mentorship to happen. 
 
-They don't know how critical OSS is for THEIR business. Teach them.
-They don't know how many libs are maintained by one or two maintainer, and the risk of burn out is high. Maintainers need more help, not more tickets. Teach them OSS sustainability today's challenges.
-I think many business owners never even thought of giving (skills, time, money, hardware) to OSS maintainers. What if you took 10.000 random companies right now and made them examine their graph of dependencies and showed them how many these libraries's maintainers need help? That'd be specific enough.
+Yes, that's more work for maintainers, but not only maintainers of a specific project can mentor juniors. Any experienced dev should be able to chime in.
 
-How do you do that?
+## Proposal 4
 
-Once the tech team is on your side, you need to make the management team UNDERSTAND.
+### Provide a space for project ownership transfer.
 
-Balance needs to reset. Companies don't realize the current imbalance. They need to taught about it.
+There could be a place that facilitates ownership hand-over of the current maintainer's project to a new maintainer.
 
-OSS, when a passion project becomes a nightmare. AS-IS
-Need to teach AS-IS to both maintainers and non-maintainers. Where? Where people learn coding? 
-dev bootcamps,
-engineering schools,
-online bootcamp thingy.
+People's needs change, work requirements and dependencies evolve. Time availability varies. Interests shift. 
 
-Videolan/videolabs/netflix/youtube example.
+There could be systems and processes in place so that maintainers can give over their code (and deployment keys) to trusted new members, if they choose to. 
 
-OSS has changed a lot in the past 20 years. Big Tech understood it appeals to the average programmer for various reasons (TODO: name of a few) and uses that as a very successful marketing strategy.
+## Proposal 5
 
-Raise awareness. what? why? how? when?
+### Developer tools and collaboration systems could encourage more positive feedback from users to fight [negative bias](https://en.wikipedia.org/wiki/Negativity_bias) through UX and product design. 
 
-Ok you've convinced the guy. Now what? He can make a donation. I'm not a lawyer, should be pretty simple for the accountant to record a donation. Having an invoice could be a showstopper? Don't think so.
+Maintainers have more users complaining than complimenting their work. Inversing that trend would go a long way, I think, though it will not be easy.
 
+# OSS and companies responsibility imbalance
 
-Maintainer burn out is real. There should be a place that educates maintainer on what providing software AS-IS means. Burn out help/advice/psychology center, and safe space with other maintainers who experienced or are experiencing burn out.
+Millions of companies in the world critically rely on OSS. A lot of OSS projects are understaffed and underfunded, while the majority of companies are not contributing a dime.
 
-several issues are linked 
+Ignorance and entitlement are not fought the same way. The following part focuses on ignorance.
 
-OSS Intro.
-list several identified problems
-    foreach of those problems, list some causes/explanations, and possible solutions.
+# Proposal 1
 
-- PROBLEM: Making a living from donations doesn't work.
+## Educate the tech side, developers, leads, architects, CTOs...
 
-SOLUTION: Unless you're really famous or something, and probably a white priviledged male, chances of it happening are rather low (though it does happen!). We've seen this with videolan. In many cases, it doesn't matter how many millions of users you have, you can't rely on donations only to hope to pay a team of maintainers a salary every month. 
-Companies should be targetted for donations in priority, not the occasional hacker. I mean, sure that's great, but that's not sustainable or a reliable way or fair. Companies.
+I believe not enough people are aware of the many OSS maintainers struggles in the tech industry. Many SME/large corps likely never thought about contributing to OSS (one way or another). The solution could then be, more education.
 
-- PROBLEM: maintainers burn out
+How many universities teach classes about the dynamics of opensource? Probably not a lot.
 
-* SOLUTION: Encourage/educate better hygiene with regard to technology. Github (because that's the popular tool of the moment, I don't endorse them) is not doing a great job here, you get auto-subbed to issues quite often by default and notification management is poor. https://www.humanetech.com/take-control
+Where do people learn to code? C.S degrees, universities, The Internet, StackOverflow, GitHub, GitLab, whatever. These places, and others, could have a responsibility, in a way, to do this given they are the centerpoint for devs both juniors and seniors, to go to. Twitter is nice and all, but don't believe that your Twitter bubble is in _any_ way representative of the dozens (hundreds?) of millions of developers present in the world today. It is not.
 
-* SOLUTION: Software is provided as-is could be written somewhere when someone opens an issue
+The tech side needs to be made more aware of these issues so they can advocate for this inside _their_ company. They know their software dependencies and which libraries they could donate to, which they rely on **critically**, which they are thankful for, that does the heavy lifting for them, so they can focus on other things. 
 
-* SOLUTION: Provide a space for mentorship to happen. Yes that's more work for maintainers, but not only maintainer of a specific project can mentor junior. After some experience, I believe you learn lessons than can apply to most projects. Then plenty of developers could help mentor, not just busy maintainers.
+Additionally, people in tech are currently in a strong position for negociation with regard to their market demand.
 
-* SOLUTION: Provide a space for "passing the torch". 
-There should be a place that facilitates mentoring and giving ownership of your project to someone else. People's need change, work requirements and dependencies change. Time availability change. Interests evolve. There should be systems in place so that maintainers can give over their code (and deployment keys) to trusted new members, if they choose to. 
+_Make opensource a topic (or even a condition) in your next hiring interview (whether you are hiring or looking for a job) by demonstrating it is in the company's best interests to contribute._
 
-- PROBLEM: Millions of companies in the world critically rely on understaffed and underfunded (so, that's risky and unethical) opensource software without contributing a dime.
+# Proposal 2
 
-* SOLUTION: uh... educate people. How?
-** Educate the tech side, developers, leads, architects, CTOs...
-> Where to educate them: where people learn to code? C.S degrees, universities, The Internet, StackOverflow, GitHub, whatever. these places, and others, have a responsibility, in a way, to do this given they are the centerpoint for devs both junior and senior, to go to. Twitter is nice and all, but don't believe that your twitter bubble is in _any_ way representative of the dozens (hundreds?) of millions of developers in world today. It's not.
+## Educate the non-tech side, CEOs, CFOs and other people with company writing-check abilities
 
-> Why: they need to advocate for this inside the company. They know their software dependencies (most of the time) and which libraries they could donate, which they rely on critically, which they are thankful for, that does the heavy lifting for them, which they dont have to maintain themselves, so they can focus on other things. Tech people are currently in a strong position for negociation. Make opensource a topic (a condition?) in your next hiring interview (whether you are hiring or looking for a job).
+The discourse/dialog needs to be different here, because these people are not necessarily techies, so:
+- Make it clear to them what are the operational risks, and impacts, for their businesses. 
+- Explain the imbalance of the current situation.
+- Use analogies to try and describe what would happen to their businesses if a low-critical dependency of their code gets abandoned by the current OSS maintainer. Then, do this with a middle or highly critical dependency of their product.
+- Show how giving back will help alleviate some the risks of OSS abandonment happening (project ownership transfer system, global developer care and health).
+- Alternative operational ideas for action: give money, give time, give skills, give code, give documentation, give hardware, give recognition, give marketing, hire the maintainers directly.
 
-** Educate non tech side. CEOs, CFOs and other people with company writing-check abilities. The discourse/dialog needs to be different here, because these people are not necessarily techies, so.
-- Make clear what are the operational risk, and impacts, 
-- make clear of the imbalance of the current state, and ethics.
-- show what happens to their business if a low-critical dependency gets abandoned by their maintainer. show what happens to their business if a middle/high critical dependency gets abandoned by their maintainer.
-- Show how giving back will help alleviate the risks of that happening (project ownership transfer system, developer care and health).
-- Operational ideas for action: give money, give time, give skills, give code, give documentation, give hardware, give recognition, hire the maintainers.
+I believe most people in the tech industry could help with these various actions, in the way they choose, no matter their position. Education will allow change, though it will take time. But if you are wondering what you can do today to help fight this imbalance, I hope some of these ideas can be applicable to you and your company.
+
+Feel free to let me know what you think on [Twitter](https://twitter.com/martz2804).
