@@ -40,7 +40,7 @@ In many cases, it does not matter how many millions of users you have, you canno
 
 ## Proposal
 
-I believe companies, and not individuals, should be targetted for donations. Asking the occasional hacker to contribute financially hardly works (though it is great when it happens!). The imbalance comes from the silent majority of businesses relying on OSS for their products.
+I believe companies, and not individuals, should be targeted for donations. Asking the occasional hacker to contribute financially hardly works (though it is great when it happens!). The imbalance comes from the silent majority of businesses relying on OSS for their products.
 
 # Maintainers burn out
 
