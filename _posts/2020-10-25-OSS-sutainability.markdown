@@ -52,7 +52,7 @@ This one is tricky, because it relates to various interlinked and personal conce
 
 Tools are partly responsible for this. Github (because that's the popular tool of the moment) is not doing a great job here, you get auto-subbed to issues by default and notification management granularity could definitely be improved. The issues section can also be responsible for a large mental load, product design could step in here as well.
 
-This can all become overwhelming fast. For more info on this, see: https://www.humanetech.com/take-control
+This can all become overwhelming fast. For more info on this, see: [https://www.humanetech.com/take-control](https://www.humanetech.com/take-control)
 
 ## Proposal 2
 
