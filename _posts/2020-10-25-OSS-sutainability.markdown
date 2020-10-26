@@ -10,7 +10,7 @@ However, OSS is not a _perfect_ world.
 
 The topic of OSS sustainability has been discussed about more and more in the past few years. So many widely used libraries and programs are understaffed and underfunded, and many maintainers need help while the amount of their users just keeps growing.
 
-This post is more about trying to find solutions than explaning the current issues. If you are not familiar with the concept of "opensource sustainability", and would like to understand the context of the current situation, the impacts and imbalances, these links are a good start:
+This post is more about trying to find solutions than explaining the current issues. If you are not familiar with the concept of "opensource sustainability", and would like to understand the context of the current situation, the impacts and imbalances, these links are a good start:
 
 - [http://veridicalsystems.com/blog/of-money-responsibility-and-pride](http://veridicalsystems.com/blog/of-money-responsibility-and-pride/)
 - [https://andre.arko.net/2016/09/26/a-year-of-ruby-together](https://andre.arko.net/2016/09/26/a-year-of-ruby-together)
