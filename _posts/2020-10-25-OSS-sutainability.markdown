@@ -112,7 +112,7 @@ The discourse/dialog needs to be different here, because these people are not ne
 - Make it clear to them what are the operational risks, and impacts, for their businesses. 
 - Explain the imbalance of the current situation.
 - Use analogies to try and describe what would happen to their businesses if a low-critical dependency of their code gets abandoned by the current OSS maintainer. Then, do this with a middle or highly critical dependency of their product.
-- Show how giving back will help alleviate some the risks of OSS abandonment happening (project ownership transfer system, global developer care and health).
+- Show how giving back will help alleviate some of the risks of OSS abandonment happening (project ownership transfer system, global developer care and health).
 - Alternative operational ideas for action: give money, give time, give skills, give code, give documentation, give hardware, give recognition, give marketing, hire the maintainers directly.
 
 I believe most people in the tech industry could help with these various actions, in the way they choose, no matter their position. Education will allow change, though it will take time. But if you are wondering what you can do today to help fight this imbalance, I hope some of these ideas can be applicable to you and your company.
