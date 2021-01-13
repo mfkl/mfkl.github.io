@@ -1,5 +1,5 @@
 ---
-title:  "Milestone: Half a million downloads for VideoLAN packages on NuGet"
+title:  "Milestone: Half a million downloads for VideoLAN packages in the .NET ecosystem"
 date:   2021-01-13 11:10:40 +0700
 classes: wide
 ---
@@ -24,12 +24,6 @@ Today, we actively publish and maintain 15 NuGet packages, 6 of which  actually 
 - Xamarin.Forms
 - Uno Platform (UWP, Android, iOS)
 - Avalonia (Windows, macOS, Linux)
-
-# Multimedia is niche
-
-LibVLC and LibVLCSharp is and will remain a niche library, and that is OK. 
-
-By this I mean that its potential userbase in the .NET ecosystem will always be much lower than a testing or IoC library, since most .NET apps do not need to provide multimedia features. And those that do might not have demanding requirements that may justify taking LibVLC as a dependency for the multimedia playback feature.
 
 LibVLCSharp counts about 19 contributors, with most people doing one-off contributions and mainly 2 active maintainers ([Jérémy](https://github.com/jeremyVignelles) and myself). I'd like to thank each of them for their valuable OSS contributions!
 
