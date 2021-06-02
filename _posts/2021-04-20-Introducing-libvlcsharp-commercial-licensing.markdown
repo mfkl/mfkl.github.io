@@ -20,11 +20,13 @@ This is very much like the approach our friends at [Six Labors](https://sixlabor
 
 # Pricing
 
-Our initial pricing is a single plan set at **99$/year/developer**<sup>2</sup>. This is very competitive pricing considering the years of work that has already been put in LibVLCSharp (not to mention LibVLC), and the [additional guarantees](https://videolabs.io/solutions/libvlcsharp-commercial-license/) you will get for that small price:
+Our initial pricing is a single plan set at **99$/year per developer**<sup>2</sup> (including VAT).
+
+We may introduce additional plans in the future, depending on your feedback. This is very competitive pricing considering the years of work that have already been put in LibVLCSharp (not to mention LibVLC), and the [additional guarantees](https://videolabs.io/solutions/libvlcsharp-commercial-license/) you will get for that small price:
 
 - priority support,
 - priority bug fixes, feature requests and documentation improvements,
-- continuous update of the NuGet packages.
+- continuous updates of the current and future NuGet packages.
 
 If your company builds commercial products using [LibVLCSharp](https://code.videolan.org/videolan/LibVLCSharp), we strongly encourage you to [purchase](https://videolabs.io/solutions/libvlcsharp/) one (or several) LibVLCSharp Commercial Licenses. Doing so will help support the project's long term viability.
 
