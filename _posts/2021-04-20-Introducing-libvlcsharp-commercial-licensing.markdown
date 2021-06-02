@@ -2,6 +2,7 @@
 title:  "Introducing LibVLCSharp Commercial Licensing"
 date:   2021-06-01 11:10:40 +0700
 classes: wide
+permalink: libvlcsharp/introducing-commercial-licenses
 ---
 
 Today we are introducing a **Commercial License** for LibVLCSharp, the .NET SDK for the multimedia and cross-platform LibVLC framework.
