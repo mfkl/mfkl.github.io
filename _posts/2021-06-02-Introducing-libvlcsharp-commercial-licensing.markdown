@@ -23,7 +23,7 @@ This is very much like the approach our friends at [Six Labors](https://sixlabor
 
 # Pricing
 
-Our initial pricing is a single plan set at **99$/year per developer**<sup>2</sup> (including VAT).
+Our [initial pricing](https://videolabs.io/solutions/libvlcsharp) is a single plan set at **99$/year per developer**<sup>2</sup> (including VAT).
 
 We may introduce additional plans in the future, depending on your feedback. This is very competitive pricing considering the years of work that have already been put in LibVLCSharp (not to mention LibVLC), and the [additional guarantees](https://videolabs.io/solutions/libvlcsharp-commercial-license/) you will get for that small price:
 
