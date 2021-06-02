@@ -45,7 +45,7 @@
 
 
 
-  <meta property="article:published_time" content="2018-10-10T05:10:40+02:00">
+  <meta property="article:published_time" content="2018-10-10T10:10:40+07:00">
 
 
 
@@ -201,7 +201,7 @@
     
     
       <div class="author__bio" itemprop="description">
-        <p>.NET @ VideoLAN/Videolabs</p>
+        <p>.NET @ VideoLAN</p>
 
       </div>
     
@@ -339,7 +339,7 @@
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="How to record an HLS stream with LibVLCSharp and .NET Core">
     <meta itemprop="description" content="In this post, I will show you how to record an HTTP Live Streaming (HLS) stream using LibVLCSharp in a .NET Core CLI app on Windows.">
-    <meta itemprop="datePublished" content="2018-10-10T05:10:40+02:00">
+    <meta itemprop="datePublished" content="2018-10-10T10:10:40+07:00">
     
 
     <div class="page__inner-wrap">
@@ -386,9 +386,9 @@
 <span class="nt">&lt;/Project&gt;</span>
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">VideoLAN.LibVLC.Windows</code> is the <code class="highlighter-rouge">libvlc</code> (C/C++) library compiled for the Windows platform. More info at <a href="https://github.com/mfkl/libvlc-nuget">here</a>.</p>
+<p><code class="language-plaintext highlighter-rouge">VideoLAN.LibVLC.Windows</code> is the <code class="language-plaintext highlighter-rouge">libvlc</code> (C/C++) library compiled for the Windows platform. More info at <a href="https://github.com/mfkl/libvlc-nuget">here</a>.</p>
 
-<p><code class="highlighter-rouge">LibVLCSharp</code> are the .NET bindings that use the native <code class="highlighter-rouge">libvlc</code> library and expose a .NET friendly API. This <a href="https://github.com/videolan/libvlcsharp">readme</a> has additional details.</p>
+<p><code class="language-plaintext highlighter-rouge">LibVLCSharp</code> are the .NET bindings that use the native <code class="language-plaintext highlighter-rouge">libvlc</code> library and expose a .NET friendly API. This <a href="https://github.com/videolan/libvlcsharp">readme</a> has additional details.</p>
 
 <p>Now onto the actual code</p>
 
@@ -430,12 +430,12 @@
 </code></pre></div></div>
 
 <ol>
-  <li>First we load the <code class="highlighter-rouge">libvlc</code> dlls (included in the <code class="highlighter-rouge">VideoLAN.LibVLC.Windows</code> nuget package).</li>
-  <li>Then we create 3 LibVLCSharp objects: a <code class="highlighter-rouge">LibVLC</code>, a <code class="highlighter-rouge">MediaPlayer</code> and a <code class="highlighter-rouge">Media</code> (containing the URL of the HLS stream).</li>
-  <li>To get a better understanding of what is going on, we hook up the <code class="highlighter-rouge">libvlc</code> log output with the console.</li>
-  <li>We add <code class="highlighter-rouge">libvlc</code> CLI options to the media, such as an output path destination (<a href="https://wiki.videolan.org/VLC_command-line_help/">more info</a>)</li>
-  <li>At last, we start the process by calling <code class="highlighter-rouge">Play</code> on the <code class="highlighter-rouge">MediaPlayer</code>.</li>
-  <li>After a while, you will find a <code class="highlighter-rouge">record.ts</code> file located at <code class="highlighter-rouge">RecordHLS\bin\Debug\netcoreapp2.1</code>.</li>
+  <li>First we load the <code class="language-plaintext highlighter-rouge">libvlc</code> dlls (included in the <code class="language-plaintext highlighter-rouge">VideoLAN.LibVLC.Windows</code> nuget package).</li>
+  <li>Then we create 3 LibVLCSharp objects: a <code class="language-plaintext highlighter-rouge">LibVLC</code>, a <code class="language-plaintext highlighter-rouge">MediaPlayer</code> and a <code class="language-plaintext highlighter-rouge">Media</code> (containing the URL of the HLS stream).</li>
+  <li>To get a better understanding of what is going on, we hook up the <code class="language-plaintext highlighter-rouge">libvlc</code> log output with the console.</li>
+  <li>We add <code class="language-plaintext highlighter-rouge">libvlc</code> CLI options to the media, such as an output path destination (<a href="https://wiki.videolan.org/VLC_command-line_help/">more info</a>)</li>
+  <li>At last, we start the process by calling <code class="language-plaintext highlighter-rouge">Play</code> on the <code class="language-plaintext highlighter-rouge">MediaPlayer</code>.</li>
+  <li>After a while, you will find a <code class="language-plaintext highlighter-rouge">record.ts</code> file located at <code class="language-plaintext highlighter-rouge">RecordHLS\bin\Debug\netcoreapp2.1</code>.</li>
 </ol>
 
 <p>This sample is available on the <a href="https://code.videolan.org/mfkl/libvlcsharp-samples/tree/master/RecordHLS">VideoLAN GitLab</a></p>
@@ -449,7 +449,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-10-10T05:10:40+02:00">October 10, 2018</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-10-10T10:10:40+07:00">October 10, 2018</time></p>
         
       </footer>
 
@@ -496,7 +496,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/libvlc/2020/03/23/Torrents-and-multimedia-streaming.html" rel="permalink">Torrents and multimedia streaming with LibVLCSharp and MonoTorrent
+        <a href="/2021/06/01/Introducing-libvlcsharp-commercial-licensing.html" rel="permalink">Introducing LibVLCSharp Commercial Licensing
 </a>
       
     </h2>
@@ -506,11 +506,12 @@
 
 
 
-  5 minute read
+  1 minute read
 
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">This post explores possibilities of torrenting and streaming technologies in .NET by combining key features from several libraries to build a unique and fun ...</p>
+    <p class="archive__item-excerpt" itemprop="description">Today we are introducing a Commercial License for LibVLCSharp, the .NET SDK for the multimedia and cross-platform LibVLC framework.
+</p>
   </article>
 </div>
 
@@ -524,7 +525,64 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/libvlc/unity/2019/12/18/Introducing-LibVLCSharp-for-Unity.html" rel="permalink">Introducing LibVLCSharp for Unity3D
+        <a href="/2021/01/13/half-a-million-downloads.html" rel="permalink">Milestone: Half a million downloads for VideoLAN packages in the .NET ecosystem
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">The NuGet VideoLAN account just reached half a million downloads in the .NET ecosystem.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/10/25/OSS-sutainability.html" rel="permalink">On the psychology and dynamics of OSS: passion, burnout and (im)balance
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Opensource is quite a modern social concept. You get to interact with people about technology from anywhere in the world, make friends, and improve your skil...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/libvlc/2020/09/02/LibVLC-bindings-users-community-discord.html" rel="permalink">Calling all LibVLC bindings maintainers and users!
 </a>
       
     </h2>
@@ -538,68 +596,7 @@
 
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Today, we are announcing the initial release of VLC for Unity (Windows) on the Unity Store!
-
-
-    
-
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html" rel="permalink">MediaPlayerElement: Plug and play and crossplatform UI video control
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  3 minute read
-
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Apple and Google already provide MediaPlayer frameworks for iOS and Android developers, but they are quite limited compared to what VLC can do in terms of co...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/libvlc/crossplatform/xamarin/forms/2019/07/02/Crossplatform-local-network-browsing-and-media-playback.html" rel="permalink">Crossplatform local network browsing and media playback
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  2 minute read
-
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">One of the great features of libvlc is that it can play all sorts of network streams. This is possible thanks to a huge number of supported network protocols.
+    <p class="archive__item-excerpt" itemprop="description">Announcing the LibVLC Community Discord Server!
 </p>
   </article>
 </div>
@@ -657,7 +654,7 @@
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2020 Martin Finkel. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2021 Martin Finkel. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

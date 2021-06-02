@@ -45,7 +45,7 @@
 
 
 
-  <meta property="article:published_time" content="2020-03-23T05:10:40+01:00">
+  <meta property="article:published_time" content="2020-03-23T11:10:40+07:00">
 
 
 
@@ -201,7 +201,7 @@
     
     
       <div class="author__bio" itemprop="description">
-        <p>.NET @ VideoLAN/Videolabs</p>
+        <p>.NET @ VideoLAN</p>
 
       </div>
     
@@ -339,7 +339,7 @@
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Torrents and multimedia streaming with LibVLCSharp and MonoTorrent">
     <meta itemprop="description" content="This post explores possibilities of torrenting and streaming technologies in .NET by combining key features from several libraries to build a unique and fun CLI sample app. But first, some context.">
-    <meta itemprop="datePublished" content="2020-03-23T05:10:40+01:00">
+    <meta itemprop="datePublished" content="2020-03-23T11:10:40+07:00">
     
 
     <div class="page__inner-wrap">
@@ -392,7 +392,7 @@
     <p>The most popular BitTorrent protocol implementation is <a href="https://github.com/arvidn/libtorrent/">libtorrent</a>, written in C++. We will come back to it later in this blog post.</p>
   </li>
   <li>
-    <p>Currently maintained by <a href="https://github.com/alanmcgovern">Alan McGovern</a>, <a href="https://github.com/alanmcgovern/monotorrent">MonoTorrent</a> seems to be the obvious choice for .NET. Do note that it is not merely a binding over <code class="highlighter-rouge">libtorrent</code> but a complete C# implementation of the BitTorrent protocol.</p>
+    <p>Currently maintained by <a href="https://github.com/alanmcgovern">Alan McGovern</a>, <a href="https://github.com/alanmcgovern/monotorrent">MonoTorrent</a> seems to be the obvious choice for .NET. Do note that it is not merely a binding over <code class="language-plaintext highlighter-rouge">libtorrent</code> but a complete C# implementation of the BitTorrent protocol.</p>
   </li>
 </ul>
 
@@ -431,13 +431,13 @@
       <p>In other words - if you are streaming a video file you can seek to the middle of the file and MonoTorrent will immediately start downloading pieces from that point onwards…</p>
     </blockquote>
 
-    <p>It sounds like exactly what we need to get torrenting working smoothly with LibVLCSharp. With this API, we can feed a <code class="highlighter-rouge">.torrent</code> file to MonoTorrent and get back a .NET <code class="highlighter-rouge">Stream</code>.</p>
+    <p>It sounds like exactly what we need to get torrenting working smoothly with LibVLCSharp. With this API, we can feed a <code class="language-plaintext highlighter-rouge">.torrent</code> file to MonoTorrent and get back a .NET <code class="language-plaintext highlighter-rouge">Stream</code>.</p>
 
-    <p>This .NET <code class="highlighter-rouge">Stream</code> is representing the media content, which is being downloaded in real time from the BitTorrent network.</p>
+    <p>This .NET <code class="language-plaintext highlighter-rouge">Stream</code> is representing the media content, which is being downloaded in real time from the BitTorrent network.</p>
 
-    <p>On the LibVLC side, the <code class="highlighter-rouge">Media</code> type has a constructor which takes a .NET stream using the <a href="https://github.com/videolan/libvlcsharp/blob/3.x/LibVLCSharp/Shared/StreamMediaInput.cs">StreamMediaInput</a> type.</p>
+    <p>On the LibVLC side, the <code class="language-plaintext highlighter-rouge">Media</code> type has a constructor which takes a .NET stream using the <a href="https://github.com/videolan/libvlcsharp/blob/3.x/LibVLCSharp/Shared/StreamMediaInput.cs">StreamMediaInput</a> type.</p>
 
-    <p>With the .NET <code class="highlighter-rouge">Stream</code> from MonoTorrent, it is then possible to create a LibVLCSharp <code class="highlighter-rouge">Media</code> object and finally start the playback.</p>
+    <p>With the .NET <code class="language-plaintext highlighter-rouge">Stream</code> from MonoTorrent, it is then possible to create a LibVLCSharp <code class="language-plaintext highlighter-rouge">Media</code> object and finally start the playback.</p>
   </li>
 </ol>
 
@@ -457,7 +457,7 @@
 <ul>
   <li>By default, if running from a CLI app, the VLC engine will create a new Window that will be used for video output.</li>
   <li>We could use the crossplatform <a href="http://localhost:4000/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html">MediaElement</a> control and combine it to this.</li>
-  <li>Playing in any VLC app would also be possible by having this CLI app stream to the <code class="highlighter-rouge">localhost:port</code>, and play that stream in VLC.</li>
+  <li>Playing in any VLC app would also be possible by having this CLI app stream to the <code class="language-plaintext highlighter-rouge">localhost:port</code>, and play that stream in VLC.</li>
 </ul>
 
 <h4 id="remote">Remote</h4>
@@ -476,9 +476,9 @@
 
 <p><a href="https://github.com/mfkl/lvst">LVST</a> is designed to be a basic sample and focused on the torrenting feature, there are currently no playback controls.</p>
 
-<p>Just provide it with a <code class="highlighter-rouge">.torrent</code> file URL with <code class="highlighter-rouge">--torrent</code> and it will start to download and play it. Casting to the chromecast is as easy as giving it the <code class="highlighter-rouge">--cast</code> flag.</p>
+<p>Just provide it with a <code class="language-plaintext highlighter-rouge">.torrent</code> file URL with <code class="language-plaintext highlighter-rouge">--torrent</code> and it will start to download and play it. Casting to the chromecast is as easy as giving it the <code class="language-plaintext highlighter-rouge">--cast</code> flag.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.\LVST.exe --help
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.\LVST.exe --help
 LVST 1.0.0
 Copyright (C) 2020 LVST
 
@@ -505,7 +505,7 @@ Copyright (C) 2020 LVST
   <li>Integrate this with the MediaElement control.</li>
 </ul>
 
-<p>I am also considering making a <code class="highlighter-rouge">LibVLCSharp.MonoTorrent</code> package to make torrent support transparent in LibVLCSharp. Feel free to reach out if that is something you would like to see!</p>
+<p>I am also considering making a <code class="language-plaintext highlighter-rouge">LibVLCSharp.MonoTorrent</code> package to make torrent support transparent in LibVLCSharp. Feel free to reach out if that is something you would like to see!</p>
 
         
       </section>
@@ -516,7 +516,7 @@ Copyright (C) 2020 LVST
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-03-23T05:10:40+01:00">March 23, 2020</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-03-23T11:10:40+07:00">March 23, 2020</time></p>
         
       </footer>
 
@@ -538,7 +538,8 @@ Copyright (C) 2020 LVST
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/libvlc/2020/07/23/Gracefully-surfacing-asynchronous-C-APIs-to-.NET.html" class="pagination--pager" title="Gracefully surfacing asynchronous C APIs to .NET
+">Next</a>
     
   </nav>
 
@@ -562,7 +563,7 @@ Copyright (C) 2020 LVST
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/libvlc/unity/2019/12/18/Introducing-LibVLCSharp-for-Unity.html" rel="permalink">Introducing LibVLCSharp for Unity3D
+        <a href="/2021/06/01/Introducing-libvlcsharp-commercial-licensing.html" rel="permalink">Introducing LibVLCSharp Commercial Licensing
 </a>
       
     </h2>
@@ -572,15 +573,11 @@ Copyright (C) 2020 LVST
 
 
 
-  2 minute read
+  1 minute read
 
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Today, we are announcing the initial release of VLC for Unity (Windows) on the Unity Store!
-
-
-    
-
+    <p class="archive__item-excerpt" itemprop="description">Today we are introducing a Commercial License for LibVLCSharp, the .NET SDK for the multimedia and cross-platform LibVLC framework.
 </p>
   </article>
 </div>
@@ -595,7 +592,7 @@ Copyright (C) 2020 LVST
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html" rel="permalink">MediaPlayerElement: Plug and play and crossplatform UI video control
+        <a href="/2021/01/13/half-a-million-downloads.html" rel="permalink">Milestone: Half a million downloads for VideoLAN packages in the .NET ecosystem
 </a>
       
     </h2>
@@ -605,39 +602,11 @@ Copyright (C) 2020 LVST
 
 
 
-  3 minute read
+  1 minute read
 
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Apple and Google already provide MediaPlayer frameworks for iOS and Android developers, but they are quite limited compared to what VLC can do in terms of co...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/libvlc/crossplatform/xamarin/forms/2019/07/02/Crossplatform-local-network-browsing-and-media-playback.html" rel="permalink">Crossplatform local network browsing and media playback
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  2 minute read
-
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">One of the great features of libvlc is that it can play all sorts of network streams. This is possible thanks to a huge number of supported network protocols.
+    <p class="archive__item-excerpt" itemprop="description">The NuGet VideoLAN account just reached half a million downloads in the .NET ecosystem.
 </p>
   </article>
 </div>
@@ -652,7 +621,35 @@ Copyright (C) 2020 LVST
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/libvlc/crossplatform/xamarin/forms/release/2019/05/13/LibVLCSharp-goes-stable.html" rel="permalink">LibVLCSharp 3.0: The first stable release of VideoLAN’s crossplatform .NET binding for LibVLC
+        <a href="/2020/10/25/OSS-sutainability.html" rel="permalink">On the psychology and dynamics of OSS: passion, burnout and (im)balance
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Opensource is quite a modern social concept. You get to interact with people about technology from anywhere in the world, make friends, and improve your skil...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/libvlc/2020/09/02/LibVLC-bindings-users-community-discord.html" rel="permalink">Calling all LibVLC bindings maintainers and users!
 </a>
       
     </h2>
@@ -666,7 +663,7 @@ Copyright (C) 2020 LVST
 
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">LibVLCSharp is the first official VideoLAN .NET binding for the multimedia LibVLC library that is fully cross-platform. It has been downloaded over 10K times.
+    <p class="archive__item-excerpt" itemprop="description">Announcing the LibVLC Community Discord Server!
 </p>
   </article>
 </div>
@@ -724,7 +721,7 @@ Copyright (C) 2020 LVST
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2020 Martin Finkel. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2021 Martin Finkel. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

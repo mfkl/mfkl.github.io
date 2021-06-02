@@ -45,7 +45,7 @@
 
 
 
-  <meta property="article:published_time" content="2019-07-02T06:10:40+02:00">
+  <meta property="article:published_time" content="2019-07-02T11:10:40+07:00">
 
 
 
@@ -201,7 +201,7 @@
     
     
       <div class="author__bio" itemprop="description">
-        <p>.NET @ VideoLAN/Videolabs</p>
+        <p>.NET @ VideoLAN</p>
 
       </div>
     
@@ -339,7 +339,7 @@
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Crossplatform local network browsing and media playback">
     <meta itemprop="description" content="One of the great features of libvlc is that it can play all sorts of network streams. This is possible thanks to a huge number of supported network protocols.">
-    <meta itemprop="datePublished" content="2019-07-02T06:10:40+02:00">
+    <meta itemprop="datePublished" content="2019-07-02T11:10:40+07:00">
     
 
     <div class="page__inner-wrap">
@@ -376,9 +376,9 @@
 
 <h1 id="show-me-the-code">Show me the code</h1>
 
-<p>I used the <code class="highlighter-rouge">MasterDetail</code> Xamarin.Forms template to build this sample, since it has the initial navigation setup built-in.</p>
+<p>I used the <code class="language-plaintext highlighter-rouge">MasterDetail</code> Xamarin.Forms template to build this sample, since it has the initial navigation setup built-in.</p>
 
-<p>To tell <code class="highlighter-rouge">libvlc</code> to start looking for local network shares, you need to create and start the <a href="https://code.videolan.org/videolan/LibVLCSharp/blob/master/LibVLCSharp/Shared/MediaDiscoverer.cs">MediaDiscoverer</a> objects.</p>
+<p>To tell <code class="language-plaintext highlighter-rouge">libvlc</code> to start looking for local network shares, you need to create and start the <a href="https://code.videolan.org/videolan/LibVLCSharp/blob/master/LibVLCSharp/Shared/MediaDiscoverer.cs">MediaDiscoverer</a> objects.</p>
 
 <blockquote>
   <p>Do not confuse it with the <a href="https://code.videolan.org/videolan/LibVLCSharp/blob/master/LibVLCSharp/Shared/RendererDiscoverer.cs">RendererDiscoverer</a> type, which is used for finding remote <em>renderers</em> such as Chromecasts.</p>
@@ -400,7 +400,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">ItemAdded</code> event provides us with a newly found <code class="highlighter-rouge">Media</code> which can be a new share, or a directory/file within a share we are currently browsing. I created a simple model class for the <code class="highlighter-rouge">ListView</code>.</p>
+<p>The <code class="language-plaintext highlighter-rouge">ItemAdded</code> event provides us with a newly found <code class="language-plaintext highlighter-rouge">Media</code> which can be a new share, or a directory/file within a share we are currently browsing. I created a simple model class for the <code class="language-plaintext highlighter-rouge">ListView</code>.</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="nf">Item</span><span class="p">(</span><span class="n">Media</span> <span class="n">media</span><span class="p">)</span>
 <span class="p">{</span>
@@ -411,7 +411,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>This is what the main <code class="highlighter-rouge">ListView</code> code looks like. I added databinding for a few things, such as loading new items with pull to refresh gestures and names of directories and files.</p>
+<p>This is what the main <code class="language-plaintext highlighter-rouge">ListView</code> code looks like. I added databinding for a few things, such as loading new items with pull to refresh gestures and names of directories and files.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;StackLayout&gt;</span>
     <span class="nt">&lt;ListView</span> <span class="na">x:Name=</span><span class="s">"ItemsListView"</span>
@@ -456,7 +456,7 @@
   <li>A file. It can be parsed and played by the libvlc engine.</li>
 </ul>
 
-<p>Once the desired media has been found, it can be played transparently by using a simple page with a <code class="highlighter-rouge">VideoView</code> element and setting the <code class="highlighter-rouge">Media</code> on the <code class="highlighter-rouge">MediaPlayer</code> as usual.</p>
+<p>Once the desired media has been found, it can be played transparently by using a simple page with a <code class="language-plaintext highlighter-rouge">VideoView</code> element and setting the <code class="language-plaintext highlighter-rouge">Media</code> on the <code class="language-plaintext highlighter-rouge">MediaPlayer</code> as usual.</p>
 
 <p align="center">
 <video width="640" height="360" controls="">
@@ -481,7 +481,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-07-02T06:10:40+02:00">July 2, 2019</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-07-02T11:10:40+07:00">July 2, 2019</time></p>
         
       </footer>
 
@@ -528,7 +528,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/libvlc/2020/03/23/Torrents-and-multimedia-streaming.html" rel="permalink">Torrents and multimedia streaming with LibVLCSharp and MonoTorrent
+        <a href="/2021/06/01/Introducing-libvlcsharp-commercial-licensing.html" rel="permalink">Introducing LibVLCSharp Commercial Licensing
 </a>
       
     </h2>
@@ -538,11 +538,12 @@
 
 
 
-  5 minute read
+  1 minute read
 
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">This post explores possibilities of torrenting and streaming technologies in .NET by combining key features from several libraries to build a unique and fun ...</p>
+    <p class="archive__item-excerpt" itemprop="description">Today we are introducing a Commercial License for LibVLCSharp, the .NET SDK for the multimedia and cross-platform LibVLC framework.
+</p>
   </article>
 </div>
 
@@ -556,7 +557,64 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/libvlc/unity/2019/12/18/Introducing-LibVLCSharp-for-Unity.html" rel="permalink">Introducing LibVLCSharp for Unity3D
+        <a href="/2021/01/13/half-a-million-downloads.html" rel="permalink">Milestone: Half a million downloads for VideoLAN packages in the .NET ecosystem
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">The NuGet VideoLAN account just reached half a million downloads in the .NET ecosystem.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2020/10/25/OSS-sutainability.html" rel="permalink">On the psychology and dynamics of OSS: passion, burnout and (im)balance
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Opensource is quite a modern social concept. You get to interact with people about technology from anywhere in the world, make friends, and improve your skil...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/libvlc/2020/09/02/LibVLC-bindings-users-community-discord.html" rel="permalink">Calling all LibVLC bindings maintainers and users!
 </a>
       
     </h2>
@@ -570,68 +628,7 @@
 
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Today, we are announcing the initial release of VLC for Unity (Windows) on the Unity Store!
-
-
-    
-
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/libvlc/crossplatform/xamarin/forms/2019/08/13/MediaPlayerElement-Plug-and-play-LibVLCSharp-UI-video-control.html" rel="permalink">MediaPlayerElement: Plug and play and crossplatform UI video control
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  3 minute read
-
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Apple and Google already provide MediaPlayer frameworks for iOS and Android developers, but they are quite limited compared to what VLC can do in terms of co...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/libvlc/crossplatform/xamarin/forms/release/2019/05/13/LibVLCSharp-goes-stable.html" rel="permalink">LibVLCSharp 3.0: The first stable release of VideoLAN’s crossplatform .NET binding for LibVLC
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  2 minute read
-
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">LibVLCSharp is the first official VideoLAN .NET binding for the multimedia LibVLC library that is fully cross-platform. It has been downloaded over 10K times.
+    <p class="archive__item-excerpt" itemprop="description">Announcing the LibVLC Community Discord Server!
 </p>
   </article>
 </div>
@@ -689,7 +686,7 @@
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2020 Martin Finkel. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2021 Martin Finkel. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
