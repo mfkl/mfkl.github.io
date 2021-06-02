@@ -10,11 +10,13 @@ Today we are introducing a **Commercial License** for LibVLCSharp, the .NET SDK 
 
 [I have written before](https://mfkl.github.io/2020/10/25/OSS-sutainability.html) on the topic of open-source sustainability. This is a subject I find personally very interesting and solutions to these problems can prove tricky.
 
-Donations just do not work. And for developer tools, another approach seems particularly fitting: **Dual licensing**.
+Donations just do not work.
+
+And for developer tools, another approach seems particularly fitting: **Dual licensing**.
 
 # Dual licensing
 
-LibVLCSharp packages (and LibVLC) will remain licensed under the LGPL2.1 license. However, a new Commercial License is now available for commercial .NET users.
+LibVLCSharp packages (and LibVLC) will remain licensed under the _LGPL2.1 license_. However, an additional _Commercial License_ is now available for commercial .NET users.
 
 This is very much like the approach our friends at [Six Labors](https://sixlabors.com/pricing/), makers of [ImageSharp](https://github.com/SixLabors/ImageSharp)<sup>1</sup>, have chosen, and I believe it strikes a good balance between keeping an open and accessible license for individual developers, and inviting companies who critically rely on open-source projects to contribute financially.
 
