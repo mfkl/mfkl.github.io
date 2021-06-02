@@ -20,3 +20,5 @@ vlc:
       - title: "VLC for Unity"
         text: "Find the Unity assets here"
         url: https://assetstore.unity.com/publishers/39987
+      - title: "LibVLCSharp Commercial Licenses"
+        url: https://videolabs.io/solutions/libvlcsharp
