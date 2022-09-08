@@ -1,22 +1,11 @@
 # main links
 main:
-  # - title: "NEW: LibVLCSharp - The book"
-  #   url: https://www.libvlcsharpthebook.com/preview
-  # - title: "About"
-  #   url: https://mmistakes.github.io/minimal-mistakes/about/
-  # - title: "Sample Posts"
-  #   url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
-  # - title: "Sitemap"
-  #   url: /sitemap/
-
 vlc:
   - title: "LibVLCSharp"
     children:
-      - title: "The book"
-        text: "Subscribe for discount and release info"
-        url: https://libvlcsharpthebook.com/preview
+      - title: "The Good Parts of LibVLC (ebook)"
+        text: "Buy the LibVLC ebook"
+        url: https://mfkl.gumroad.com/l/libvlc-good-parts
       - title: "VLC for Unity"
         text: "Find the Unity assets here"
         url: https://assetstore.unity.com/publishers/39987
