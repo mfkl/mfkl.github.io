@@ -39,8 +39,6 @@ In your C# files:
 +using LibVLCSharp.Platforms.Windows;
 ```
 
-This namespace change was necessary since we could not combine both UWP and WinUI for the same VideoView that we maintain, due to XAML design limitations. We believe keeping the UWP name for the WinUI integration and apps would have been confusing for users.
-
 This should be quick and as painless as possible to fix as you upgrade to LibVLCSharp 3.7.0 in your UWP applications. The minor version of LibVLCSharp is bumped according to our documented [versioning strategy](https://code.videolan.org/videolan/LibVLCSharp/-/blob/master/docs/versioning.md).
 
 ## LibVLC build type
