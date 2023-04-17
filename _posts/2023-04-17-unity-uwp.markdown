@@ -1,0 +1,52 @@
+---
+title:  "Introducing VLC for Unity - UWP Edition"
+date:   2023-04-17 11:10:40 +0700
+classes: wide
+
+---
+
+Today, we are announcing the initial release of [VLC for Unity (UWP)](https://assetstore.unity.com/packages/tools/video/vlc-for-unity-uwp-246153) on the Unity Store!
+
+This Unity plugin allows you to use a LibVLC-powered video player in your Unity-based UWP apps and games. Whether you need to support a rare video format, live streaming, HLS, RTSP or play a 4K video in your latest production, we got you covered. Feel free to [give it a try](https://videolabs.io/solutions/vlc-unity-trial.unitypackage)!
+
+## All LibVLC features available in your Unity game
+
+Given that this plugin is using [LibVLCSharp](https://code.videolan.org/videolan/LibVLCSharp) (which uses LibVLC), it exposes more or less the [same feature set](https://code.videolan.org/videolan/LibVLCSharp#features) and same codecs support than VLC, such as:
+
+- Play every media file formats, every codec and every streaming protocols
+- Run on every platform, from desktop (Windows, Linux, Mac) to mobile (Android, iOS) and TVs
+- Hardware and efficient decoding on every platform, up to 8K
+- Network browsing for distant filesystems (SMB, FTP, SFTP, NFS...) and servers (UPnP, DLNA)
+- Playback of Audio CD, DVD and Bluray with menu navigation
+- Support for HDR, including tonemapping for SDR streams
+- Audio passthrough with SPDIF and HDMI, including for Audio HD codecs, like DD+, TrueHD or DTS-HD
+- Support for video and audio filters
+- Support for 360 video and 3D audio playback, including Ambisonics
+- Able to cast and stream to distant renderers, like Chromecast and UPnP renderers.
+
+And more!
+
+## Hardware-accelerated video playback in your UWP Unity apps and games
+
+The 4.0 development version of LibVLC provides a powerful API which allows to perform custom rendering yet retaining hardware accelerated decoding.
+
+In the context of Unity, this means using VLC for Unity allows you to use video frames as GPU textures in your Unity games. For UWP, this solution is based on Direct3D11.
+
+This is as simple to use for you as writing
+
+```csharp
+MediaPlayer.GetTexture(out texture);
+```
+
+and uploading it to Unity for post-processing in your game scene.
+
+The CPU architectures supported on UWP by VLC Unity are as follows:
+
+- **arm64-v8a**,
+- **x86_64**.
+
+_Xbox and Hololens devices_, in addition to regular Windows 10/11 desktop devices are therefore supported. This is the 3rd platform supported by VLC for Unity, in addition to [Windows Classic](https://assetstore.unity.com/packages/tools/video/vlc-for-unity-windows-133979) and [Android](https://assetstore.unity.com/packages/tools/video/vlc-for-unity-android-213786).
+
+Feel free to let me know what you think on [Twitter](https://twitter.com/martz2804).
+
+#### [Download the Free Trial version](https://videolabs.io/solutions)
