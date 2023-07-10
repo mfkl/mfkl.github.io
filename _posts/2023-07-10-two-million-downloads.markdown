@@ -120,8 +120,10 @@ The Discord server has grown steadily to **1200+ members** and it is a place whe
 
 When someone has a cool use case or sample they want to share with the community, they can post in the _showcase_ channel on the LibVLC Discord. For example, that is how I learned about the existence of the [VLC support in Minecraft](https://github.com/MinecraftMediaLibrary/EzMediaCore), using the awesome [VLCJ bindings](https://github.com/caprica/vlcj) from [Caprica](https://github.com/caprica).
 
-<video width="640" height="360" src="https://user-images.githubusercontent.com/40838203/132433665-a675fc35-e31f-4044-a960-ce46a8fb7df5.mp4" controls="controls">
-</video>
+<p align="center">
+    <video width="640" height="360" src="https://user-images.githubusercontent.com/40838203/132433665-a675fc35-e31f-4044-a960-ce46a8fb7df5.mp4" controls="controls">
+    </video>
+</p>
 
 ## Zig
 
