@@ -98,7 +98,7 @@ The feedback we have received so far is great: the video decoding performance is
 
 While we initially released a [LibVLCSharp / Uno integration](https://platform.uno/blog/vlc-windows-lamp-now-supported-uno-platform) back in 2019, it has not been updated for a while to keep up with the latest Uno releases and accompanying API changes. 
 
-This may all change soon, now that [Uno decided to use LibVLC for their Linux mediaplayer support](https://platform.uno/blog/4-9-release-media-player-element-on-mobile-web-linux-webview2-support/).
+This may all change soon, now that [Uno decided to use LibVLC for their Linux mediaplayer support](https://platform.uno/blog/new-release-media-player-element-on-mobile-web-linux-webview2-support).
 
 We are looking forward to work together to improve the developer experience for .NET developers in the multimedia space across all platforms that Uno and VLC support.
 
