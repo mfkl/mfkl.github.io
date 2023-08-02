@@ -23,15 +23,15 @@ This is very much like the approach our friends at [Six Labors](https://sixlabor
 
 # Pricing
 
-Our [initial pricing](https://videolabs.io/solutions/libvlcsharp) is a single plan set at **99$/year per developer**<sup>2</sup> (including VAT).
+Our [initial pricing](https://videolabs.io/products/libvlcsharp) is a single plan set at **99$/year per developer**<sup>2</sup> (including VAT).
 
-We may introduce additional plans in the future, depending on your feedback. This is very competitive pricing considering the years of work that have already been put in LibVLCSharp (not to mention LibVLC), and the [additional guarantees](https://videolabs.io/solutions/libvlcsharp-commercial-license/) you will get for that small price:
+We may introduce additional plans in the future, depending on your feedback. This is very competitive pricing considering the years of work that have already been put in LibVLCSharp (not to mention LibVLC), and the [additional guarantees](https://videolabs.io/products/libvlcsharp-commercial-license/) you will get for that small price:
 
 - priority support,
 - priority bug fixes, feature requests and documentation improvements,
 - continuous updates of the current and future NuGet packages.
 
-If your company builds commercial products using [LibVLCSharp](https://code.videolan.org/videolan/LibVLCSharp), we strongly encourage you to [purchase](https://videolabs.io/solutions/libvlcsharp/) one (or several) LibVLCSharp Commercial Licenses. Doing so will help support the project's long term viability.
+If your company builds commercial products using [LibVLCSharp](https://code.videolan.org/videolan/LibVLCSharp), we strongly encourage you to [purchase](https://videolabs.io/products/libvlcsharp/) one (or several) LibVLCSharp Commercial Licenses. Doing so will help support the project's long term viability.
 
 <sup>1</sup> Btw, we have a nice and short [LibVLCSharp/ImageSharp code sample](https://code.videolan.org/mfkl/libvlcsharp-samples/-/blob/master/PreviewThumbnailExtractor/Program.cs)!
 
