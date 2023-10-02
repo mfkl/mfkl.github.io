@@ -83,12 +83,6 @@ social:
   name                   : # If the user or organization name differs from the site's name
   links:
     - "https://twitter.com/martz2804"
-# Analytics
-analytics:
-  provider               : "google-gtag" # false (default), "google", "google-universal", "custom"
-  google:
-    tracking_id          : "UA-162790981-1"
-    anonymize_ip         : # true, false (default)
 
 
 # Site Author
