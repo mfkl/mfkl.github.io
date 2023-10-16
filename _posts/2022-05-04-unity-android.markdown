@@ -6,7 +6,7 @@ youtubeId: aF4EMISZf34
 
 ---
 
-Today, we are announcing the initial release of [VLC for Unity (Android)](https://assetstore.unity.com/packages/tools/video/vlc-for-unity-android-213786) on the Unity Store!
+Today, we are announcing the initial release of [VLC for Unity (Android)](https://videolabs.io/store/unity) on the Videolabs Store!
 
 <p align="center">
   <img src="/assets/unity-courtyard.png"/>
@@ -59,7 +59,7 @@ The CPU architectures supported on Android by VLC Unity are as follows:
 
 ## New Unity demo scenes in the VLC for Unity asset
 
-We have recently added several new Unity scenes into the VLC asset. These are shipped with the VLC Unity asset from the Unity Store. They provide an efficient way to get started quickly and showcase real use case scenarios for your apps and games.
+We have recently added several new Unity scenes into the VLC asset. These are shipped with the VLC Unity asset from the Videolabs Store. They provide an efficient way to get started quickly and showcase real use case scenarios for your apps and games.
 
 <img width="100%" src="/assets/3d-scene-unity.png">
 

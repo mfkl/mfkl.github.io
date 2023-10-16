@@ -5,7 +5,7 @@ date:   2019-12-18 11:10:40 +0700
 categories: libvlc unity
 classes: wide
 ---
-### Today, we are announcing the initial release of [VLC for Unity (Windows)](https://assetstore.unity.com/packages/tools/video/vlc-for-unity-windows-133979) on the Unity Store!
+### Today, we are announcing the initial release of [VLC for Unity (Windows)](https://videolabs.io/store/unity) on the Videolabs Store!
 <br/>
 <p align="center">
     <img src="/assets/unity-cover-image.png"/>
@@ -14,7 +14,7 @@ classes: wide
 This Unity plugin allows you to use a LibVLC-powered video player in your games and Unity apps. Whether you need to support a strange format, live streaming or play a 4K video in your latest production, we got you covered.
 
 ## Commercial support
-While this Unity plugin is [opensource](https://code.videolan.org/videolan/vlc-unity/), its Unity Store price is **100USD**.
+While this Unity plugin is [opensource](https://code.videolan.org/videolan/vlc-unity/), its Videolabs Store price is **100USD**.
 
 This price is intended to help sponsor the development and the commercial support of this Unity plugin by [Videolabs](https://videolabs.io), the main commercial contributor to the VLC apps.
 
@@ -95,5 +95,5 @@ We currently have a prototype working on Android with OpenGL ES.
 #### [Download the Free Trial version](https://videolabs.io/#unity)
 
 <p align="center">
-    <a href="https://assetstore.unity.com/packages/tools/video/vlc-for-unity-windows-133979"><img src="/assets/unity-logo.png"/></a>
+    <a href="https://videolabs.io/store/unity"><img src="/assets/unity-logo.png"/></a>
 </p>

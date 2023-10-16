@@ -88,11 +88,11 @@ bool libvlc_video_set_output_callbacks( libvlc_media_player_t *mp,
 
 ## Unity
 
-We recently shipped support for the [UWP platform in VLC Unity](https://mfkl.github.io/2023/04/17/unity-uwp.html), enabling the use of LibVLCSharp and LibVLC in Microsoft HoloLens devices, desktop and Xbox platforms, in addition to the existing [Android](https://assetstore.unity.com/packages/tools/video/vlc-for-unity-android-213786) and [Windows](https://assetstore.unity.com/packages/tools/video/vlc-for-unity-windows-133979) classic targets.
+We recently shipped support for the [UWP platform in VLC Unity](https://mfkl.github.io/2023/04/17/unity-uwp.html), enabling the use of LibVLCSharp and LibVLC in Microsoft HoloLens devices, desktop and Xbox platforms, in addition to the existing [Android](https://videolabs.io/store/unity) and [Windows](https://videolabs.io/store/unity) classic targets.
 
 As we are finalizing support for VLC Unity on iOS and macOS, we will then focus on general developer experience improvements as well as documentation efforts to solidify the Unity integration.
 
-The feedback we have received so far is great: the video decoding performance is unmatched and VLC Unity is one of the most capable and advanced media player asset currently available on the Unity Store in terms of features.
+The feedback we have received so far is great: the video decoding performance is unmatched and VLC Unity is one of the most capable and advanced media player asset currently available on the Videolabs Store in terms of features.
 
 ## Uno Platform
 

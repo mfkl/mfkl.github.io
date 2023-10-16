@@ -5,7 +5,7 @@ classes: wide
 
 ---
 
-Today, we are announcing the initial release of [VLC for Unity (UWP)](https://assetstore.unity.com/packages/tools/video/vlc-for-unity-uwp-246153) on the Unity Store!
+Today, we are announcing the initial release of [VLC for Unity (UWP)](https://videolabs.io/store/unity) on the Videolabs Store!
 
 This Unity plugin allows you to use a LibVLC-powered video player in your Unity-based UWP apps and games. Whether you need to support a rare video format, live streaming, HLS, RTSP or play a 4K video in your latest production, we got you covered. Feel free to [give it a try](https://videolabs.io/solutions/vlc-unity-trial.unitypackage)!
 
@@ -45,7 +45,7 @@ The CPU architectures supported on UWP by VLC Unity are as follows:
 - **arm64-v8a**,
 - **x86_64**.
 
-_Xbox and Hololens devices_, in addition to regular Windows 10/11 desktop devices are therefore supported. This is the 3rd platform supported by VLC for Unity, in addition to [Windows Classic](https://assetstore.unity.com/packages/tools/video/vlc-for-unity-windows-133979) and [Android](https://assetstore.unity.com/packages/tools/video/vlc-for-unity-android-213786).
+_Xbox and Hololens devices_, in addition to regular Windows 10/11 desktop devices are therefore supported. This is the 3rd platform supported by VLC for Unity, in addition to [Windows Classic](https://videolabs.io/store/unity) and [Android](https://videolabs.io/store/unity).
 
 Feel free to let me know what you think on [Twitter](https://twitter.com/martz2804).
 
