@@ -19,7 +19,9 @@ Since the start, we have had many users downloading the assets from the Unity St
 
 This all changed at the end of the summer 2023 when Unity emailed us the following:
 
-> The packages "VLC for Unity (Android)", "VLC for Unity (UWP)", "VLC for Unity (Windows)" have been deprecated. We have received a report that these packages have dependencies that are licensed under LGPL, which is in violation of section 5.10.4 of the [Provider agreement](https://unity.com/legal/provider). Based on our investigation, these packages will not be reinstated onto the Asset Store.
+<p align="center">
+    <img src="/assets/unity-store-email.png"/>
+</p>
 
 And just like this, our [publisher account was instantly banned](https://assetstore.unity.com/publishers/39987).
 
