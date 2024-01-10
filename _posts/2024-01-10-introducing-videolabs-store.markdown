@@ -31,7 +31,7 @@ It gets better... Unity itself, both the Editor and the runtime (which means _yo
 
 So Unity gets to use and benefit from LGPL open-source libraries, games built with Unity depend on LGPL code by default (hello glibc!), but publishers and Unity users are not allowed to do so through the Unity Store?
 
-# Introducing the Videolabs Store
+# Introducing the [Videolabs Store](https://videolabs.io/store)
 
 Numerous companies make use of the LibVLC SDK and other related technologies (like FFmpeg). 
 
@@ -40,17 +40,19 @@ Sometimes they will run into issues or request a new feature and while the commu
 It is in the best interest of both open-source project maintainers and commercial consumers to have a clear products and services offering for a given project, and that is what we have created with the [Videolabs Store](https://videolabs.io/store) for both LibVLC and FFmpeg.
 
 <p align="center">
-    <img src="/assets/vlabs-store-1.png"/>
+    <a href="https://videolabs.io/store"><img src="/assets/vlabs-store-1.png"/></a>
 </p>
 
 If you are a company requiring multimedia products or consulting for your own projects, this store will be of interest to you.
 
 ### Flexible multimedia consulting packages
 
-The Videolabs team is composed of VLC and FFmpeg experts in most protocols, formats and platforms. If you are using or planning to use LibVLC or FFmpeg in your project and need help, whether it be custom builds, bug fixes, SDK integration or simply answers to your questions for your specific needs, these packages are for you!
+The Videolabs team is composed of VLC and FFmpeg experts in most protocols, formats and platforms.
+
+If you are using or planning to use LibVLC or FFmpeg in your project and need help, whether it be custom builds, bug fixes, SDK integration or simply answers to your questions for your specific needs, these packages are for you!
 
 <p align="center">
-    <img src="/assets/vlabs-store-2.png"/>
+    <a href="https://videolabs.io/store"><img src="/assets/vlabs-store-2.png"/></a>
 </p>
 
 We have created 3 multimedia consulting packages: 3 hours, 10 hours and 24 hours. They can be purchased for a one-time service or a monthly subscription.
@@ -59,10 +61,10 @@ No matter which OS platform or toolkit you are building with, we can help.
 
 ### Other products
 
-The [LibVLCSharp commercial license](https://videolabs.io/store/libvlcsharp/) and the [LibVLC ebook](https://mfkl.gumroad.com/l/libvlc-good-parts) can also be found in the Videolabs Store, as well as other upcoming products such as Kyber, our new ultra low latency game/desktop streaming and remote control SDK, and more game engine integration such as Unreal. 
+The [LibVLCSharp commercial license](https://videolabs.io/store/libvlcsharp/) and the [LibVLC ebook](https://mfkl.gumroad.com/l/libvlc-good-parts) can also be found in the [Videolabs Store](https://videolabs.io/store), as well as other upcoming products such as Kyber, our new ultra low latency game/desktop streaming and remote control SDK, and more game engine integration such as Unreal. 
 
 The [VLC Unity integration](https://videolabs.io/store/unity/) can of course also be purchased from our Store. Stay tuned for more Unity platforms support coming later this month!
 
 <p align="center">
-    <img src="/assets/vlabs-store-3.png"/>
+    <a href="https://videolabs.io/store"><img src="/assets/vlabs-store-3.png"/></a>
 </p>
