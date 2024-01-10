@@ -4,7 +4,7 @@ date:   2024-01-10 11:10:40 +0700
 classes: wide
 ---
 
-# The VLC Unity integration banned from the Unity Store
+# VLC for Unity integration
 
 For the readers unaware, we started distributing binaries on the Unity Store for the open-source [VLC for Unity](https://code.videolan.org/videolan/vlc-unity) integration back in December 2019.
 
@@ -14,6 +14,8 @@ Since the start, we have had many customers downloading the assets from the Unit
 - Windows,
 - UWP,
 - Android.
+
+# Unity Store ban
 
 This all changed at the end of the summer 2023 when Unity emailed us the following:
 
@@ -37,7 +39,9 @@ Sometimes they will run into issues or request a new feature and while the commu
 
 It is in the best interest of both open-source project maintainers and commercial consumers to have a clear products and services offering for a given project, and that is what we have created with the [Videolabs Store](https://videolabs.io/store) for both LibVLC and FFmpeg.
 
->>> Store header picture
+<p align="center">
+    <img src="/assets/vlabs-store-1.png"/>
+</p>
 
 If you are a company requiring multimedia products or consulting for your own projects, this store will be of interest to you.
 
@@ -45,7 +49,9 @@ If you are a company requiring multimedia products or consulting for your own pr
 
 The Videolabs team is composed of VLC and FFmpeg experts in most protocols, formats and platforms. If you are using or planning to use LibVLC or FFmpeg in your project and need help, whether it be custom builds, bug fixes, SDK integration or simply answers to your questions for your specific needs, these packages are for you!
 
->>> Store consulting picture
+<p align="center">
+    <img src="/assets/vlabs-store-2.png"/>
+</p>
 
 We have created 3 multimedia consulting packages: 3 hours, 10 hours and 24 hours. They can be purchased for a one-time service or a monthly subscription.
 
@@ -56,3 +62,7 @@ No matter which OS platform or toolkit you are building with, we can help.
 The [LibVLCSharp commercial license](https://videolabs.io/store/libvlcsharp/) and the [LibVLC ebook](https://mfkl.gumroad.com/l/libvlc-good-parts) can also be found in the Videolabs Store, as well as other upcoming products such as Kyber, our new ultra low latency game/desktop streaming and remote control SDK, and more game engine integration such as Unreal. 
 
 The [VLC Unity integration](https://videolabs.io/store/unity/) can of course also be purchased from our Store. Stay tuned for more Unity platforms support coming later this month!
+
+<p align="center">
+    <img src="/assets/vlabs-store-3.png"/>
+</p>
