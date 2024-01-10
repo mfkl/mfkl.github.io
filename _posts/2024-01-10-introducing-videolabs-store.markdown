@@ -1,5 +1,5 @@
 ---
-title:  "Unity's Open-Source Double Standard: the ban of VLC and creation of a new multimedia open-source online Store"
+title:  "Unity's Open-Source Double Standard: the ban of VLC"
 date:   2024-01-10 11:10:40 +0700
 classes: wide
 ---
