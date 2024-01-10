@@ -10,7 +10,7 @@ For the readers unaware, we started distributing binaries on the Unity Store for
 
 The integration essentially was a bridge between the Unity game engine and the VLC multimedia engine, allowing to build your own media-player based on VLC technology in Unity-based games. Both Unity, through Mono, and LibVLC are highly portable so this is a compelling argument for this cross-platform integration.
 
-Since the start, we have had many customers downloading the assets from the Unity Store for their Unity apps and games when requiring demanding multimedia solutions. We had 3 assets targeting specific platforms:
+Since the start, we have had many users downloading the assets from the Unity Store for their Unity apps and games when requiring demanding multimedia solutions. We had 3 assets targeting specific platforms:
 - Windows,
 - UWP,
 - Android.
