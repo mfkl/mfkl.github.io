@@ -35,19 +35,25 @@ So Unity gets to use and benefit from LGPL open-source libraries, games built wi
 
 # Introducing the [Videolabs Store](https://videolabs.io/store)
 
-Numerous companies make use of the LibVLC SDK and other related technologies (like FFmpeg). 
-
-Sometimes they will run into issues or request a new feature and while the community can sometimes help, the limited time of a few volunteers only goes so far. I have written about [OSS sustainability before](https://mfkl.github.io/2020/10/25/OSS-sutainability.html) and that is very much on topic here.
-
-It is in the best interest of both open-source project maintainers and commercial consumers to have a clear products and services offering for a given project, and that is what we have created with the [Videolabs Store](https://videolabs.io/store) for both LibVLC and FFmpeg.
-
 <p align="center">
     <a href="https://videolabs.io/store"><img src="/assets/vlabs-store-1.png"/></a>
 </p>
 
 If you are a company requiring multimedia products or consulting for your own projects, this store will be of interest to you.
 
+After our assets got removed, previous and new customers started emailing us about the status of VLC for Unity. Are we going to keep maintaining the assets? How to get build updates? etc.
+
+Numerous companies make use of the LibVLC SDK and other related technologies (like FFmpeg). 
+
+For this reason, we decided to publish a simple Store on the [Videolabs](https://videolabs.io) website.
+
+This way, existing and new customers can still [purchase the binaries for the open-source VLC Unity plugin](https://videolabs.io/store/unity) without our presence on the Unity Store.
+
 ### Flexible multimedia consulting packages
+
+Sometimes users will run into issues or request a new feature and while the community can sometimes help, the limited time of a few volunteers only goes so far. I have written about [OSS sustainability before](https://mfkl.github.io/2020/10/25/OSS-sutainability.html) and that is very much on topic here.
+
+It is in the best interest of both open-source project maintainers and commercial consumers to have a clear products and services offering for a given project, and that is what we have created with the [Videolabs Store](https://videolabs.io/store) for both LibVLC and FFmpeg.
 
 The Videolabs team is composed of VLC and FFmpeg experts in most protocols, formats and platforms.
 
@@ -64,8 +70,6 @@ No matter which OS platform or toolkit you are building with, we can help.
 ### Other products
 
 The [LibVLCSharp commercial license](https://videolabs.io/store/libvlcsharp/) and the [LibVLC ebook](https://mfkl.gumroad.com/l/libvlc-good-parts) can also be found in the [Videolabs Store](https://videolabs.io/store), as well as other upcoming products such as Kyber, our new ultra low latency game/desktop streaming and remote control SDK, and more game engine integration such as Unreal. 
-
-The [VLC Unity integration](https://videolabs.io/store/unity/) can of course also be purchased from our Store. Stay tuned for more Unity platforms support coming later this month!
 
 <p align="center">
     <a href="https://videolabs.io/store"><img src="/assets/vlabs-store-3.png"/></a>
