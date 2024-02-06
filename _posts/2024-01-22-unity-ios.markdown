@@ -1,0 +1,56 @@
+---
+title:  "Introducing VLC for Unity - iOS Edition"
+date:   2024-02-06 11:10:40 +0700
+classes: wide
+
+---
+
+Today, we are announcing the release of [VLC for Unity (iOS)](https://videolabs.io/store/unity) on the Videolabs Store!
+
+<br/>
+This Unity plugin allows you to use a LibVLC-powered video player in your Unity-based iOS apps and games. Whether you need to support a rare video format, live streaming, HLS, RTSP or play a 4K video in your latest production, we got you covered. Feel free to [give it a try](https://videolabs.io/solutions/vlc-unity-trial.unitypackage)!
+
+## All LibVLC features available in your iOS Unity game
+
+Given that this plugin is using [LibVLCSharp](https://code.videolan.org/videolan/LibVLCSharp) (which uses LibVLC), it exposes more or less the [same feature set](https://code.videolan.org/videolan/LibVLCSharp#features) and same codecs support than VLC, such as:
+
+- Play every media file formats, every codec and every streaming protocols
+- Run on every platform, from desktop (Windows, Linux, Mac) to mobile (Android, iOS) and TVs
+- Hardware and efficient decoding on every platform, up to 8K
+- Network browsing for distant filesystems (SMB, FTP, SFTP, NFS...) and servers (UPnP, DLNA)
+- Playback of Audio CD, DVD and Bluray with menu navigation
+- Support for HDR, including tonemapping for SDR streams
+- Audio passthrough with SPDIF and HDMI, including for Audio HD codecs, like DD+, TrueHD or DTS-HD
+- Support for video and audio filters
+- Support for 360 video and 3D audio playback, including Ambisonics
+- Able to cast and stream to distant renderers, like Chromecast and UPnP renderers.
+
+And more!
+
+## Hardware acceleration on iOS with Unity and LibVLC
+
+Hardware acceleration is often a highly requested features for video players, especially on mobile devices. Decoding videos with the GPU allows much more efficient decoding allowing to playback high res samples that the CPU could not, while saving battery life and CPU cycles for other apps.
+
+On iOS, GPU hardware video decoder access is performed through either OpenGL ES or Metal. While according to Apple, [OpenGL ES is officially deprecated on iOS](https://developer.apple.com/documentation/opengles), it is still working, the App Store still accepts submissions of apps that rely OpenGL ES and in fact, many games, browsers and video players (amongst others) still make use of OpenGL ES for various reasons.
+
+However, Unity removed the option to pick OpenGL ES as a graphics API backend when building iOS apps using Unity. Metal is the default and only option.
+
+At the time of writing, LibVLC does not _yet_ offer a fully featured and battle-tested Metal-based video output for Apple Platform, only OpenGL is available. 
+
+So how to do?
+
+Well, [a nice workaround](https://code.videolan.org/videolan/vlc-unity/-/blob/master/PluginSource/RenderAPI_OpenGLEAGL.mm) was implemented by [Alexandre Janniaux](https://code.videolan.org/alexandre-janniaux) to be able to perform OpenGL ES calls within a Metal context, notably using [CVMetalTextureCacheCreateTextureFromImage](https://developer.apple.com/documentation/corevideo/1456754-cvmetaltexturecachecreatetexture). 
+
+This way both LibVLC and Unity constraints are satisfied, and the bridge between both ecosystems on iOS is complete!
+
+## Testing VLC in your Unity for iOS app
+
+As of today, the initial [VLC for Unity iOS](https://videolabs.io/store/unity/) release includes ARM64 binaries _only_. The simulator support will come in a later release.
+
+However, as you might know already, iOS apps can be ran on modern Apple Silicon Macs which can speed up the development experience. Deploying to an iPhone device can time consuming and a hassle.
+
+We also included initial support for the macOS platform in the VLC Unity asset. This allows you to test VLC features and develop your app using the macOS Editor (or XCode builds) for faster iteration.
+
+This is the first Apple platform supported by VLC Unity. A future macOS release will come soon, tvOS could be an option as well. Do reach out if you are interested in any platform not yet supported.
+
+Feel free to let me know what you think on [Twitter](https://twitter.com/martz2804).
