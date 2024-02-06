@@ -9,6 +9,10 @@ Today, we are announcing the release of [VLC for Unity (iOS)](https://videolabs.
 
 This Unity plugin allows you to use a LibVLC-powered video player in your Unity-based iOS apps and games. Whether you need to support a rare video format, live streaming, HLS, RTSP or play a 4K video in your latest production, we got you covered. Feel free to [give it a try](https://videolabs.io/solutions/vlc-unity-trial.unitypackage)!
 
+<p align="center">
+    <a href="https://videolabs.io/store/unity"><img src="/assets/unity-logo.png"/></a>
+</p>
+
 ## All LibVLC features available in your iOS Unity game
 
 Given that this plugin is using [LibVLCSharp](https://code.videolan.org/videolan/LibVLCSharp) (which uses LibVLC), it exposes more or less the [same feature set](https://code.videolan.org/videolan/LibVLCSharp#features) and same codecs support than VLC, such as:
