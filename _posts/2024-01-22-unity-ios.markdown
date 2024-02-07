@@ -7,10 +7,6 @@ classes: wide
 
 Today, we are announcing the release of [VLC for Unity (iOS)](https://videolabs.io/store/unity) on the Videolabs Store!
 
-<p align="center">
-    <a href="https://videolabs.io/store/unity"><img src="/assets/unity-logo.png"/></a>
-</p>
-
 This Unity plugin allows you to use a LibVLC-powered video player in your Unity-based iOS apps and games. Whether you need to support a rare video format, live streaming, HLS, RTSP or play a 4K video in your latest production, we got you covered. Feel free to [give it a try](https://videolabs.io/solutions/vlc-unity-trial.unitypackage)!
 
 ## All LibVLC features available in your iOS Unity game
@@ -30,6 +26,10 @@ Given that this plugin is using [LibVLCSharp](https://code.videolan.org/videolan
 
 And more!
 
+<p align="center">
+    <a href="https://videolabs.io/store/unity"><img src="/assets/unity-logo.png"/></a>
+</p>
+
 ## Hardware acceleration on iOS with Unity and LibVLC
 
 Hardware acceleration is often a highly requested features for video players, especially on mobile devices. Decoding videos with the GPU allows much more efficient decoding allowing to playback high res samples that the CPU could not, while saving battery life and CPU cycles for other apps.
@@ -40,20 +40,20 @@ However, Unity removed the option to pick OpenGL ES as a graphics API backend wh
 
 At the time of writing, LibVLC does not _yet_ offer a fully featured and battle-tested Metal-based video output for Apple Platform, only OpenGL is available. 
 
-So how to do?
+So how to do? 🤔
 
 Well, [a nice workaround](https://code.videolan.org/videolan/vlc-unity/-/blob/master/PluginSource/RenderAPI_OpenGLEAGL.mm) was implemented by [Alexandre Janniaux](https://code.videolan.org/alexandre-janniaux) to be able to perform OpenGL ES calls within a Metal context, notably using [CVMetalTextureCacheCreateTextureFromImage](https://developer.apple.com/documentation/corevideo/1456754-cvmetaltexturecachecreatetexture). 
 
-This way both LibVLC and Unity constraints are satisfied, and the bridge between both ecosystems on iOS is complete!
+This way both LibVLC and Unity constraints are satisfied, and the bridge between both ecosystems on iOS is complete! 🙌
 
 ## Testing VLC in your Unity for iOS app
 
 As of today, the initial [VLC for Unity iOS](https://videolabs.io/store/unity/) release includes ARM64 binaries _only_. The simulator support will come in a later release.
 
-However, as you might know already, iOS apps can be ran on modern Apple Silicon Macs which can speed up the development experience. Deploying to an iPhone device can time consuming and a hassle.
+However, as you might know already, iOS apps can be ran on modern Apple Silicon Macs which can speed up the development experience. Deploying to an iPhone device can be time consuming and a hassle.
 
 We also included initial support for the macOS platform in the VLC Unity asset. This allows you to test VLC features and develop your app using the macOS Editor (or XCode builds) for faster iteration.
 
-This is the first Apple platform supported by VLC Unity. A future macOS release will come soon, tvOS could be an option as well. Do reach out if you are interested in any platform not yet supported.
+✨ This is the first Apple platform supported by VLC Unity. A future macOS release will come soon, tvOS could be an option as well. Do reach out if you are interested in any platform not yet supported.
 
 Feel free to let me know what you think on [Twitter](https://twitter.com/martz2804).
