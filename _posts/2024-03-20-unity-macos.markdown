@@ -32,7 +32,7 @@ And more!
 
 ## Hardware acceleration on macOS with Unity and LibVLC
 
-Hardware acceleration is often a highly requested features for video players, especially on mobile devices. Decoding videos with the GPU allows much more efficient decoding allowing to playback high res samples that the CPU could not, while saving battery life and CPU cycles for other apps.
+Hardware acceleration is often a highly requested features for video players. Decoding videos with the GPU allows much more efficient decoding allowing to playback high res samples that the CPU could not, while saving battery life and CPU cycles for other apps.
 
 On macOS, GPU hardware video decoder access is performed through either OpenGL or Metal.
 
@@ -48,8 +48,8 @@ This way both LibVLC and Unity constraints are satisfied, and both iOS and macOS
 
 As of today, the initial [VLC for Unity macOS](https://videolabs.io/store/unity/) release includes both Intel x64 and Apple Silicon ARM64 binaries.
 
-It is possible to build through XCode by generating an XCode project file, or directly generating the final app binary through the Unity Editor. Running VLC Unity in the Unity Editor is also support, although it can sometimes take a while to load all the libraries. We will be working on speeding that up next.
+It is possible to build through XCode by generating an XCode project file, or directly generating the final app binary through the Unity Editor. Running VLC Unity in the Unity Editor is also supported, although it can sometimes take a while to load all the libraries. We will be working on speeding that up next.
 
-✨ This is the second Apple platform supported by VLC Unity, after iOS. Future possible Apple target platforms, depending on your interest, could be tvOS and visionOS! Do reach out if you are interested in any platform not yet supported.
+✨ This is the second Apple platform supported by VLC Unity, after the iOS release last month. Future possible Apple target platforms, depending on your interest, could be tvOS and visionOS! Do reach out if you are interested in any platform not yet supported.
 
 Feel free to let me know what you think on [Twitter](https://twitter.com/martz2804).
