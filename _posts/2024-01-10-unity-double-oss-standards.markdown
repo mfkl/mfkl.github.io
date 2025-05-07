@@ -8,7 +8,7 @@ classes: wide
 
 For the readers unaware, we started distributing binaries on the Unity Store for the open-source [VLC for Unity](https://code.videolan.org/videolan/vlc-unity) integration back in December 2019.
 
-The integration essentially was a bridge between the Unity game engine and the VLC multimedia engine, allowing to build your own media-player based on VLC technology in Unity-based games. Both Unity, through Mono, and LibVLC are highly portable so this is a compelling argument for this cross-platform integration.
+The integration essentially was a bridge between the Unity game engine and the VLC multimedia engine, allowing to build your own media-player based on the VLC engine in Unity-based games. Both Unity, through Mono, and LibVLC are highly portable so this is a compelling argument for this cross-platform integration.
 
 Since the start, we have had many users downloading the assets from the Unity Store for their Unity apps and games when requiring demanding multimedia solutions. We had 3 assets targeting specific platforms:
 - Windows,
@@ -47,7 +47,7 @@ Numerous companies make use of the LibVLC SDK and other related technologies (li
 
 For this reason, we decided to publish a simple Store on the [Videolabs](https://videolabs.io) website.
 
-This way, existing and new customers can still [purchase the binaries for the open-source VLC Unity plugin](https://videolabs.io/store/unity) without our presence on the Unity Store.
+This way, existing and new customers can still [purchase the binaries for the open-source VLC Unity plugin](https://videolabs.io/store/unity) without our presence on the Unity Store. Of course, users can still build VLC for Unity themselves, as it is open source.
 
 ### Flexible multimedia consulting packages
 
