@@ -104,9 +104,9 @@ We are looking forward to work together to improve the developer experience for 
 
 ## Commercial licensing and consulting offering
 
-Exactly 2 years ago, we introduced the [LibVLCSharp Commercial License](https://videolabs.io/products/libvlcsharp) in an effort to secure the long term maintenance of the project. I firmly believe companies should be put to contribution when it comes to opensource sustainability, not individuals, and I have written [about this topic before](https://mfkl.github.io/2020/10/25/OSS-sutainability.html).
+Exactly 2 years ago, we introduced the [LibVLCSharp Commercial License](https://videolabs.io/store/libvlcsharp) in an effort to secure the long term maintenance of the project. I firmly believe companies should be put to contribution when it comes to opensource sustainability, not individuals, and I have written [about this topic before](https://mfkl.github.io/2020/10/25/OSS-sutainability.html).
 
-If your company relies on LibVLCSharp for their commercial products, we encourage you to support the project and help secure the long term maintenance by [purchasing a commercial license today](https://videolabs.io/products/libvlcsharp).
+If your company relies on LibVLCSharp for their commercial products, we encourage you to support the project and help secure the long term maintenance by [purchasing a commercial license today](https://videolabs.io/store/libvlcsharp).
 
 For more general multimedia needs, such as consulting, training, specific LibVLC / FFMPEG features or bug fixes, or even new platforms support, [Videolabs](https://videolabs.io) is the partner of choice with experts on all platforms.
 

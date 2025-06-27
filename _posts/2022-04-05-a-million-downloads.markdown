@@ -34,7 +34,7 @@ Plans to investigate LibVLCSharp interop performance further have been made and 
 
 # Commercial licensing
 
-Almost a year ago, we introduced **[Commercial Licenses for LibVLCSharp](https://videolabs.io/products/libvlcsharp/)** through dual licensing (current OSS licenses remain). This was the start of an experiment to try and make the project financially sustainable. I don't believe user donations are a working solution for most OSS maintainers, and if companies contributed financially to the sustainability of their dependencies, I believe the open-source ecosystem would be more _balanced_.
+Almost a year ago, we introduced **[Commercial Licenses for LibVLCSharp](https://videolabs.io/store/libvlcsharp/)** through dual licensing (current OSS licenses remain). This was the start of an experiment to try and make the project financially sustainable. I don't believe user donations are a working solution for most OSS maintainers, and if companies contributed financially to the sustainability of their dependencies, I believe the open-source ecosystem would be more _balanced_.
 
 <p align="center">
     <img src="/assets/mrr-lvs-twitter.png"/>
@@ -42,6 +42,6 @@ Almost a year ago, we introduced **[Commercial Licenses for LibVLCSharp](https:/
 
 After a needed pricing change, and almost a year in, we now stand at $224 monthly recurring revenue with 11 happy customers and growing! This is certainly better than the donation route but there surely is a way to go still.
 
-If your company uses LibVLCSharp in commercial products, please consider supporting the project by [purchasing a commercial license](https://videolabs.io/products/libvlcsharp)!
+If your company uses LibVLCSharp in commercial products, please consider supporting the project by [purchasing a commercial license](https://videolabs.io/store/libvlcsharp)!
 
 Feel free to let me know what you think on [Twitter](https://twitter.com/martz2804).
