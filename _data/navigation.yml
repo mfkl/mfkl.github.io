@@ -13,5 +13,6 @@ vlc:
         url: https://videolabs.io/store/libvlcsharp
 pkgstore:
   - title: "pkgstore.io"
-    url: https://pkgstore.io
-    external: true
+    children:
+      - title: "pkgstore.io"
+        url: https://pkgstore.io
