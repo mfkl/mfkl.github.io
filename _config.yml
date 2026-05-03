@@ -265,7 +265,8 @@ defaults:
       share: true
       related: true
       sidebar:
-        nav: "vlc"
+        - nav: "vlc"
+        - nav: "pkgstore"
   - scope:
       path: ""
       type: pages
@@ -273,4 +274,5 @@ defaults:
       layout: single
       author_profile: true
       sidebar:
-        nav: "vlc"
+        - nav: "vlc"
+        - nav: "pkgstore"

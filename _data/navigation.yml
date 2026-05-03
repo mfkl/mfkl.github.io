@@ -14,5 +14,5 @@ vlc:
 pkgstore:
   - title: "pkgstore.io"
     children:
-      - title: "pkgstore.io"
+      - title: ".NET marketplace for NuGet"
         url: https://pkgstore.io
